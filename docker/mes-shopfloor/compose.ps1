@@ -6,12 +6,10 @@ docker compose up -d # Run the compose script ('-d' means, 'dont show me all of 
 Write-Host "`n...running!"
 
 ### Clustering RabbitMQ instances:
-$node_a="rabbitmq-a"
-$node_b="rabbitmq-b"
-
 Write-Host "`nClustering RabbitMQ nodes...`n"
-docker exec $node_b rabbitmqctl stop_app # Stop our secondary node (node 'b').
-docker exec $node_b rabbitmqctl join_cluster mes-shopfloor@$node_a # Add our secondary node to the cluster of our primary node (node 'a').
-docker exec $node_b rabbitmqctl start_app # Start our secondary node again.
-docker exec $node_b rabbitmqctl cluster_status # Print the status of our secondary node, so we can confirm that both primary and secondary nodes are clustered.
+Start-Sleep -Seconds 4 # Wait a moment because we need both RabbitMQ instances to actually run. (If problems related to clustering or failing to contact some RabbitMQ instance arise, try increasing the amounts of seconds)
+docker exec rabbitmq-b rabbitmqctl stop_app # Stop our secondary node (node 'b').
+docker exec rabbitmq-b rabbitmqctl join_cluster mes-shopfloor@rabbitmq-a # Add our secondary node to the cluster of our primary node (node 'a').
+docker exec rabbitmq-b rabbitmqctl start_app # Start our secondary node again.
+docker exec rabbitmq-b rabbitmqctl cluster_status # Print the status of our secondary node, so we can confirm that both primary and secondary nodes are clustered.
 Write-Host "`n...clustered!"
