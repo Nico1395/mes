@@ -1,0 +1,58 @@
+services:
+  rabbitmq-a:
+    image: rabbitmq:management
+    container_name: rabbitmq-a
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=dev
+      - RABBITMQ_DEFAULT_PASS=dev
+      - RABBITMQ_ERLANG_COOKIE="super_secret_cookie"
+      - RABBITMQ_NODENAME=mes-shopfloor@rabbitmq-a
+    volumes:
+      - mes-shopfloor-rmq-a-lib:/var/lib/rabbitmq/
+      - mes-shopfloor-rmq-a-log:/var/log/rabbitmq/
+    networks:
+      - mes-shopfloor
+
+  rabbitmq-b:
+    image: rabbitmq:management
+    container_name: rabbitmq-b
+    ports:
+      - 5673:5672
+      - 15673:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=dev
+      - RABBITMQ_DEFAULT_PASS=dev
+      - RABBITMQ_ERLANG_COOKIE="super_secret_cookie"
+      - RABBITMQ_NODENAME=mes-shopfloor@rabbitmq-b
+    volumes:
+      - mes-shopfloor-rmq-b-lib:/var/lib/rabbitmq/
+      - mes-shopfloor-rmq-b-log:/var/log/rabbitmq/
+    networks:
+      - mes-shopfloor
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev
+    volumes:
+      - mes-shopfloor-pg:/var/lib/postgresql
+    networks:
+      - mes-shopfloor
+
+volumes:
+  mes-shopfloor-rmq-a-lib:
+  mes-shopfloor-rmq-a-log:
+  mes-shopfloor-rmq-b-lib:
+  mes-shopfloor-rmq-b-log:
+  mes-shopfloor-pg:
+
+networks:
+  mes-shopfloor:
+    driver: bridge
