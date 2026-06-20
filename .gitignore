@@ -427,3 +427,71 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# JetBrains Rider
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# .NET
+bin/
+obj/
+*.userprefs
+*.cache
+*.opensdf
+*.sdf
+
+# NuGet
+packages/
+*.nupkg
+*.nuspec
+
+# ReSharper
+_ReSharper*/
+*.resharper
+*.DotSettings.user
+
+# Visual Studio
+*.vspscc
+*.vssscc
+*.tmp
+*.tmpproj
+*.bak
+*.log
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# User-specific files
+*.userprefs
+*.userosscache
+*.sln.docstates
+
+# Test results
+TestResults/
+*.trx
+
+# Local history (JetBrains)
+.idea/.gitignore
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/libraries/
+.idea/options/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
