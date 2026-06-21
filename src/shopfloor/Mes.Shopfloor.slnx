@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Services/">
+    <Project Path="Mes.Shopfloor.Api.Core/Mes.Shopfloor.Api.Core.csproj" />
+    <Project Path="Mes.Shopfloor.Api.Orders/Mes.Shopfloor.Api.Orders.csproj" />
+  </Folder>
+  <Folder Name="/Terminal/">
+    <Project Path="Mes.Shopfloor.Terminal.Core/Mes.Shopfloor.Terminal.Core.csproj" />
+    <Project Path="Mes.Shopfloor.Terminal.Headless/Mes.Shopfloor.Terminal.Headless.csproj" />
+  </Folder>
+  <Folder Name="/_/">
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="Mes.Shopfloor.Core/Mes.Shopfloor.Core.csproj" />
+</Solution>
