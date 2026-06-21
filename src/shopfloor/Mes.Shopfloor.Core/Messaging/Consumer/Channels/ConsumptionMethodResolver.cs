@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace Mes.Shopfloor.Core.Messaging.Consumer.ListeningRoutine;
+namespace Mes.Shopfloor.Core.Messaging.Consumer.Channels;
 
 public static class ConsumptionMethodResolver
 {

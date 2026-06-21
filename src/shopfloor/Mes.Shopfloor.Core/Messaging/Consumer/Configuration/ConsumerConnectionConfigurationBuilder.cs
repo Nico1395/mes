@@ -17,7 +17,7 @@ public sealed class ConsumerConnectionConfigurationBuilder
 
     public ConsumerConnectionConfigurationBuilder ConfigureFactory(Action<ConnectionFactory> factoryAction)
     {
-        factoryAction(_configuration.ConnectionFactory);
+        factoryAction(_configuration.ConnectionFactoryInternal);
         return this;
     }
     

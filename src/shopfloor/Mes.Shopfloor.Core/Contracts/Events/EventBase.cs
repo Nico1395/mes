@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Core.Contracts;
+﻿namespace Mes.Shopfloor.Core.Contracts.Events;
 
 public abstract class EventBase
 {

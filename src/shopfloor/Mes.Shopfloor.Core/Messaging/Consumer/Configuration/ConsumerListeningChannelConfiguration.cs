@@ -1,6 +1,4 @@
-﻿using RabbitMQ.Client;
-
-namespace Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
+﻿namespace Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
 
 public sealed class ConsumerListeningChannelConfiguration(string exchange, string queue)
 {

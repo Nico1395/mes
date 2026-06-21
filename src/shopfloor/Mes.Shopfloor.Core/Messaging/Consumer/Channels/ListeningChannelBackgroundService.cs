@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Mes.Shopfloor.Core.Messaging.Connections;
 using Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
 using Mes.Shopfloor.Core.Messaging.Serialization;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,22 +8,24 @@ using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace Mes.Shopfloor.Core.Messaging.Consumer.ListeningRoutine;
+namespace Mes.Shopfloor.Core.Messaging.Consumer.Channels;
 
-internal sealed class ConsumerBackgroundService(
-    ILogger _logger,
+internal sealed class ListeningChannelBackgroundService(
+    ILogger<ListeningChannelBackgroundService> _logger,
     IServiceProvider _serviceProvider,
     ConsumerConnectionConfiguration _connectionConfiguration,
-    IConnection _connection) : BackgroundService
+    IConnectionProvider _connectionProvider) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        var connection = await _connectionProvider.GetAsync(stoppingToken);
+        
         try
         {
             // Initialize a channel and queue for every configured listening channel.
             foreach (var channelConfiguration in _connectionConfiguration.Channels)
             {
-                var listeningChannel = await _connection.CreateChannelAsync(cancellationToken: stoppingToken);
+                var listeningChannel = await connection.CreateChannelAsync(cancellationToken: stoppingToken);
                 await InitializeListeningChannelAsync(listeningChannel, channelConfiguration, stoppingToken);
             }
         }
@@ -36,7 +39,18 @@ internal sealed class ConsumerBackgroundService(
     private async Task InitializeListeningChannelAsync(IChannel channel, ConsumerListeningChannelConfiguration configuration, CancellationToken cancellationToken)
     {
         var ackLock = new SemaphoreSlim(1, 1);
+
+        // Declare the exchange
+        await channel.ExchangeDeclareAsync(
+            exchange: configuration.Exchange,
+            type: ExchangeType.Topic,
+            durable: true,
+            autoDelete: false,
+            cancellationToken: cancellationToken);
         
+        configuration.QueueOptions.Arguments ??= new Dictionary<string, object?>();
+        configuration.QueueOptions.Arguments.TryAdd("x-queue-type", "quorum");
+
         // Declare the queue
         await channel.QueueDeclareAsync(
             queue: configuration.Queue,

@@ -1,4 +1,6 @@
+using Mes.Shopfloor.Core.Messaging.Connections;
 using Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
+using NLog.Extensions.Logging;
 
 namespace Mes.Shopfloor.Api.Orders;
 
@@ -9,12 +11,19 @@ internal sealed class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddOpenApi();
+        builder.Services.AddLogging(logging =>
+        {
+            logging.ClearProviders();
+            logging.SetMinimumLevel(LogLevel.Trace);
+        });
+        builder.Services.AddSingleton<ILoggerProvider, NLogLoggerProvider>();
         builder.Services.AddConsumerConnection(connection =>
         {
             connection.ConfigureFactory(factory =>
             {
                 factory.UserName = "dev";
                 factory.Password = "dev";
+                factory.UseClustering("localhost:5672", "localhost:5673");
             });
             connection.AddListeningChannel("terminal", "api.order", channel =>
             {
