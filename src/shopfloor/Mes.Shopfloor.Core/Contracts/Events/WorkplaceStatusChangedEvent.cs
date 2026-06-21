@@ -1,6 +1,9 @@
-﻿namespace Mes.Shopfloor.Core.Contracts.Events;
+﻿using Mes.Shopfloor.Core.Messaging;
 
-public class WorkplaceStatusChangedEvent : EventBase
+namespace Mes.Shopfloor.Core.Contracts.Events;
+
+[MessageRoute("status.changed")]
+public sealed class WorkplaceStatusChangedEvent : Message
 {
     public required Guid WorkplaceId { get; init; }
     public required Guid OldStatusId { get; init; }

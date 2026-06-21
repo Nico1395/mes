@@ -1,5 +1,6 @@
 using Mes.Shopfloor.Core.Messaging.Connections;
 using Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
+using Mes.Shopfloor.Core.Messaging.Producer;
 using NLog.Extensions.Logging;
 
 namespace Mes.Shopfloor.Api.Orders;
@@ -17,7 +18,10 @@ internal sealed class Program
             logging.SetMinimumLevel(LogLevel.Trace);
         });
         builder.Services.AddSingleton<ILoggerProvider, NLogLoggerProvider>();
-        builder.Services.AddConsumerConnection(connection =>
+
+        builder.Services.AddRabbitMQConnection();
+        builder.Services.AddRabbitMQProducer();
+        builder.Services.AddRabbitMQConsumer(connection =>
         {
             connection.ConfigureFactory(factory =>
             {

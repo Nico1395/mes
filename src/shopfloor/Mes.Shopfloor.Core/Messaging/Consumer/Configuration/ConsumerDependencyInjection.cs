@@ -1,4 +1,4 @@
-﻿using Mes.Shopfloor.Core.Messaging.Connections;
+﻿using System.Reflection;
 using Mes.Shopfloor.Core.Messaging.Consumer.Channels;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,16 +6,40 @@ namespace Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
 
 public static class ConsumerDependencyInjection
 {
-    public static IServiceCollection AddConsumerConnection(this IServiceCollection services, Action<ConsumerConnectionConfigurationBuilder> connectionAction)
+    private static readonly IReadOnlyList<Type> _consumerTypes =
+    [
+        typeof(IConsumer<>),
+    ];
+
+    public static IServiceCollection AddRabbitMQConsumer(this IServiceCollection services, Action<ConsumerConnectionConfigurationBuilder> connectionAction)
     {
         var builder = new ConsumerConnectionConfigurationBuilder();
         connectionAction(builder);
         var connectionConfiguration = builder.Build();
         
         services.AddSingleton(connectionConfiguration);
-        services.AddSingleton<IConnectionProvider, ConnectionProvider>();
         services.AddHostedService<ListeningChannelBackgroundService>();
-        
+
+        AddConsumers(services, connectionConfiguration.Assemblies);
+
         return services;
+    }
+
+    private static void AddConsumers(IServiceCollection services, IReadOnlyList<Assembly> assemblies)
+    {
+        var handlerTypes = assemblies.SelectMany(a => a.DefinedTypes).Where(t => t is { IsClass: true, IsAbstract: false, IsGenericTypeDefinition: false });
+        foreach (var implementationType in handlerTypes)
+        {
+            var interfaces = implementationType.ImplementedInterfaces;
+            foreach (var @interface in interfaces)
+            {
+                if (!@interface.IsGenericType)
+                    continue;
+
+                var genericDefinition = @interface.GetGenericTypeDefinition();
+                if (_consumerTypes.Contains(genericDefinition))
+                    services.AddTransient(@interface, implementationType);
+            }
+        }
     }
 }

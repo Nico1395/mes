@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Mes.Shopfloor.Core.Messaging.Consumer.Channels;
 
-public static class ConsumptionMethodResolver
+public static class ConsumerMethodResolver
 {
     private static readonly ConcurrentDictionary<Type, MethodInfo> _methodInfos = [];
     
@@ -15,8 +15,8 @@ public static class ConsumptionMethodResolver
         if (_methodInfos.TryGetValue(messageType, out method))
             return true;
 
-        var consumptionType = typeof(IConsumption<>).MakeGenericType(messageType);
-        method = consumptionType.GetMethods().FirstOrDefault(m => m.Name == nameof(IConsumption<>.HandleAsync));
+        var consumerType = typeof(IConsumer<>).MakeGenericType(messageType);
+        method = consumerType.GetMethods().FirstOrDefault(m => m.Name == nameof(IConsumer<>.HandleAsync));
         if (method == null)
             return false;
 

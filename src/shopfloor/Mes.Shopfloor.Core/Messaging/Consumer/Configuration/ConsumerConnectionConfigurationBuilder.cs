@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using System.Reflection;
+using RabbitMQ.Client;
 
 namespace Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
 
@@ -18,6 +19,12 @@ public sealed class ConsumerConnectionConfigurationBuilder
     public ConsumerConnectionConfigurationBuilder ConfigureFactory(Action<ConnectionFactory> factoryAction)
     {
         factoryAction(_configuration.ConnectionFactoryInternal);
+        return this;
+    }
+
+    public ConsumerConnectionConfigurationBuilder ScanInAssemblies(params Assembly[] assemblies)
+    {
+        _configuration.AssembliesInternal = assemblies.ToList();
         return this;
     }
     

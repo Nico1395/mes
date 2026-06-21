@@ -1,6 +1,6 @@
 ﻿namespace Mes.Shopfloor.Core.Messaging.Consumer;
 
-public enum ConsumptionResultCode
+public enum ConsumerResultCode
 {
     Ack = 0,
     Nack = 1,

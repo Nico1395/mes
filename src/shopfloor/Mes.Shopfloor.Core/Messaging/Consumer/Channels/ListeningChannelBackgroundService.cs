@@ -94,7 +94,7 @@ internal sealed class ListeningChannelBackgroundService(
 
     private async Task ReceiveAsync(BasicDeliverEventArgs args, SemaphoreSlim ackLock, IChannel channel, ConsumerListeningChannelConfiguration configuration, CancellationToken cancellationToken)
     {
-        ConsumptionResultCode code;
+        ConsumerResultCode code;
 
         try
         {
@@ -103,8 +103,8 @@ internal sealed class ListeningChannelBackgroundService(
                 throw new InvalidOperationException("Failed to resolve message type.");
 
             // Fetch the consumption handle method
-            if (!ConsumptionMethodResolver.TryReflectMethod(messageType, out var handleAsync))
-                throw new InvalidOperationException($"Failed to reflect method '{nameof(IConsumption<>.HandleAsync)}' from '{typeof(IConsumption<>).MakeGenericType(messageType)}'.");
+            if (!ConsumerMethodResolver.TryReflectMethod(messageType, out var handleAsync))
+                throw new InvalidOperationException($"Failed to reflect method '{nameof(IConsumer<>.HandleAsync)}' from '{typeof(IConsumer<>).MakeGenericType(messageType)}'.");
 
             // Read the message body as a string
             var json = Encoding.UTF8.GetString(args.Body.Span);
@@ -115,26 +115,26 @@ internal sealed class ListeningChannelBackgroundService(
             var message = MessageSerializer.Deserialize(messageType, json);
             using var scope = _serviceProvider.CreateScope();
             {
-                ConsumptionResult? combinedResult = null;
+                ConsumerResult? combinedResult = null;
 
-                var consumptionType = typeof(IConsumption<>).MakeGenericType(messageType);
-                var consumptions = scope.ServiceProvider.GetServices(consumptionType);
-                foreach (var consumption in consumptions)
+                var consumerType = typeof(IConsumer<>).MakeGenericType(messageType);
+                var consumers = scope.ServiceProvider.GetServices(consumerType);
+                foreach (var consumer in consumers)
                 {
-                    if (handleAsync.Invoke(consumption, parameters: [message, cancellationToken]) is not Task<ConsumptionResult> task)
+                    if (handleAsync.Invoke(consumer, parameters: [message, cancellationToken]) is not Task<ConsumerResult> task)
                         throw new InvalidOperationException($"Failed to handle '{messageType}'.");
                 
                     var currentResult = await task;
                     combinedResult = combinedResult == null ? currentResult : combinedResult.Combine(currentResult);
                 }
 
-                    // If the combined result is null, no consumptions even existed. We assume the message wasn't needed and can be acked.
-                    code = combinedResult?.Code ?? ConsumptionResultCode.Ack;
+                // If the combined result is null, no consumptions even existed. We assume the message wasn't needed and can be acked.
+                code = combinedResult?.Code ?? ConsumerResultCode.Ack;
             }
         }
         catch (Exception ex)
         {
-            code = configuration.RequeueOnException ? ConsumptionResultCode.NackRequeue : ConsumptionResultCode.Nack;
+            code = configuration.RequeueOnException ? ConsumerResultCode.NackRequeue : ConsumerResultCode.Nack;
             _logger.LogError(ex, "Receiving a message threw an exception.");
         }
 
@@ -145,13 +145,13 @@ internal sealed class ListeningChannelBackgroundService(
         try
         {
             // Evaluate and act accordingly
-            if (code == ConsumptionResultCode.Ack)
+            if (code == ConsumerResultCode.Ack)
             {
                 await channel.BasicAckAsync(args.DeliveryTag, multiple: false, cancellationToken);
             }
             else
             {
-                var requeue = code == ConsumptionResultCode.NackRequeue;
+                var requeue = code == ConsumerResultCode.NackRequeue;
                 await channel.BasicNackAsync(args.DeliveryTag, multiple: false, requeue, cancellationToken);
             }
         }

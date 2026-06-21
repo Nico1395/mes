@@ -6,6 +6,9 @@ public static class ConnectionFactoryExtensions
 {
     public static void UseClustering(this ConnectionFactory factory, TimeSpan recoveryInterval, params string[] hostNames)
     {
+        // TODO -> The factory is not utilizing its endpoints!
+        factory.HostName = string.Empty;
+        factory.Port = 0;
         factory.AutomaticRecoveryEnabled = true;
         factory.TopologyRecoveryEnabled = true;
         factory.NetworkRecoveryInterval = recoveryInterval;
