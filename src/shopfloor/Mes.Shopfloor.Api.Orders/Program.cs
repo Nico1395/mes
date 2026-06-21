@@ -23,12 +23,11 @@ internal sealed class Program
         builder.Services.AddRabbitMQProducer();
         builder.Services.AddRabbitMQConsumer(connection =>
         {
-            connection.ConfigureFactory(factory =>
-            {
-                factory.UserName = "dev";
-                factory.Password = "dev";
-                factory.UseClustering("localhost:5672", "localhost:5673");
-            });
+            connection.ConnectToCluster(
+                userName: "dev",
+                password: "dev",
+                nodes: ["localhost:5672", "localhost:5673"]);
+
             connection.AddListeningChannel("terminal", "api.order", channel =>
             {
                 channel.WithRoutingKey("quantity.produced");

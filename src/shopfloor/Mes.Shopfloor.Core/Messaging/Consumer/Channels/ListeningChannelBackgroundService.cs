@@ -18,10 +18,10 @@ internal sealed class ListeningChannelBackgroundService(
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var connection = await _connectionProvider.GetAsync(stoppingToken);
-        
         try
         {
+            var connection = await _connectionProvider.GetAsync(stoppingToken);
+
             // Initialize a channel and queue for every configured listening channel.
             foreach (var channelConfiguration in _connectionConfiguration.Channels)
             {

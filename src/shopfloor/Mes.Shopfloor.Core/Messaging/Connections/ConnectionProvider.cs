@@ -14,7 +14,12 @@ internal sealed class ConnectionProvider(
     {
         try
         {
-            return _connection = await _connectionConfiguration.ConnectionFactory.CreateConnectionAsync(cancellationToken);
+            if (_connection is { IsOpen: true })
+                return _connection;
+
+            return _connection = await _connectionConfiguration.ConnectionFactory.CreateConnectionAsync(
+                _connectionConfiguration.Nodes,
+                cancellationToken);
         }
         catch (Exception e)
         {
