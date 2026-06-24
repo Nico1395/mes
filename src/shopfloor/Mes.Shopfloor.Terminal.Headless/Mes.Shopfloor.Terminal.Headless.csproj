@@ -7,4 +7,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mes.Shopfloor.Terminal.InventoryManagement\Mes.Shopfloor.Terminal.InventoryManagement.csproj" />
+    <ProjectReference Include="..\Mes.Shopfloor.Terminal.MaintenanceManagement\Mes.Shopfloor.Terminal.MaintenanceManagement.csproj" />
+    <ProjectReference Include="..\Mes.Shopfloor.Terminal.ProductionManagement\Mes.Shopfloor.Terminal.ProductionManagement.csproj" />
+    <ProjectReference Include="..\Mes.Shopfloor.Terminal.QualityManagement\Mes.Shopfloor.Terminal.QualityManagement.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
