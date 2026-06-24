@@ -1,25 +1,27 @@
 <Solution>
-  <Folder Name="/Services/">
+  <Folder Name="/Api/">
     <Project Path="Mes.Shopfloor.Api.InventoryManagement/Mes.Shopfloor.Api.InventoryManagement.csproj" />
     <Project Path="Mes.Shopfloor.Api.MaintenanceManagement/Mes.Shopfloor.Api.MaintenanceManagement.csproj" />
     <Project Path="Mes.Shopfloor.Api.ProductionManagement/Mes.Shopfloor.Api.ProductionManagement.csproj" />
     <Project Path="Mes.Shopfloor.Api.QualityManagement/Mes.Shopfloor.Api.QualityManagement.csproj" />
     <Project Path="Mes.Shopfloor.Api/Mes.Shopfloor.Api.csproj" />
   </Folder>
-  <Folder Name="/Terminal/">
-    <Project Path="Mes.Shopfloor.Terminal.Headless/Mes.Shopfloor.Terminal.Headless.csproj" />
-    <Project Path="Mes.Shopfloor.Terminal.InventoryManagement/Mes.Shopfloor.Terminal.InventoryManagement.csproj" />
-    <Project Path="Mes.Shopfloor.Terminal.MaintenanceManagement/Mes.Shopfloor.Terminal.MaintenanceManagement.csproj" />
-    <Project Path="Mes.Shopfloor.Terminal.ProductionManagement/Mes.Shopfloor.Terminal.ProductionManagement.csproj" />
-    <Project Path="Mes.Shopfloor.Terminal.QualityManagement/Mes.Shopfloor.Terminal.QualityManagement.csproj" />
-    <Project Path="Mes.Shopfloor.Terminal/Mes.Shopfloor.Terminal.csproj" />
+  <Folder Name="/Client/">
+    <Project Path="Mes.Shopfloor.Client.Headless/Mes.Shopfloor.Client.Headless.csproj" />
+    <Project Path="Mes.Shopfloor.Client.InventoryManagement/Mes.Shopfloor.Client.InventoryManagement.csproj" />
+    <Project Path="Mes.Shopfloor.Client.MaintenanceManagement/Mes.Shopfloor.Client.MaintenanceManagement.csproj" />
+    <Project Path="Mes.Shopfloor.Client.ProductionManagement/Mes.Shopfloor.Client.ProductionManagement.csproj" />
+    <Project Path="Mes.Shopfloor.Client.QualityManagement/Mes.Shopfloor.Client.QualityManagement.csproj" />
+    <Project Path="Mes.Shopfloor.Client/Mes.Shopfloor.Client.csproj" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="Mes.Shopfloor.Shared.InventoryManagement/Mes.Shopfloor.Shared.InventoryManagement.csproj" />
+    <Project Path="Mes.Shopfloor.Shared.MaintenanceManagement/Mes.Shopfloor.Shared.MaintenanceManagement.csproj" />
+    <Project Path="Mes.Shopfloor.Shared.ProductionManagement/Mes.Shopfloor.Shared.ProductionManagement.csproj" />
+    <Project Path="Mes.Shopfloor.Shared.QualityManagement/Mes.Shopfloor.Shared.QualityManagement.csproj" />
+    <Project Path="Mes.Shopfloor.Shared/Mes.Shopfloor.Shared.csproj" />
   </Folder>
   <Folder Name="/_/">
     <File Path="Directory.Packages.props" />
   </Folder>
-  <Project Path="Mes.Shopfloor.InventoryManagement/Mes.Shopfloor.InventoryManagement.csproj" />
-  <Project Path="Mes.Shopfloor.MaintenanceManagement/Mes.Shopfloor.MaintenanceManagement.csproj" />
-  <Project Path="Mes.Shopfloor.ProductionManagement/Mes.Shopfloor.ProductionManagement.csproj" />
-  <Project Path="Mes.Shopfloor.QualityManagement/Mes.Shopfloor.QualityManagement.csproj" />
-  <Project Path="Mes.Shopfloor/Mes.Shopfloor.csproj" />
 </Solution>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Mes.Shopfloor.Terminal.Headless.Startup;
+namespace Mes.Shopfloor.Client.Headless.Startup;
 
 public abstract class EntryPoint : IDisposable
 {

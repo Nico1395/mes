@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mes.Shopfloor.Client.InventoryManagement\Mes.Shopfloor.Client.InventoryManagement.csproj" />
+    <ProjectReference Include="..\Mes.Shopfloor.Client.MaintenanceManagement\Mes.Shopfloor.Client.MaintenanceManagement.csproj" />
+    <ProjectReference Include="..\Mes.Shopfloor.Client.ProductionManagement\Mes.Shopfloor.Client.ProductionManagement.csproj" />
+    <ProjectReference Include="..\Mes.Shopfloor.Client.QualityManagement\Mes.Shopfloor.Client.QualityManagement.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

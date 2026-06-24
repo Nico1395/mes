@@ -12,7 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Mes.Shopfloor.Api\Mes.Shopfloor.Api.csproj" />
-      <ProjectReference Include="..\Mes.Shopfloor.QualityManagement\Mes.Shopfloor.QualityManagement.csproj" />
+      <ProjectReference Include="..\Mes.Shopfloor.Shared.QualityManagement\Mes.Shopfloor.Shared.QualityManagement.csproj" />
     </ItemGroup>
 
 </Project>

@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Mes.Shopfloor.QualityManagement\Mes.Shopfloor.QualityManagement.csproj" />
-      <ProjectReference Include="..\Mes.Shopfloor.Terminal\Mes.Shopfloor.Terminal.csproj" />
+      <ProjectReference Include="..\Mes.Shopfloor.Shared.ProductionManagement\Mes.Shopfloor.Shared.ProductionManagement.csproj" />
+      <ProjectReference Include="..\Mes.Shopfloor.Client\Mes.Shopfloor.Client.csproj" />
     </ItemGroup>
 
 </Project>

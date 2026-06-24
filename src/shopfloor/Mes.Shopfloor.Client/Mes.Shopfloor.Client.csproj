@@ -8,11 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mes.Shopfloor\Mes.Shopfloor.csproj" />
+    <ProjectReference Include="..\Mes.Shopfloor.Shared\Mes.Shopfloor.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domains\ProductionManagement\Subdomains\Scheduling\" />
   </ItemGroup>
 
 </Project>

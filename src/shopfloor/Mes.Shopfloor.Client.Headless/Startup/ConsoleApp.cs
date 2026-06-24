@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Shopfloor.Terminal.Headless.Startup;
+namespace Mes.Shopfloor.Client.Headless.Startup;
 
 public sealed class ConsoleApp(IServiceCollection services, IConfiguration configuration)
 {

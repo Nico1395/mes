@@ -1,7 +1,7 @@
-﻿using Mes.Shopfloor.Terminal.Core;
-using Mes.Shopfloor.Terminal.Headless.Startup;
+﻿using Mes.Shopfloor.Client.Headless.Startup;
+using Mes.Shopfloor.Terminal.Core;
 
-namespace Mes.Shopfloor.Terminal.Headless;
+namespace Mes.Shopfloor.Client.Headless;
 
 internal sealed class Program
 {

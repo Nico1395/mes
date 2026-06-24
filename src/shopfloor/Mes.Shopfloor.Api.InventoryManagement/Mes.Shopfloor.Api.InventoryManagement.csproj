@@ -12,7 +12,7 @@
     
     <ItemGroup>
       <ProjectReference Include="..\Mes.Shopfloor.Api\Mes.Shopfloor.Api.csproj" />
-      <ProjectReference Include="..\Mes.Shopfloor.InventoryManagement\Mes.Shopfloor.InventoryManagement.csproj" />
+      <ProjectReference Include="..\Mes.Shopfloor.Shared.InventoryManagement\Mes.Shopfloor.Shared.InventoryManagement.csproj" />
     </ItemGroup>
 
 </Project>

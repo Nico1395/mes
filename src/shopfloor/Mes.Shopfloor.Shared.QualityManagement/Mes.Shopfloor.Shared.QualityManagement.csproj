@@ -4,11 +4,10 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>Mes.Shopfloor.ProductionManagement.Core</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mes.Shopfloor\Mes.Shopfloor.csproj" />
+    <ProjectReference Include="..\Mes.Shopfloor.Shared\Mes.Shopfloor.Shared.csproj" />
   </ItemGroup>
 
 </Project>

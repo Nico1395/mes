@@ -1,8 +1,8 @@
-﻿using Mes.Shopfloor.Terminal.Core.Infrastructure;
-using Mes.Shopfloor.Terminal.Headless.Startup;
+﻿using Mes.Shopfloor.Client.Headless.Startup;
+using Mes.Shopfloor.Terminal.Core.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Shopfloor.Terminal.Headless;
+namespace Mes.Shopfloor.Client.Headless;
 
 internal sealed class HeadlessTerminalEntryPoint : EntryPoint
 {
