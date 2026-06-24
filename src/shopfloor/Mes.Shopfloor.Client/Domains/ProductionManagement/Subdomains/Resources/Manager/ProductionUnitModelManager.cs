@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
-using Mes.Shopfloor.Terminal.Core.Configuration;
+using Mes.Shopfloor.Client.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace Mes.Shopfloor.Terminal.Core.Domains.ProductionManagement.Subdomains.Resources.Manager;
+namespace Mes.Shopfloor.Client.Domains.ProductionManagement.Subdomains.Resources.Manager;
 
 internal sealed class ProductionUnitModelManager(
     IOptions<ProductionUnitOptions> _options,

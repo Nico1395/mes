@@ -1,4 +1,4 @@
-﻿using Mes.Shopfloor.Core.ValueObjects;
+﻿using Mes.Shopfloor.Shared.ValueObjects;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.ProductDefinition;
 

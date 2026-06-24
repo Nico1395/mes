@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Terminal.Core.Configuration;
+﻿namespace Mes.Shopfloor.Client.Configuration;
 
 public sealed class ApiOptions
 {

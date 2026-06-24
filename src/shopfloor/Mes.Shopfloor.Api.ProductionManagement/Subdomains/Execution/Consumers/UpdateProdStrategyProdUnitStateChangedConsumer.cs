@@ -1,5 +1,5 @@
-﻿using Mes.Shopfloor.Core.Messaging.Consumer;
-using Mes.Shopfloor.ProductionManagement.Core.Analysis.Events;
+﻿using Mes.Shopfloor.Shared.Messaging.Consumer;
+using Mes.Shopfloor.Shared.ProductionManagement.Analysis.Events;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.Execution.Consumers;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Shopfloor.Core.Messaging.Connections;
+namespace Mes.Shopfloor.Shared.Messaging.Connections;
 
 public static class ConnectionDependencyInjection
 {

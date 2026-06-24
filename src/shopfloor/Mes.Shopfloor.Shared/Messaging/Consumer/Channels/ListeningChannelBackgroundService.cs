@@ -1,14 +1,14 @@
 ﻿using System.Text;
-using Mes.Shopfloor.Core.Messaging.Connections;
-using Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
-using Mes.Shopfloor.Core.Messaging.Serialization;
+using Mes.Shopfloor.Shared.Messaging.Connections;
+using Mes.Shopfloor.Shared.Messaging.Consumer.Configuration;
+using Mes.Shopfloor.Shared.Messaging.Serialization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace Mes.Shopfloor.Core.Messaging.Consumer.Channels;
+namespace Mes.Shopfloor.Shared.Messaging.Consumer.Channels;
 
 internal sealed class ListeningChannelBackgroundService(
     ILogger<ListeningChannelBackgroundService> _logger,

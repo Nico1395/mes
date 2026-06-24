@@ -1,6 +1,6 @@
 ﻿using RabbitMQ.Client;
 
-namespace Mes.Shopfloor.Core.Messaging.Connections;
+namespace Mes.Shopfloor.Shared.Messaging.Connections;
 
 public interface IConnectionProvider
 {

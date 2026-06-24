@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Terminal.Core.Domains.ProductionManagement.Subdomains.Resources.Manager;
+﻿namespace Mes.Shopfloor.Client.Domains.ProductionManagement.Subdomains.Resources.Manager;
 
 internal interface IProductionUnitModelManager
 {

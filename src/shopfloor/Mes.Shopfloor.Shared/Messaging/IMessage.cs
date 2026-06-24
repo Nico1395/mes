@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Core.Messaging;
+﻿namespace Mes.Shopfloor.Shared.Messaging;
 
 public interface IMessage
 {

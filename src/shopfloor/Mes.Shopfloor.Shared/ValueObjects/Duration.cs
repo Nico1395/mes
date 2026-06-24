@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Core.ValueObjects;
+﻿namespace Mes.Shopfloor.Shared.ValueObjects;
 
 public sealed record Duration(TimeSpan Value, double DeviationSeconds)
 {

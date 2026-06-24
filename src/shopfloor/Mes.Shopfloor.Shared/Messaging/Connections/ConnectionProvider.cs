@@ -1,8 +1,7 @@
-﻿using Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 
-namespace Mes.Shopfloor.Core.Messaging.Connections;
+namespace Mes.Shopfloor.Shared.Messaging.Connections;
 
 internal sealed class ConnectionProvider(
     ILogger<ConnectionProvider> _logger,

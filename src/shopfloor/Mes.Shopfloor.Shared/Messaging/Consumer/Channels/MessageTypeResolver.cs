@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Mes.Shopfloor.Core.Messaging.Consumer.Channels;
+namespace Mes.Shopfloor.Shared.Messaging.Consumer.Channels;
 
 public static class MessageTypeResolver
 {

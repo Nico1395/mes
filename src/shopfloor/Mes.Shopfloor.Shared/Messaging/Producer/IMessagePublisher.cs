@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Core.Messaging.Producer;
+﻿namespace Mes.Shopfloor.Shared.Messaging.Producer;
 
 public interface IMessagePublisher
 {

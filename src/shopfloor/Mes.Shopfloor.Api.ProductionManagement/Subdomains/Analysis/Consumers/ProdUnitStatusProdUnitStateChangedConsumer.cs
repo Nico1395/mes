@@ -4,8 +4,8 @@ using Mes.Shopfloor.Api.Infrastructure;
 using Mes.Shopfloor.Api.ProductionManagement.Subdomains.Analysis.Factories;
 using Mes.Shopfloor.Api.ProductionManagement.Subdomains.Analysis.Repositories;
 using Mes.Shopfloor.Api.ProductionManagement.Subdomains.Resources.UseCases;
-using Mes.Shopfloor.Core.Messaging.Consumer;
-using Mes.Shopfloor.ProductionManagement.Core.Analysis.Events;
+using Mes.Shopfloor.Shared.Messaging.Consumer;
+using Mes.Shopfloor.Shared.ProductionManagement.Analysis.Events;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.Analysis.Consumers;
 

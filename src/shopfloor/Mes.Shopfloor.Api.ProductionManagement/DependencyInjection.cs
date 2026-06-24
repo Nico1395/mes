@@ -6,9 +6,9 @@ using Mes.Shopfloor.Api.Infrastructure;
 using Mes.Shopfloor.Api.ProductionManagement.Infrastructure;
 using Mes.Shopfloor.Api.ProductionManagement.Subdomains.Analysis.Repositories;
 using Mes.Shopfloor.Api.ProductionManagement.Subdomains.Resources.Repositories;
-using Mes.Shopfloor.Core.Messaging.Connections;
-using Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
-using Mes.Shopfloor.Core.Messaging.Producer;
+using Mes.Shopfloor.Shared.Messaging.Connections;
+using Mes.Shopfloor.Shared.Messaging.Consumer.Configuration;
+using Mes.Shopfloor.Shared.Messaging.Producer;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mes.Shopfloor.Api.ProductionManagement;

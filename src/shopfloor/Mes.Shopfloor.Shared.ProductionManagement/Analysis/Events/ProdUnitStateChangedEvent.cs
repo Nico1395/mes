@@ -1,6 +1,6 @@
-﻿using Mes.Shopfloor.Core.Messaging;
+﻿using Mes.Shopfloor.Shared.Messaging;
 
-namespace Mes.Shopfloor.ProductionManagement.Core.Analysis.Events;
+namespace Mes.Shopfloor.Shared.ProductionManagement.Analysis.Events;
 
 public sealed class ProdUnitStateChangedEvent : Message
 {

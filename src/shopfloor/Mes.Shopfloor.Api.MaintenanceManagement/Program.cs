@@ -1,6 +1,6 @@
-using Mes.Shopfloor.Core.Messaging.Connections;
-using Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
-using Mes.Shopfloor.Core.Messaging.Producer;
+using Mes.Shopfloor.Shared.Messaging.Connections;
+using Mes.Shopfloor.Shared.Messaging.Consumer.Configuration;
+using Mes.Shopfloor.Shared.Messaging.Producer;
 using NLog.Extensions.Logging;
 
 namespace Mes.Shopfloor.Api.MaintenanceManagement;

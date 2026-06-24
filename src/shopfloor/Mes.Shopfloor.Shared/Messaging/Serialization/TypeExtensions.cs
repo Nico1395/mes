@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Core.Messaging.Serialization;
+﻿namespace Mes.Shopfloor.Shared.Messaging.Serialization;
 
 public static class TypeExtensions
 {

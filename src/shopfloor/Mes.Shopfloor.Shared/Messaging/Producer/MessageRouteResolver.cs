@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace Mes.Shopfloor.Core.Messaging.Producer;
+namespace Mes.Shopfloor.Shared.Messaging.Producer;
 
 public static class MessageRouteResolver
 {

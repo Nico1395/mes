@@ -1,5 +1,4 @@
 ﻿using Mes.Shopfloor.Client.Console.Startup;
-using Mes.Shopfloor.Terminal.Core;
 
 namespace Mes.Shopfloor.Client.Console;
 

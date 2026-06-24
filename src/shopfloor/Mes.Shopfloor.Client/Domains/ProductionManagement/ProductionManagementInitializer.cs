@@ -1,9 +1,9 @@
-﻿using Mes.Shopfloor.Terminal.Core.Configuration;
-using Mes.Shopfloor.Terminal.Core.Domains.ProductionManagement.Subdomains.Resources.Manager;
-using Mes.Shopfloor.Terminal.Core.Infrastructure;
+﻿using Mes.Shopfloor.Client.Configuration;
+using Mes.Shopfloor.Client.Domains.ProductionManagement.Subdomains.Resources.Manager;
+using Mes.Shopfloor.Client.Infrastructure;
 using Microsoft.Extensions.Options;
 
-namespace Mes.Shopfloor.Terminal.Core.Domains.ProductionManagement;
+namespace Mes.Shopfloor.Client.Domains.ProductionManagement;
 
 internal sealed class ProductionManagementInitializer(
     IOptions<ProductionUnitOptions> _options,

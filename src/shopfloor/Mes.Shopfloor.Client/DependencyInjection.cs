@@ -1,13 +1,13 @@
-﻿using Mes.Shopfloor.Core.Messaging.Connections;
-using Mes.Shopfloor.Core.Messaging.Producer;
-using Mes.Shopfloor.Terminal.Core.Configuration;
-using Mes.Shopfloor.Terminal.Core.Domains.ProductionManagement;
-using Mes.Shopfloor.Terminal.Core.Domains.ProductionManagement.Subdomains.Resources.Manager;
-using Mes.Shopfloor.Terminal.Core.Infrastructure;
+﻿using Mes.Shopfloor.Client.Configuration;
+using Mes.Shopfloor.Client.Domains.ProductionManagement;
+using Mes.Shopfloor.Client.Domains.ProductionManagement.Subdomains.Resources.Manager;
+using Mes.Shopfloor.Client.Infrastructure;
+using Mes.Shopfloor.Shared.Messaging.Connections;
+using Mes.Shopfloor.Shared.Messaging.Producer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Shopfloor.Terminal.Core;
+namespace Mes.Shopfloor.Client;
 
 public static class DependencyInjection
 {

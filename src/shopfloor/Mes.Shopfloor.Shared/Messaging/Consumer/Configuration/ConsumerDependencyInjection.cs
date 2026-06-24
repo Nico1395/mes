@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
-using Mes.Shopfloor.Core.Messaging.Consumer.Channels;
+using Mes.Shopfloor.Shared.Messaging.Consumer.Channels;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
+namespace Mes.Shopfloor.Shared.Messaging.Consumer.Configuration;
 
 public static class ConsumerDependencyInjection
 {

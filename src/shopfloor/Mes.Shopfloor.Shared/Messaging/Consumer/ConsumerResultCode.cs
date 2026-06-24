@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Core.Messaging.Consumer;
+﻿namespace Mes.Shopfloor.Shared.Messaging.Consumer;
 
 public enum ConsumerResultCode
 {

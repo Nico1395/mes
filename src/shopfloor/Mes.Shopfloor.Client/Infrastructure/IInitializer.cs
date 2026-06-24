@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Terminal.Core.Infrastructure;
+﻿namespace Mes.Shopfloor.Client.Infrastructure;
 
 public interface IInitializer
 {

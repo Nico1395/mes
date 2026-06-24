@@ -1,5 +1,5 @@
 ﻿using Mes.Shopfloor.Client.Console.Startup;
-using Mes.Shopfloor.Terminal.Core.Infrastructure;
+using Mes.Shopfloor.Client.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Mes.Shopfloor.Client.Console;

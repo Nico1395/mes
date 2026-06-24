@@ -1,6 +1,6 @@
-﻿using Mes.Shopfloor.Core.Messaging;
+﻿using Mes.Shopfloor.Shared.Messaging;
 
-namespace Mes.Shopfloor.Core.Contracts.Events;
+namespace Mes.Shopfloor.Shared.Contracts.Events;
 
 [MessageRoute("status.changed")]
 public sealed class WorkplaceStatusChangedEvent : Message

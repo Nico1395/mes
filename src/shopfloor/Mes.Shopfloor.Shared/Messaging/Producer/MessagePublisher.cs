@@ -1,9 +1,9 @@
 ﻿using System.Text;
-using Mes.Shopfloor.Core.Messaging.Connections;
-using Mes.Shopfloor.Core.Messaging.Serialization;
+using Mes.Shopfloor.Shared.Messaging.Connections;
+using Mes.Shopfloor.Shared.Messaging.Serialization;
 using RabbitMQ.Client;
 
-namespace Mes.Shopfloor.Core.Messaging.Producer;
+namespace Mes.Shopfloor.Shared.Messaging.Producer;
 
 internal sealed class MessagePublisher(IConnectionProvider _connectionProvider) : IMessagePublisher
 {

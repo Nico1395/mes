@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Mes.Shopfloor.Core.Messaging.Consumer.Configuration;
+namespace Mes.Shopfloor.Shared.Messaging.Consumer.Configuration;
 
 public sealed class RabbitMQConsumerConfiguration
 {
