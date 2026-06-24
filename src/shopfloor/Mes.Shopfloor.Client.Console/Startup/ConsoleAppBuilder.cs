@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Shopfloor.Client.Headless.Startup;
+namespace Mes.Shopfloor.Client.Console.Startup;
 
 public sealed class ConsoleAppBuilder
 {

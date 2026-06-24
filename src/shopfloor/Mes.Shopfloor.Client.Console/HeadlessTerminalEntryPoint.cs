@@ -1,14 +1,14 @@
-﻿using Mes.Shopfloor.Client.Headless.Startup;
+﻿using Mes.Shopfloor.Client.Console.Startup;
 using Mes.Shopfloor.Terminal.Core.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Shopfloor.Client.Headless;
+namespace Mes.Shopfloor.Client.Console;
 
 internal sealed class HeadlessTerminalEntryPoint : EntryPoint
 {
     public override async Task RunAsync(CancellationToken cancellationToken)
     {
-        Console.WriteLine("[0] Terminal initializing...");
+        System.Console.WriteLine("[0] Terminal initializing...");
 
         var initializers = Services.GetServices<IInitializer>().ToList();
         if (initializers.Count == 0)
@@ -17,12 +17,12 @@ internal sealed class HeadlessTerminalEntryPoint : EntryPoint
         foreach (var initializer in initializers)
             await initializer.InitializeAsync(cancellationToken);
 
-        Console.WriteLine("[0] Terminal initialized!");
+        System.Console.WriteLine("[0] Terminal initialized!");
 
-        Console.WriteLine("[1] Beginning production...");
+        System.Console.WriteLine("[1] Beginning production...");
         
         // TODO -> Allow entering quantities or automatically generate quantities and statuses
         
-        Console.ReadLine();
+        System.Console.ReadLine();
     }
 }

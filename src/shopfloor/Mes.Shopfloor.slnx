@@ -7,7 +7,7 @@
     <Project Path="Mes.Shopfloor.Api/Mes.Shopfloor.Api.csproj" />
   </Folder>
   <Folder Name="/Client/">
-    <Project Path="Mes.Shopfloor.Client.Headless/Mes.Shopfloor.Client.Headless.csproj" />
+    <Project Path="Mes.Shopfloor.Client.Console/Mes.Shopfloor.Client.Console.csproj" />
     <Project Path="Mes.Shopfloor.Client.InventoryManagement/Mes.Shopfloor.Client.InventoryManagement.csproj" />
     <Project Path="Mes.Shopfloor.Client.MaintenanceManagement/Mes.Shopfloor.Client.MaintenanceManagement.csproj" />
     <Project Path="Mes.Shopfloor.Client.ProductionManagement/Mes.Shopfloor.Client.ProductionManagement.csproj" />

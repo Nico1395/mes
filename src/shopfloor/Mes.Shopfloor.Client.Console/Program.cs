@@ -1,7 +1,7 @@
-﻿using Mes.Shopfloor.Client.Headless.Startup;
+﻿using Mes.Shopfloor.Client.Console.Startup;
 using Mes.Shopfloor.Terminal.Core;
 
-namespace Mes.Shopfloor.Client.Headless;
+namespace Mes.Shopfloor.Client.Console;
 
 internal sealed class Program
 {

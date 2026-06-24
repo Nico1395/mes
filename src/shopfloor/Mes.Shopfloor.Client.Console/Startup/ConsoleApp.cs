@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Shopfloor.Client.Headless.Startup;
+namespace Mes.Shopfloor.Client.Console.Startup;
 
 public sealed class ConsoleApp(IServiceCollection services, IConfiguration configuration)
 {
@@ -23,11 +23,11 @@ public sealed class ConsoleApp(IServiceCollection services, IConfiguration confi
         }
         catch (Exception ex)
         {
-            Console.WriteLine("The application ran into a critical error and can't recover.");
-            Console.WriteLine(ex);
+            System.Console.WriteLine("The application ran into a critical error and can't recover.");
+            System.Console.WriteLine(ex);
             
-            Console.Write("\nPress any key to exit the application...");
-            Console.ReadLine();
+            System.Console.Write("\nPress any key to exit the application...");
+            System.Console.ReadLine();
             
             return Task.CompletedTask;
         }
