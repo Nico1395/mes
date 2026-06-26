@@ -1,5 +1,5 @@
 ﻿using Mes.Shopfloor.Client.Console.Startup;
-using Mes.Shopfloor.Client.Infrastructure.Initialization;
+using Mes.Shopfloor.Client.Infrastructure.TerminalInitialization;
 using Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,10 +11,10 @@ internal sealed class HeadlessTerminalEntryPoint : EntryPoint
     {
         System.Console.WriteLine("Terminal initializing...");
 
-        var initializer = Services.GetRequiredService<IInitializer>();
+        var initializer = Services.GetRequiredService<ITerminalInitializer>();
         var issues = await initializer.InitializeAsync(cancellationToken);
 
-        var anyCriticalIssues = issues.Any(i => i.Severity == InitializationIssueSeverity.Critical);
+        var anyCriticalIssues = issues.Any(i => i.Severity == TerminalInitializationIssueSeverity.Critical);
         System.Console.WriteLine(anyCriticalIssues
             ? "Encountered at least one critical issue while initializing:"
             : "Encountered several issues while initializing:");

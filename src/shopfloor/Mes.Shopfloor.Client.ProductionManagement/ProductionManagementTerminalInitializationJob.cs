@@ -1,6 +1,6 @@
 ﻿using Mes.Shopfloor.Client.Configuration;
-using Mes.Shopfloor.Client.Infrastructure.Initialization;
 using Mes.Shopfloor.Client.Infrastructure.Input;
+using Mes.Shopfloor.Client.Infrastructure.TerminalInitialization;
 using Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
 using Mes.Shopfloor.Client.ProductionManagement.DataCollection.Repositories;
 using Mes.Shopfloor.Client.ProductionManagement.ProductDefinition.Repositories;
@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Mes.Shopfloor.Client.ProductionManagement;
 
-internal sealed class ProductionManagementInitializationJob(
+internal sealed class ProductionManagementTerminalInitializationJob(
     IOptions<ProductionUnitOptions> _options,
     ITerminalRoutineContext terminalRoutineContext,
     IInputHandler<WorkerSignInInputRequest, string> _workerSignIn,
@@ -21,22 +21,22 @@ internal sealed class ProductionManagementInitializationJob(
     IProductionUnitScheduleModelRepository _productionUnitScheduleModelRepository,
     IProductionProcessModelRepository _productionProcessModelRepository,
     IProductionOrderModelRepository _productionOrderModelRepository,
-    IWorkerModelRepository _workerModelRepository) : IInitializationJob
+    IWorkerModelRepository _workerModelRepository) : ITerminalInitializationJob
 {
     public int Order => 0;
 
-    public async Task InitializeAsync(InitializationContext context, CancellationToken cancellationToken)
+    public async Task InitializeAsync(TerminalInitializationContext context, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(_options.Value.Key))
         {
-            context.ReportIssue(InitializationIssueSeverity.Critical, "Production unit key not configured.");
+            context.ReportIssue(TerminalInitializationIssueSeverity.Critical, "Production unit key not configured.");
             return;
         }
 
         var currentProductionUnit = await _productionUnitModelRepository.GetByKeyAsync(_options.Value.Key, cancellationToken);
         if (currentProductionUnit == null)
         {
-            context.ReportIssue(InitializationIssueSeverity.Critical, $"No production unit for key '{_options.Value.Key}' could be fetched.");
+            context.ReportIssue(TerminalInitializationIssueSeverity.Critical, $"No production unit for key '{_options.Value.Key}' could be fetched.");
             return;
         }
 

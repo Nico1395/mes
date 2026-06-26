@@ -1,5 +1,5 @@
 ﻿using Mes.Shopfloor.Client.Configuration;
-using Mes.Shopfloor.Client.Infrastructure.Initialization;
+using Mes.Shopfloor.Client.Infrastructure.TerminalInitialization;
 using Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
 using Mes.Shopfloor.Shared.Messaging.Connections;
 using Mes.Shopfloor.Shared.Messaging.Producer;

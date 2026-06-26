@@ -1,18 +1,18 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Shopfloor.Client.Infrastructure.Initialization;
+namespace Mes.Shopfloor.Client.Infrastructure.TerminalInitialization;
 
-public static class InitializationServiceCollectionExtensions
+public static class TerminalInitializationServiceCollectionExtensions
 {
     private static readonly IReadOnlyList<Type> _jobTypes =
     [
-        typeof(IInitializationJob),
+        typeof(ITerminalInitializationJob),
     ];
 
     public static IServiceCollection AddTerminalInitialization(this IServiceCollection services, Assembly[] assemblies)
     {
-        services.AddSingleton<IInitializer, Initializer>();
+        services.AddSingleton<ITerminalInitializer, TerminalInitializer>();
         AddJobs(services, assemblies);
 
         return services;
