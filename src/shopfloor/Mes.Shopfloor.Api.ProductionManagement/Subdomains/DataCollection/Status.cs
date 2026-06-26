@@ -1,11 +1,11 @@
-﻿namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.Analysis;
+﻿namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.DataCollection;
 
-internal sealed class ProductionUnitStatus
+internal sealed class Status
 {
     public required Guid ProductionUnitId { get; init; }
-    public List<ProductionUnitStatusState> States { get; init; } = [];
+    public List<StatusState> States { get; init; } = [];
 
-    public void SetState(ProductionUnitStatusState state)
+    public void SetState(StatusState state)
     {
         var lastState = States.OrderBy(s => s.StartedAt).LastOrDefault();
         if (lastState != null)

@@ -1,16 +1,14 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.DataCollection;
 
-namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.Analysis;
-
-internal sealed class ProductionUnitStatusState
+internal sealed class StatusState
 {
     public required Guid ProductionUnitId { get; init; }
     public required Guid StateId { get; init; }
-    public ProductionUnitState? State { get; init; }
+    public State? State { get; init; }
     public required DateTime StartedAt { get; init; }
     public DateTime? EndedAt { get; private set; }
 
-    public static ProductionUnitStatusState FromState(Guid productionUnitId, ProductionUnitState state, DateTime startedAt)
+    public static StatusState FromState(Guid productionUnitId, State state, DateTime startedAt)
     {
         return new()
         {
