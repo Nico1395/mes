@@ -11,4 +11,8 @@
       <ProjectReference Include="..\Mes.Shopfloor.Client\Mes.Shopfloor.Client.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Execution\" />
+    </ItemGroup>
+
 </Project>
