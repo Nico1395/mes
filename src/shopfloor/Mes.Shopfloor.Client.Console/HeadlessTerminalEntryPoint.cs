@@ -1,6 +1,6 @@
 ﻿using Mes.Shopfloor.Client.Console.Startup;
 using Mes.Shopfloor.Client.Infrastructure.Initialization;
-using Mes.Shopfloor.Client.Infrastructure.Routine;
+using Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Mes.Shopfloor.Client.Console;
@@ -35,7 +35,7 @@ internal sealed class HeadlessTerminalEntryPoint : EntryPoint
 
         using var scope = Services.CreateScope();
         {
-            var routine = scope.ServiceProvider.GetRequiredService<IRoutine>();
+            var routine = scope.ServiceProvider.GetRequiredService<ITerminalRoutine>();
             await routine.ExecuteAsync(cancellationToken);
         }
         

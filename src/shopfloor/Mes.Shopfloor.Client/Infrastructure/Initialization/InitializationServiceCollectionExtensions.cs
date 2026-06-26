@@ -10,7 +10,7 @@ public static class InitializationServiceCollectionExtensions
         typeof(IInitializationJob),
     ];
 
-    public static IServiceCollection AddInitialization(this IServiceCollection services, Assembly[] assemblies)
+    public static IServiceCollection AddTerminalInitialization(this IServiceCollection services, Assembly[] assemblies)
     {
         services.AddSingleton<IInitializer, Initializer>();
         AddJobs(services, assemblies);

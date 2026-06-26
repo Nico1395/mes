@@ -1,4 +1,5 @@
 ﻿using Mes.Shopfloor.Client.Console.Startup;
+using Mes.Shopfloor.Client.ProductionManagement;
 
 namespace Mes.Shopfloor.Client.Console;
 
@@ -8,8 +9,9 @@ internal sealed class Program
     {
         var builder = new ConsoleAppBuilder(args).UseEntryPoint<HeadlessTerminalEntryPoint>();
 
-        builder.Services.AddTerminal(builder.Configuration);
-        
+        builder.Services.AddTerminalCore(builder.Configuration);
+        builder.Services.AddTerminalProductionManagement(builder.Configuration);
+
         await builder.Build().RunAsync();
     }
 }

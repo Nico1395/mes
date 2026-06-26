@@ -1,6 +1,6 @@
-﻿namespace Mes.Shopfloor.Client.Infrastructure.Routine;
+﻿namespace Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
 
-public enum RoutineDataKey
+public enum DataKey
 {
     ProducedQuantity,
     ProductionUnitId,

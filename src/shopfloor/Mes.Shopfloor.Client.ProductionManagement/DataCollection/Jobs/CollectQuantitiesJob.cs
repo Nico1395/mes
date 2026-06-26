@@ -1,17 +1,17 @@
-﻿using Mes.Shopfloor.Client.Infrastructure.Routine;
+﻿using Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
 
 namespace Mes.Shopfloor.Client.ProductionManagement.DataCollection.Jobs;
 
-internal sealed class CollectQuantitiesJob : RoutineJob
+internal sealed class CollectQuantitiesJob : TerminalRoutineJob
 {
     private static readonly Random _random = new();
 
     private int _producedQuantity;
     private int _rejectQuantity;
 
-    public override int Order => RoutineJobOrder.CollectQuantities.ToInt();
+    public override int Order => JobOrder.CollectQuantities.ToInt();
 
-    public override Task ExecuteAsync(IRoutineContext context, CancellationToken cancellationToken)
+    public override Task ExecuteAsync(ITerminalRoutineContext context, CancellationToken cancellationToken)
     {
         // Usually you would request quantity data from either
         // 1. a OPC UA server,
@@ -25,10 +25,10 @@ internal sealed class CollectQuantitiesJob : RoutineJob
         return Task.CompletedTask;
     }
 
-    public override void Synchronize(IRoutineContext context)
+    public override void Synchronize(ITerminalRoutineContext context)
     {
-        context.Set(RoutineDataKey.ProducedQuantity, _producedQuantity);
-        context.Set(RoutineDataKey.RejectQuantity, _rejectQuantity);
+        context.Set(DataKey.ProducedQuantity, _producedQuantity);
+        context.Set(DataKey.RejectQuantity, _rejectQuantity);
     }
 
     private static int NextProducedQuantity()

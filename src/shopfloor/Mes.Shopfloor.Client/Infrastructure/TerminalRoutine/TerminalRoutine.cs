@@ -3,15 +3,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Mes.Shopfloor.Client.Infrastructure.Routine;
+namespace Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
 
-internal sealed partial class Routine(
-    IRoutineContext _routineContext,
-    ILogger<Routine> _logger,
+internal sealed partial class TerminalRoutine(
+    ITerminalRoutineContext terminalRoutineContext,
+    ILogger<TerminalRoutine> _logger,
     IOptions<RoutineOptions> _options,
-    IServiceProvider _serviceProvider) : IRoutine
+    IServiceProvider _serviceProvider) : ITerminalRoutine
 {
-    private List<IRoutineJob>? _jobs;
+    private List<ITerminalRoutineJob>? _jobs;
 
     public async Task ExecuteAsync(CancellationToken cancellationToken)
     {
@@ -20,7 +20,7 @@ internal sealed partial class Routine(
 
         while (!cancellationToken.IsCancellationRequested)
         {
-            _routineContext.CurrentIterationStartedAt = DateTime.UtcNow;
+            terminalRoutineContext.CurrentIterationStartedAt = DateTime.UtcNow;
 
             foreach (var job in jobs)
             {
@@ -30,14 +30,14 @@ internal sealed partial class Routine(
 
                 try
                 {
-                    await job.ExecuteAsync(_routineContext, jobTokenSource.Token);
-                    job.Synchronize(_routineContext);
+                    await job.ExecuteAsync(terminalRoutineContext, jobTokenSource.Token);
+                    job.Synchronize(terminalRoutineContext);
                 }
                 catch (OperationCanceledException) when (jobTokenSource.IsCancellationRequested)
                 {
                     _logger.LogWarning("Job '{jobName}' timed out after {timeout}.", job.GetType().Name, job.Timeout);
                 }
-                catch (RequiredRoutineDataMissingException ex)
+                catch (RequiredTerminalRoutineDataMissingException ex)
                 {
                     LogJobJobnameIsMissingRequiredRoutineData(job.GetType().Name, ex);
                 }
@@ -47,9 +47,9 @@ internal sealed partial class Routine(
                 }
             }
 
-            _routineContext.LastIterationCompletedAt = DateTime.UtcNow;
+            terminalRoutineContext.LastIterationCompletedAt = DateTime.UtcNow;
 
-            var iterationDuration = _routineContext.LastIterationCompletedAt - _routineContext.CurrentIterationStartedAt;
+            var iterationDuration = terminalRoutineContext.LastIterationCompletedAt - terminalRoutineContext.CurrentIterationStartedAt;
             var remainingDuration = iterationInterval - iterationDuration;
             var delayedMs = remainingDuration.Milliseconds <= 0 ? 0 : remainingDuration.Milliseconds;
 
@@ -59,14 +59,14 @@ internal sealed partial class Routine(
         }
     }
 
-    private List<IRoutineJob> GetJobs()
+    private List<ITerminalRoutineJob> GetJobs()
     {
-        return _jobs ??= _serviceProvider.GetServices<IRoutineJob>().OrderBy(j => j.Order).ToList();
+        return _jobs ??= _serviceProvider.GetServices<ITerminalRoutineJob>().OrderBy(j => j.Order).ToList();
     }
 
     [LoggerMessage(LogLevel.Critical, "Job '{jobName}' is missing required routine data.")]
-    partial void LogJobJobnameIsMissingRequiredRoutineData(string jobName, RequiredRoutineDataMissingException requiredRoutineDataMissingException);
+    partial void LogJobJobnameIsMissingRequiredRoutineData(string jobName, RequiredTerminalRoutineDataMissingException requiredTerminalRoutineDataMissingException);
 
-    [LoggerMessage(LogLevel.Information, "Routine iteration took {IterationDuration} with {RemainingDuration} left.")]
+    [LoggerMessage(LogLevel.Information, "TerminalRoutine iteration took {IterationDuration} with {RemainingDuration} left.")]
     partial void LogRoutineIterationTookIterationDurationWithRemainingDurationLeft(TimeSpan iterationDuration, TimeSpan remainingDuration);
 }

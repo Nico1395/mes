@@ -14,8 +14,4 @@
     <PackageReference Include="Microsoft.Extensions.Http" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ProductionManagement\Execution\" />
-  </ItemGroup>
-
 </Project>

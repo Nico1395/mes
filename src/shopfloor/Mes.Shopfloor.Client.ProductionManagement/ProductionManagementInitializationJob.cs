@@ -1,7 +1,7 @@
 ﻿using Mes.Shopfloor.Client.Configuration;
 using Mes.Shopfloor.Client.Infrastructure.Initialization;
 using Mes.Shopfloor.Client.Infrastructure.Input;
-using Mes.Shopfloor.Client.Infrastructure.Routine;
+using Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
 using Mes.Shopfloor.Client.ProductionManagement.DataCollection.Repositories;
 using Mes.Shopfloor.Client.ProductionManagement.ProductDefinition.Repositories;
 using Mes.Shopfloor.Client.ProductionManagement.Resources;
@@ -13,7 +13,7 @@ namespace Mes.Shopfloor.Client.ProductionManagement;
 
 internal sealed class ProductionManagementInitializationJob(
     IOptions<ProductionUnitOptions> _options,
-    IRoutineContext _routineContext,
+    ITerminalRoutineContext terminalRoutineContext,
     IInputHandler<WorkerSignInInputRequest, string> _workerSignIn,
     IRejectGroupModelRepository _rejectGroupModelRepository,
     IStateGroupModelRepository _stateGroupModelRepository,
@@ -40,35 +40,35 @@ internal sealed class ProductionManagementInitializationJob(
             return;
         }
 
-        _routineContext.SetIfNotNull(RoutineDataKey.ProductionUnit, currentProductionUnit);
-        _routineContext.SetIfNotNull(RoutineDataKey.ProductionUnitId, currentProductionUnit.Id);
+        terminalRoutineContext.SetIfNotNull(DataKey.ProductionUnit, currentProductionUnit);
+        terminalRoutineContext.SetIfNotNull(DataKey.ProductionUnitId, currentProductionUnit.Id);
 
         var rejectGroup = await _rejectGroupModelRepository.GetByIdAsync(currentProductionUnit.Group.RejectGroupId, cancellationToken);
-        _routineContext.SetIfNotNull(RoutineDataKey.RejectGroup, rejectGroup);
-        _routineContext.SetIfNotNull(RoutineDataKey.RejectGroupId, rejectGroup?.Id);
+        terminalRoutineContext.SetIfNotNull(DataKey.RejectGroup, rejectGroup);
+        terminalRoutineContext.SetIfNotNull(DataKey.RejectGroupId, rejectGroup?.Id);
         
         var stateGroup = await _stateGroupModelRepository.GetByIdAsync(currentProductionUnit.Group.StateGroupId, cancellationToken);
-        _routineContext.SetIfNotNull(RoutineDataKey.StateGroup, stateGroup);
-        _routineContext.SetIfNotNull(RoutineDataKey.StateGroupId, stateGroup?.Id);
+        terminalRoutineContext.SetIfNotNull(DataKey.StateGroup, stateGroup);
+        terminalRoutineContext.SetIfNotNull(DataKey.StateGroupId, stateGroup?.Id);
 
         var currentSchedule = await _productionUnitScheduleModelRepository.GetByProductionUnitIdAsync(currentProductionUnit.Id, cancellationToken);
-        _routineContext.SetIfNotNull(RoutineDataKey.Schedule, currentSchedule);
-        _routineContext.SetIfNotNull(RoutineDataKey.ScheduleId, currentSchedule?.Id);
+        terminalRoutineContext.SetIfNotNull(DataKey.Schedule, currentSchedule);
+        terminalRoutineContext.SetIfNotNull(DataKey.ScheduleId, currentSchedule?.Id);
 
         var productionProcessId = currentSchedule?.GetCurrentTask()?.ProductionScheduleId;
         if (productionProcessId.HasValue)
         {
             var productionProcess = await _productionProcessModelRepository.GetByIdAsync(productionProcessId.Value, cancellationToken);
-            _routineContext.SetIfNotNull(RoutineDataKey.ProductionProcess, productionProcess);
-            _routineContext.SetIfNotNull(RoutineDataKey.ProductionProcessId, productionProcess?.Id);
+            terminalRoutineContext.SetIfNotNull(DataKey.ProductionProcess, productionProcess);
+            terminalRoutineContext.SetIfNotNull(DataKey.ProductionProcessId, productionProcess?.Id);
         }
 
         var orderId = currentSchedule?.GetCurrentTask()?.ProductionOrderId;
         if (orderId.HasValue)
         {
             var order = await _productionOrderModelRepository.GetByIdAsync(orderId.Value, cancellationToken);
-            _routineContext.SetIfNotNull(RoutineDataKey.Order, order);
-            _routineContext.SetIfNotNull(RoutineDataKey.OrderId, order?.Id);
+            terminalRoutineContext.SetIfNotNull(DataKey.Order, order);
+            terminalRoutineContext.SetIfNotNull(DataKey.OrderId, order?.Id);
         }
 
         WorkerModel? worker = null;
@@ -79,8 +79,8 @@ internal sealed class ProductionManagementInitializationJob(
             if (worker == null)
                 Console.WriteLine($"No worker for number '{workerNumber}' could be found. Try again.");
         }
-        _routineContext.SetIfNotNull(RoutineDataKey.Worker, worker);
-        _routineContext.SetIfNotNull(RoutineDataKey.WorkerId, worker.Id);
-        _routineContext.SetIfNotNull(RoutineDataKey.WorkerNumber, worker.Number);
+        terminalRoutineContext.SetIfNotNull(DataKey.Worker, worker);
+        terminalRoutineContext.SetIfNotNull(DataKey.WorkerId, worker.Id);
+        terminalRoutineContext.SetIfNotNull(DataKey.WorkerNumber, worker.Number);
     }
 }
