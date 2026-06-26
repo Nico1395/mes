@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Client.Domains.ProductionManagement.Subdomains.Resources;
+﻿namespace Mes.Shopfloor.Client.ProductionManagement.Resources;
 
 internal sealed class ProductionUnitModel
 {
