@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.Infrastructure;
 
@@ -12,6 +11,6 @@ internal sealed class ProductionManagementDbContext(IConfiguration _configuratio
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductionManagementDbContext).Assembly);
     }
 }
