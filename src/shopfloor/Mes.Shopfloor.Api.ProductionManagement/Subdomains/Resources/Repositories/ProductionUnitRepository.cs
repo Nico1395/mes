@@ -13,6 +13,7 @@ internal sealed class ProductionUnitRepository(DbContext _context) : IProduction
     {
         return _context
             .Set<ProductionUnit>()
+            .Include(p => p.Type)
             .Include(p => p.Group)
             .SingleOrDefaultAsync(p => p.Id == id, cancellationToken);
     }
@@ -26,6 +27,7 @@ internal sealed class ProductionUnitRepository(DbContext _context) : IProduction
     {
         return _context
             .Set<ProductionUnit>()
+            .Include(p => p.Type)
             .Include(p => p.Group)
             .SingleOrDefaultAsync(p => p.Key == key, cancellationToken);
     }

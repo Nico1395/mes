@@ -3,7 +3,9 @@ using DandyMediator;
 using DandyMediator.Queries;
 using DandyMediator.Responses;
 using Mes.Shopfloor.Api.Infrastructure;
+using Mes.Shopfloor.Api.ProductionManagement.Subdomains.Resources.Contracts;
 using Mes.Shopfloor.Api.ProductionManagement.Subdomains.Resources.Repositories;
+using Mes.Shopfloor.Shared.ObjectMapping;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.Resources.UseCases;
@@ -21,7 +23,7 @@ public static class GetProductionUnitByKey
                 CancellationToken cancellationToken) =>
             {
                 var response = await mediator.SendAsync<Query, ProductionUnit>(new Query(key, eager), cancellationToken);
-                return response.ToResult();
+                return response.Map(p => p.Map<ProductionUnitDto>()).ToResult();
             });
         }
     }
