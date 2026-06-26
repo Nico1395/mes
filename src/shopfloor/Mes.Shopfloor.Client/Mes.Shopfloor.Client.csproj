@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domains\ProductionManagement\Subdomains\Scheduling\" />
+    <Folder Include="ProductionManagement\Execution\" />
   </ItemGroup>
 
 </Project>

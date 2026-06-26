@@ -1,7 +1,10 @@
-﻿using Mes.Shopfloor.Client.Configuration;
-using Mes.Shopfloor.Client.Domains.ProductionManagement;
-using Mes.Shopfloor.Client.Domains.ProductionManagement.Subdomains.Resources.Manager;
-using Mes.Shopfloor.Client.Infrastructure;
+﻿using System.Reflection;
+using Mes.Shopfloor.Client.Configuration;
+using Mes.Shopfloor.Client.Infrastructure.Initialization;
+using Mes.Shopfloor.Client.Infrastructure.Routine;
+using Mes.Shopfloor.Client.ProductionManagement.DataCollection.Repositories;
+using Mes.Shopfloor.Client.ProductionManagement.Resources.Repositories;
+using Mes.Shopfloor.Client.ProductionManagement.Scheduling.Repositories;
 using Mes.Shopfloor.Shared.Messaging.Connections;
 using Mes.Shopfloor.Shared.Messaging.Producer;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +20,8 @@ public static class DependencyInjection
         var brokerPassword = configuration["MessageBroker:Password"] ?? throw new InvalidOperationException("No message broker user password configured.");
         var brokerNodes = configuration.GetSection("MessageBroker:Nodes").Get<string[]>() ?? throw new InvalidOperationException("No message broker nodes configured.");
 
+        var assemblies = new Assembly[] { typeof(DependencyInjection).Assembly, };
+
         services.AddRabbitMQConnection(connection =>
         {
             connection.ConnectToCluster(
@@ -25,6 +30,8 @@ public static class DependencyInjection
                 nodes: brokerNodes);
         });
         services.AddRabbitMQProducer();
+        services.AddInitialization(assemblies);
+        services.AddRoutine(assemblies);
 
         services.AddOptions<ProductionUnitOptions>().Bind(configuration.GetSection("ProductionUnit"));
         services.AddOptions<ApiOptions>().Bind(configuration.GetSection("Apis"));
@@ -35,8 +42,11 @@ public static class DependencyInjection
         {
             cfg.BaseAddress = new Uri(productionManagementUrl);
         });
-        services.AddSingleton<IInitializer, ProductionManagementInitializer>();
-        services.AddSingleton<IProductionUnitModelManager, ProductionUnitModelManager>();
+        
+        services.AddSingleton<IProductionUnitModelRepository, ProductionUnitModelRepository>();
+        services.AddSingleton<IProductionUnitScheduleModelRepository, ProductionUnitScheduleModelRepository>();
+        services.AddSingleton<IStateGroupModelRepository, StateGroupModelRepository>();
+        services.AddSingleton<IRejectGroupModelRepository, RejectGroupModelRepository>();
 
         return services;
     }
