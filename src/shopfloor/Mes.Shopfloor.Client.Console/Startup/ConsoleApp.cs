@@ -10,7 +10,7 @@ public sealed class ConsoleApp(IServiceCollection services, IConfiguration confi
     public IServiceProvider Services { get; } = services.BuildServiceProvider();
     public IConfiguration Configuration { get; } = configuration;
 
-    public Task RunAsync()
+    public async Task RunAsync()
     {
         EntryPoint ??= Services.GetRequiredService<EntryPoint>();
 
@@ -19,7 +19,7 @@ public sealed class ConsoleApp(IServiceCollection services, IConfiguration confi
 
         try
         {
-            return EntryPoint.RunAsync(EntryPoint.CancellationToken);
+            await EntryPoint.RunAsync(EntryPoint.CancellationToken);
         }
         catch (Exception ex)
         {
@@ -28,8 +28,6 @@ public sealed class ConsoleApp(IServiceCollection services, IConfiguration confi
             
             System.Console.Write("\nPress any key to exit the application...");
             System.Console.ReadLine();
-            
-            return Task.CompletedTask;
         }
     }
 }

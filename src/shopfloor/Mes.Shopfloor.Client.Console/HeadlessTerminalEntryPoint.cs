@@ -1,5 +1,6 @@
 ﻿using Mes.Shopfloor.Client.Console.Startup;
-using Mes.Shopfloor.Client.Infrastructure;
+using Mes.Shopfloor.Client.Infrastructure.Initialization;
+using Mes.Shopfloor.Client.Infrastructure.Routine;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Mes.Shopfloor.Client.Console;
@@ -8,21 +9,36 @@ internal sealed class HeadlessTerminalEntryPoint : EntryPoint
 {
     public override async Task RunAsync(CancellationToken cancellationToken)
     {
-        System.Console.WriteLine("[0] Terminal initializing...");
+        System.Console.WriteLine("Terminal initializing...");
 
-        var initializers = Services.GetServices<IInitializer>().ToList();
-        if (initializers.Count == 0)
-            throw new InvalidOperationException($"No terminal initializers were found.");
+        var initializer = Services.GetRequiredService<IInitializer>();
+        var issues = await initializer.InitializeAsync(cancellationToken);
 
-        foreach (var initializer in initializers)
-            await initializer.InitializeAsync(cancellationToken);
+        var anyCriticalIssues = issues.Any(i => i.Severity == InitializationIssueSeverity.Critical);
+        System.Console.WriteLine(anyCriticalIssues
+            ? "Encountered at least one critical issue while initializing:"
+            : "Encountered several issues while initializing:");
 
-        System.Console.WriteLine("[0] Terminal initialized!");
+        foreach (var issue in issues)
+            System.Console.WriteLine($"    1. {issue.Severity} - {issue.Message}");
 
-        System.Console.WriteLine("[1] Beginning production...");
+        if (anyCriticalIssues)
+        {
+            System.Console.WriteLine("\nAt least one critical issue is preventing the application from continuing. Press any key to exit.");
+            System.Console.ReadKey();
+            return;
+        }
+
+        System.Console.WriteLine("Terminal initialized!");
+
+        System.Console.WriteLine("\nBeginning production...");
+
+        using var scope = Services.CreateScope();
+        {
+            var routine = scope.ServiceProvider.GetRequiredService<IRoutine>();
+            await routine.ExecuteAsync(cancellationToken);
+        }
         
-        // TODO -> Allow entering quantities or automatically generate quantities and statuses
-        
-        System.Console.ReadLine();
+        System.Console.ReadKey();
     }
 }
