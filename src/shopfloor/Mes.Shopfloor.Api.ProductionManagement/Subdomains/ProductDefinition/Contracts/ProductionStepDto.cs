@@ -1,0 +1,18 @@
+﻿using Mes.Shopfloor.Shared.ValueObjects;
+
+namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.ProductDefinition.Contracts;
+
+public class ProductionStepDto
+{
+    public Guid Id { get; init; }
+    public required Guid ProcessId { get; init; }
+    public required int Index { get; init; }
+    public required string Name { get; set; }
+    public string? Description { get; set; }
+    public Duration? Duration { get; set; }
+    public Guid? ProductionUnitId { get; set; }
+    public List<ProductionStepPartDto>? Parts { get; set; }
+    public List<ProductionStepMaterialDto>? Material { get; set; }
+    public List<ProductionStepParameterDto>? Parameters { get; set; }
+    public List<ProductionStepEquipmentDto>? Equipment { get; set; }
+}
