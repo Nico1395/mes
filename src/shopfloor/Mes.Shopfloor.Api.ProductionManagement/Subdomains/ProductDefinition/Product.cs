@@ -1,6 +1,6 @@
 ﻿namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.ProductDefinition;
 
-public class Product
+internal sealed class Product
 {
     public Guid Id { get; init; } = Guid.NewGuid();
     public required string Name { get; set; }
