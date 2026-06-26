@@ -7,6 +7,7 @@ internal sealed class ProductionUnitGroup
     public string? Description { get; set; }
     public required Guid StateGroupId { get; set; }
     public required Guid RejectGroupId { get; set; }
+    public List<ProductionUnit>? ProductionUnits { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
