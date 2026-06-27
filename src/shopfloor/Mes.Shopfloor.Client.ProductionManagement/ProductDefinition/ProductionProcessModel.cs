@@ -1,6 +1,6 @@
 ﻿namespace Mes.Shopfloor.Client.ProductionManagement.ProductDefinition;
 
-public class ProductionProcessModel
+internal sealed class ProductionProcessModel
 {
     public Guid Id { get; init; }
     public required string Name { get; set; }
