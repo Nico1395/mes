@@ -1,6 +1,6 @@
 ﻿namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.ProductDefinition.Contracts;
 
-public class ProductionProcessDto
+internal sealed class ProductionProcessDto
 {
     public Guid Id { get; init; }
     public required string Name { get; set; }

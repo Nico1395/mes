@@ -1,8 +1,11 @@
-﻿namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.ProductDefinition.Contracts;
+﻿using Mes.Shopfloor.Api.ProductionManagement.Subdomains.Resources.Contracts;
 
-public class ProductionStepEquipmentDto
+namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.ProductDefinition.Contracts;
+
+internal sealed class ProductionStepEquipmentDto
 {
-    public required Guid StepId { get; init; }
+    public required Guid ProductionStepId { get; init; }
     public required Guid EquipmentId { get; init; }
+    public EquipmentDto? Equipment { get; init; }
     public required int Quantity { get; set; }
 }
