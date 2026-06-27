@@ -1,4 +1,5 @@
 ﻿using Mes.Shopfloor.Client.ProductionManagement.DataCollection.Repositories;
+using Mes.Shopfloor.Client.ProductionManagement.ProductDefinition.Repositories;
 using Mes.Shopfloor.Client.ProductionManagement.Resources.Repositories;
 using Mes.Shopfloor.Client.ProductionManagement.Scheduling.Repositories;
 using Microsoft.Extensions.Configuration;
@@ -16,10 +17,12 @@ public static class DependencyInjection
             cfg.BaseAddress = new Uri(productionManagementUrl);
         });
 
-        services.AddSingleton<IProductionUnitModelRepository, ProductionUnitModelRepository>();
-        services.AddSingleton<IProductionUnitScheduleModelRepository, ProductionUnitScheduleModelRepository>();
-        services.AddSingleton<IStateGroupModelRepository, StateGroupModelRepository>();
-        services.AddSingleton<IRejectGroupModelRepository, RejectGroupModelRepository>();
+        services.AddScoped<IProductionUnitModelRepository, ProductionUnitModelRepository>();
+        services.AddScoped<IProductionUnitScheduleModelRepository, ProductionUnitScheduleModelRepository>();
+        services.AddScoped<IStateGroupModelRepository, StateGroupModelRepository>();
+        services.AddScoped<IRejectGroupModelRepository, RejectGroupModelRepository>();
+        services.AddScoped<IProductionOrderModelRepository, ProductionOrderModelRepository>();
+        services.AddScoped<IProductionProcessModelRepository, ProductionProcessModelRepository>();
 
         return services;
     }

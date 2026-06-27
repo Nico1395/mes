@@ -20,7 +20,7 @@ internal sealed class CollectQuantitiesJob : TerminalRoutineJob
         // For now however we are just generating some numbers.
 
         _producedQuantity = NextProducedQuantity();
-        _rejectQuantity = NextRejectQuantity();
+        _rejectQuantity = NextRejectQuantity(); // We should probably remove this
 
         return Task.CompletedTask;
     }
@@ -33,6 +33,7 @@ internal sealed class CollectQuantitiesJob : TerminalRoutineJob
 
     private static int NextProducedQuantity()
     {
+        Thread.Sleep(10); // Simulate some kind of response time from some quantity source (this is a bad scenario).
         return _random.Next(3, 10);
     }
 

@@ -33,6 +33,7 @@ internal sealed class HeadlessTerminalEntryPoint : EntryPoint
 
         System.Console.WriteLine("\nBeginning production...");
 
+        // All services related to the terminal routine are registered as scoped so this should execute in its very own scope
         using var scope = Services.CreateScope();
         {
             var routine = scope.ServiceProvider.GetRequiredService<ITerminalRoutine>();

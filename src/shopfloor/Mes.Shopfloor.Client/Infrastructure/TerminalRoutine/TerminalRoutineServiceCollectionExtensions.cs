@@ -12,8 +12,8 @@ public static class TerminalRoutineServiceCollectionExtensions
 
     public static IServiceCollection AddTerminalRoutine(this IServiceCollection services, Assembly[] assemblies)
     {
-        services.AddSingleton<ITerminalRoutine, TerminalRoutine>();
-        services.AddSingleton<ITerminalRoutineContext, TerminalRoutineContext>();
+        services.AddScoped<ITerminalRoutine, TerminalRoutine>();
+        services.AddSingleton<ITerminalRoutineContext, TerminalRoutineContext>(); // Maybe this is not the best idea
 
         AddJobs(services, assemblies);
 
@@ -33,7 +33,7 @@ public static class TerminalRoutineServiceCollectionExtensions
 
                 var genericDefinition = @interface.GetGenericTypeDefinition();
                 if (_jobTypes.Contains(genericDefinition))
-                    services.AddSingleton(@interface, implementationType);
+                    services.AddScoped(@interface, implementationType);
             }
         }
     }

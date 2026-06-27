@@ -33,28 +33,35 @@ internal sealed class ProductionManagementTerminalInitializationJob(
             return;
         }
 
+        // Fetching the production unit
         var currentProductionUnit = await _productionUnitModelRepository.GetByKeyAsync(_options.Value.Key, cancellationToken);
         if (currentProductionUnit == null)
         {
             context.ReportIssue(TerminalInitializationIssueSeverity.Critical, $"No production unit for key '{_options.Value.Key}' could be fetched.");
             return;
         }
+        else
+        {
+            terminalRoutineContext.SetIfNotNull(DataKey.ProductionUnit, currentProductionUnit);
+            terminalRoutineContext.SetIfNotNull(DataKey.ProductionUnitId, currentProductionUnit.Id);
+        }
 
-        terminalRoutineContext.SetIfNotNull(DataKey.ProductionUnit, currentProductionUnit);
-        terminalRoutineContext.SetIfNotNull(DataKey.ProductionUnitId, currentProductionUnit.Id);
-
+        // Fetching the reject group (and its rejects)
         var rejectGroup = await _rejectGroupModelRepository.GetByIdAsync(currentProductionUnit.Group.RejectGroupId, cancellationToken);
         terminalRoutineContext.SetIfNotNull(DataKey.RejectGroup, rejectGroup);
         terminalRoutineContext.SetIfNotNull(DataKey.RejectGroupId, rejectGroup?.Id);
         
+        // Fetch the state group (and its states)
         var stateGroup = await _stateGroupModelRepository.GetByIdAsync(currentProductionUnit.Group.StateGroupId, cancellationToken);
         terminalRoutineContext.SetIfNotNull(DataKey.StateGroup, stateGroup);
         terminalRoutineContext.SetIfNotNull(DataKey.StateGroupId, stateGroup?.Id);
 
+        // Fetch the schedule (and its task)
         var currentSchedule = await _productionUnitScheduleModelRepository.GetByProductionUnitIdAsync(currentProductionUnit.Id, cancellationToken);
         terminalRoutineContext.SetIfNotNull(DataKey.Schedule, currentSchedule);
         terminalRoutineContext.SetIfNotNull(DataKey.ScheduleId, currentSchedule?.Id);
 
+        // Fetch the production process (and its steps)
         var productionProcessId = currentSchedule?.GetCurrentTask()?.ProductionScheduleId;
         if (productionProcessId.HasValue)
         {
@@ -63,6 +70,7 @@ internal sealed class ProductionManagementTerminalInitializationJob(
             terminalRoutineContext.SetIfNotNull(DataKey.ProductionProcessId, productionProcess?.Id);
         }
 
+        // Fetch the order (and its progress)
         var orderId = currentSchedule?.GetCurrentTask()?.ProductionOrderId;
         if (orderId.HasValue)
         {
@@ -71,6 +79,7 @@ internal sealed class ProductionManagementTerminalInitializationJob(
             terminalRoutineContext.SetIfNotNull(DataKey.OrderId, order?.Id);
         }
 
+        // Prompt the worker to sign in and fetch the worker
         WorkerModel? worker = null;
         while (worker == null)
         {
