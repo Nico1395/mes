@@ -5,6 +5,7 @@ using DandyMediator.Validation;
 using Mes.Shopfloor.Api.Infrastructure;
 using Mes.Shopfloor.Api.ProductionManagement.Infrastructure;
 using Mes.Shopfloor.Api.ProductionManagement.Subdomains.DataCollection.Repositories;
+using Mes.Shopfloor.Api.ProductionManagement.Subdomains.ProductDefinition.Repositories;
 using Mes.Shopfloor.Api.ProductionManagement.Subdomains.Resources.Repositories;
 using Mes.Shopfloor.Api.ProductionManagement.Subdomains.Scheduling.Repositories;
 using Mes.Shopfloor.Shared.Messaging.Connections;
@@ -48,13 +49,17 @@ internal static class DependencyInjection
         services.AddScoped<IRejectGroupRepository, RejectGroupRepository>();
         services.AddScoped<IStateGroupRepository, StateGroupRepository>();
 
+        // Product definition
+        services.AddScoped<IProductionProcessRepository, ProductionProcessRepository>();
+        
         // Resources
         services.AddScoped<IProductionUnitRepository, ProductionUnitRepository>();
 
         // Scheduling
         services.AddScoped<IProductionUnitTaskRepository, ProductionUnitTaskRepository>();
         services.AddScoped<IProductionUnitScheduleRepository, ProductionUnitScheduleRepository>();
-        
+        services.AddScoped<IProductionOrderRepository, ProductionOrderRepository>();
+
         return services;
     }
 }
