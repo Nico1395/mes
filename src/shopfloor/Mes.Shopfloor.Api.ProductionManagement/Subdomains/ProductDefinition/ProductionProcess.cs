@@ -1,6 +1,6 @@
 ﻿namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.ProductDefinition;
 
-public class ProductionProcess
+internal sealed class ProductionProcess
 {
     public Guid Id { get; init; } = Guid.NewGuid();
     public required string Name { get; set; }

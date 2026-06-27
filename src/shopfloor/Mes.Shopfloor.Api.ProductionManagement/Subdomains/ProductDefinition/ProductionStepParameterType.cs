@@ -1,6 +1,6 @@
 ﻿namespace Mes.Shopfloor.Api.ProductionManagement.Subdomains.ProductDefinition;
 
-public enum ProductionStepParameterType
+internal enum ProductionStepParameterType
 {
     String = 0,
     Integer = 1,
