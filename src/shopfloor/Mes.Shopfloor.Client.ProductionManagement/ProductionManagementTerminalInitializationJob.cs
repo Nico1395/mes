@@ -14,7 +14,7 @@ namespace Mes.Shopfloor.Client.ProductionManagement;
 internal sealed class ProductionManagementTerminalInitializationJob(
     IOptions<ProductionUnitOptions> _options,
     ITerminalRoutineContext terminalRoutineContext,
-    IInputHandler<WorkerSignInInputRequest, string> _workerSignIn,
+    IInputPromptHandler<WorkerSignInInputPrompt, string> _workerSignIn,
     IRejectGroupModelRepository _rejectGroupModelRepository,
     IStateGroupModelRepository _stateGroupModelRepository,
     IProductionUnitModelRepository _productionUnitModelRepository,
@@ -83,7 +83,7 @@ internal sealed class ProductionManagementTerminalInitializationJob(
         WorkerModel? worker = null;
         while (worker == null)
         {
-            var workerNumber = _workerSignIn.RequestInput(new WorkerSignInInputRequest());
+            var workerNumber = _workerSignIn.Prompt(new WorkerSignInInputPrompt());
             worker = await _workerModelRepository.GetByNumberAsync(workerNumber ?? string.Empty, cancellationToken);
             if (worker == null)
                 Console.WriteLine($"No worker for number '{workerNumber}' could be found. Try again.");

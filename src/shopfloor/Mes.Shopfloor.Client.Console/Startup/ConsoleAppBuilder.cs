@@ -16,6 +16,7 @@ public sealed class ConsoleAppBuilder
         Configuration = new ConfigurationBuilder()
             .AddEnvironmentVariables()
             .AddJsonFile("appsettings.json")
+            .AddJsonFile("appsettings.Development.json", optional: true)
             .AddCommandLine(args ?? [])
             .Build();
 
@@ -24,7 +25,6 @@ public sealed class ConsoleAppBuilder
 
     public IServiceCollection Services { get; }
     public IConfiguration Configuration { get; } 
-    public ILoggingBuilder Logging { get; }
 
     public ConsoleAppBuilder UseEntryPoint<TEntryPoint>()
         where TEntryPoint : EntryPoint

@@ -1,4 +1,5 @@
 ﻿using Mes.Shopfloor.Client.ProductionManagement.DataCollection.Repositories;
+using Mes.Shopfloor.Client.ProductionManagement.DataCollection.Services;
 using Mes.Shopfloor.Client.ProductionManagement.ProductDefinition.Repositories;
 using Mes.Shopfloor.Client.ProductionManagement.Resources.Repositories;
 using Mes.Shopfloor.Client.ProductionManagement.Scheduling.Repositories;
@@ -23,6 +24,8 @@ public static class DependencyInjection
         services.AddScoped<IRejectGroupModelRepository, RejectGroupModelRepository>();
         services.AddScoped<IProductionOrderModelRepository, ProductionOrderModelRepository>();
         services.AddScoped<IProductionProcessModelRepository, ProductionProcessModelRepository>();
+
+        services.AddKeyedScoped<IQuantityReader, RandomQuantityReader>("random");
 
         return services;
     }

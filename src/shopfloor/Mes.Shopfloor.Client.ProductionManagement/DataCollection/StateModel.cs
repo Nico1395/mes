@@ -3,7 +3,7 @@
 internal sealed class StateModel
 {
     public Guid Id { get; init; }
-    public required Guid GroupId { get; init; }
+    public required Guid StateGroupId { get; init; }
     public int Order { get; init; }
     public bool IsIdle { get; init; }
     public bool IsProductive { get; init; }

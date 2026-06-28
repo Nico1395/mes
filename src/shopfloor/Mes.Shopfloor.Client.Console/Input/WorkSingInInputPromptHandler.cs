@@ -3,9 +3,9 @@ using Mes.Shopfloor.Client.ProductionManagement;
 
 namespace Mes.Shopfloor.Client.Console.Input;
 
-internal sealed class WorkSingInInputHandler : IInputHandler<WorkerSignInInputRequest, string>
+internal sealed class WorkSingInInputPromptHandler : IInputPromptHandler<WorkerSignInInputPrompt, string>
 {
-    public string? RequestInput(WorkerSignInInputRequest request)
+    public string? Prompt(WorkerSignInInputPrompt prompt)
     {
         try
         {

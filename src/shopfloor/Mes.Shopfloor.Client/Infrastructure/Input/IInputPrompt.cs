@@ -1,5 +1,5 @@
 ﻿namespace Mes.Shopfloor.Client.Infrastructure.Input;
 
-public interface IInputRequest<out TInput>
+public interface IInputPrompt<out TInput>
 {
 }

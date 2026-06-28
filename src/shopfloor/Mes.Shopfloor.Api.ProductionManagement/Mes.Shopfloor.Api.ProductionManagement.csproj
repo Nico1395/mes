@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Subdomains\Analysis\" />
-    <Folder Include="Subdomains\DataCollection\Infrastructure\" />
     <Folder Include="Subdomains\Traceability\" />
   </ItemGroup>
 

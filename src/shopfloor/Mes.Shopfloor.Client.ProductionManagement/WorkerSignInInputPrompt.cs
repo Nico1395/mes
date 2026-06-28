@@ -2,6 +2,6 @@
 
 namespace Mes.Shopfloor.Client.ProductionManagement;
 
-public sealed class WorkerSignInInputRequest : IInputRequest<string>
+public sealed class WorkerSignInInputPrompt : IInputPrompt<string>
 {
 }
