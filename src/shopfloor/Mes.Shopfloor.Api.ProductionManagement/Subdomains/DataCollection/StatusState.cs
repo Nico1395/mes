@@ -2,6 +2,7 @@
 
 internal sealed class StatusState
 {
+    public Guid Id { get; init; } = Guid.NewGuid();
     public required Guid ProductionUnitId { get; init; }
     public required Guid StateId { get; init; }
     public State? State { get; init; }
