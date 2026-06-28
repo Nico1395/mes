@@ -495,3 +495,6 @@ TestResults/
 
 # Windows
 Thumbs.db
+
+#ravendb licenses
+docker/mes-shopfloor/ravendb/license
