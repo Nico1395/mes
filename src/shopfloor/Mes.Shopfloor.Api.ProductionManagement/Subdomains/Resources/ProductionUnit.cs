@@ -10,6 +10,8 @@ internal sealed class ProductionUnit
     public ProductionUnitType? Type { get; set; }
     public required int GroupId { get; set; }
     public ProductionUnitGroup? Group { get; set; }
+    public Guid? ProductionLineId { get; set; }
+    public Guid? ShopfloorId { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

@@ -10,6 +10,8 @@ internal sealed class ProductionUnitEntityTypeConfiguration : IEntityTypeConfigu
         builder.ToTable("production_unit", "resources");
         builder.HasKey(p => p.Id);
         builder.Property(p => p.Id).HasColumnName("id").IsRequired();
+        builder.Property(p => p.ShopfloorId).HasColumnName("shopfloor_id");
+        builder.Property(p => p.ProductionLineId).HasColumnName("production_line_id");
         builder.Property(p => p.Key).HasColumnName("key").HasMaxLength(64).IsRequired();
         builder.Property(p => p.Name).HasColumnName("name").HasMaxLength(128).IsRequired();
         builder.Property(p => p.Description).HasColumnName("description").HasMaxLength(256);

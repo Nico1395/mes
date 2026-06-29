@@ -8,6 +8,7 @@ internal sealed class ProductionUnitGroupDto
     public required Guid StateGroupId { get; init; }
     public required Guid RejectGroupId { get; init; }
     public List<ProductionUnitDto>? ProductionUnits { get; init; }
+    public List<ProductionUnitGroupQualificationDto>? RequiredQualifications { get; init; }
     public DateTime CreatedAt { get; init; }
     public DateTime UpdatedAt { get; init; }
 }

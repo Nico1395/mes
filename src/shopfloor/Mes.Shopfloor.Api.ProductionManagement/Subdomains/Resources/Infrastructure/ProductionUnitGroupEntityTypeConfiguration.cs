@@ -17,5 +17,6 @@ internal sealed class ProductionUnitGroupEntityTypeConfiguration : IEntityTypeCo
         builder.Property(p => p.CreatedAt).HasColumnName("created_at").IsRequired();
         builder.Property(p => p.UpdatedAt).HasColumnName("updated_at").IsRequired();
         builder.HasMany(p => p.ProductionUnits).WithOne(p => p.Group).HasForeignKey(p => p.GroupId);
+        builder.HasMany(p => p.RequiredQualifications).WithOne(p => p.ProductionUnitGroup).HasForeignKey(p => p.ProductionUnitGroupId);
     }
 }
