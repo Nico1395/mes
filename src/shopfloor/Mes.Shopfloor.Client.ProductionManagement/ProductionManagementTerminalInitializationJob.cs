@@ -80,6 +80,7 @@ internal sealed class ProductionManagementTerminalInitializationJob(
         }
 
         // Prompt the worker to sign in and fetch the worker
+        // We are not going to compare worker and production unit group qualifications at this point
         WorkerModel? worker = null;
         while (worker == null)
         {

@@ -9,7 +9,7 @@ public static class ConnectionDependencyInjection
         var builder = new RabbitMQConnectionConfigurationBuilder();
         connectionAction?.Invoke(builder);
         var connectionConfiguration = builder.Build();
-        
+
         services.AddSingleton(connectionConfiguration);
         services.AddSingleton<IConnectionProvider, ConnectionProvider>();
 

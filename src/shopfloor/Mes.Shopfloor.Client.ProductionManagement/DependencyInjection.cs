@@ -23,6 +23,7 @@ public static class DependencyInjection
         services.AddScoped<IRejectGroupModelRepository, RejectGroupModelRepository>();
         services.AddScoped<IProductionOrderModelRepository, ProductionOrderModelRepository>();
         services.AddScoped<IProductionProcessModelRepository, ProductionProcessModelRepository>();
+        services.AddScoped<IWorkerModelRepository, WorkerModelRepository>();
 
         return services;
     }

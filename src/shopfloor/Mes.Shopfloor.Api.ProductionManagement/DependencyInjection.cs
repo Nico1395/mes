@@ -54,7 +54,8 @@ internal static class DependencyInjection
         
         // Resources
         services.AddScoped<IProductionUnitRepository, ProductionUnitRepository>();
-
+        services.AddScoped<IWorkerRepository, WorkerRepository>();
+        
         // Scheduling
         services.AddScoped<IProductionUnitTaskRepository, ProductionUnitTaskRepository>();
         services.AddScoped<IProductionUnitScheduleRepository, ProductionUnitScheduleRepository>();
