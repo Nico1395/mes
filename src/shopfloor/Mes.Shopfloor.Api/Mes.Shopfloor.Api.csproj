@@ -11,6 +11,7 @@
     <PackageReference Include="DandyEndpoints" />
     <PackageReference Include="DandyMediator.Validation" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="Scalar.AspNetCore" />
     <ProjectReference Include="..\Mes.Shopfloor.Shared\Mes.Shopfloor.Shared.csproj" />
   </ItemGroup>
 
