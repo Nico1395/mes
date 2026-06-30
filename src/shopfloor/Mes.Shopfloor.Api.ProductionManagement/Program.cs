@@ -1,5 +1,7 @@
 using System.Reflection;
+using DandyEndpoints;
 using NLog.Extensions.Logging;
+using Scalar.AspNetCore;
 
 namespace Mes.Shopfloor.Api.ProductionManagement;
 
@@ -23,9 +25,16 @@ internal sealed class Program
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+            app.MapScalarApiReference("/docs", options =>
+            {
+                options.Title = "MES Shopfloor Production Management API Reference";
+                options.Agent = new() { Disabled = true };
+            });
         }
 
         app.UseHttpsRedirection();
+
+        app.MapDandyEndpoints();
 
         app.Run();
     }

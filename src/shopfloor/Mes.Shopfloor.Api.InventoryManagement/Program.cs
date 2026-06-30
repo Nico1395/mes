@@ -1,7 +1,9 @@
+using DandyEndpoints;
 using Mes.Shopfloor.Shared.Messaging.Connections;
 using Mes.Shopfloor.Shared.Messaging.Consumer.Configuration;
 using Mes.Shopfloor.Shared.Messaging.Producer;
 using NLog.Extensions.Logging;
+using Scalar.AspNetCore;
 
 namespace Mes.Shopfloor.Api.InventoryManagement;
 
@@ -33,9 +35,16 @@ internal sealed class Program
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+            app.MapScalarApiReference("/docs", options =>
+            {
+                options.Title = "MES Shopfloor Inventory Management API Reference";
+                options.Agent = new() { Disabled = true };
+            });
         }
 
         app.UseHttpsRedirection();
+
+        app.MapDandyEndpoints();
 
         app.Run();
     }
