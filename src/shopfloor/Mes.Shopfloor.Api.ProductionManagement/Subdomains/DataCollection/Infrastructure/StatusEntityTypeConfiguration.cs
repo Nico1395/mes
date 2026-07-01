@@ -8,7 +8,7 @@ internal sealed class StatusEntityTypeConfiguration : IEntityTypeConfiguration<S
     public void Configure(EntityTypeBuilder<Status> builder)
     {
         builder.ToTable("status", "data_collection");
-        builder.HasIndex(d => d.ProductionUnitId);
+        builder.HasKey(d => d.ProductionUnitId);
         builder.Property(d => d.ProductionUnitId).HasColumnName("production_unit_id").IsRequired();
         builder.HasMany(d => d.States).WithOne().HasForeignKey(d => d.ProductionUnitId);
     }

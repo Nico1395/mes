@@ -3,7 +3,7 @@
 internal sealed class Shopfloor
 {
     public Guid Id { get; init; } = Guid.NewGuid();
-    public required Guid ManufacturingPlantId { get; init; }
+    public required int ManufacturingPlantId { get; init; }
     public required string Name { get; set; }
     public string? Description { get; set; }
     public List<ProductionUnit>? ProductionUnits { get; set; }

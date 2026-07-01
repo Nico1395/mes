@@ -9,7 +9,7 @@ internal sealed class ProductionUnitGroupEntityTypeConfiguration : IEntityTypeCo
     {
         builder.ToTable("production_unit_group", "resources");
         builder.HasKey(p => p.Id);
-        builder.Property(p => p.Id).HasColumnName("id").ValueGeneratedOnUpdate().IsRequired();
+        builder.Property(p => p.Id).HasColumnName("id").ValueGeneratedOnAdd().IsRequired();
         builder.Property(p => p.Name).HasColumnName("name").HasMaxLength(128).IsRequired();
         builder.Property(p => p.Description).HasColumnName("description").HasMaxLength(256).IsRequired();
         builder.Property(p => p.StateGroupId).HasColumnName("state_group_id").IsRequired();
