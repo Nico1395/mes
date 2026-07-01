@@ -16,5 +16,23 @@ internal sealed class RejectEntityTypeConfiguration : IEntityTypeConfiguration<R
         builder.Property(d => d.Name).HasColumnName("name").HasMaxLength(128).IsRequired();
         builder.Property(d => d.Description).HasColumnName("description").HasMaxLength(256);
         builder.Property(d => d.Color).HasColumnName("color").HasMaxLength(32).IsRequired();
+
+        builder.HasData(
+            new()
+            {
+                Order = 1,
+                Name = "Too small",
+                Code = "A",
+                Color = "#FFCC00",
+                RejectGroupId = Guid.Parse("69ea30ac-8a9b-499f-85b4-6e064c98400a"),
+            },
+            new()
+            {
+                Order = 2,
+                Name = "Cracked",
+                Code = "B",
+                Color = "#3300FF",
+                RejectGroupId = Guid.Parse("69ea30ac-8a9b-499f-85b4-6e064c98400a"),
+            });
     }
 }

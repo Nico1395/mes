@@ -15,5 +15,11 @@ internal sealed class RejectGroupEntityTypeConfiguration : IEntityTypeConfigurat
         builder.Property(d => d.CreatedAt).HasColumnName("created_at");
         builder.Property(d => d.UpdatedAt).HasColumnName("updated_at");
         builder.HasMany(d => d.Rejects).WithOne(d => d.RejectGroup).HasForeignKey(d => d.RejectGroupId);
+
+        builder.HasData(new RejectGroup()
+        {
+            Id = Guid.Parse("69ea30ac-8a9b-499f-85b4-6e064c98400a"),
+            Name = "Extruders A",
+        });
     }
 }

@@ -15,5 +15,11 @@ internal sealed class StateGroupEntityTypeConfiguration : IEntityTypeConfigurati
         builder.Property(d => d.CreatedAt).HasColumnName("created_at");
         builder.Property(d => d.UpdatedAt).HasColumnName("updated_at");
         builder.HasMany(d => d.States).WithOne(d => d.StateGroup).HasForeignKey(d => d.StateGroupId);
+        
+        builder.HasData(new RejectGroup()
+        {
+            Id = Guid.Parse("4d93e894-2809-458a-b685-a117594a6d61"),
+            Name = "Extruders A",
+        });
     }
 }

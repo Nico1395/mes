@@ -4,7 +4,6 @@ internal sealed class RejectDto
 {
     public Guid Id { get; init; }
     public required Guid RejectGroupId { get; init; }
-    public RejectGroupDto? RejectGroup { get; init; }
     public required int Order { get; init; }
     public required string Code { get; set; }
     public required string Name { get; set; }
