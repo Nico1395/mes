@@ -3,6 +3,7 @@ using DandyMediator.Queries;
 using DandyMediator.Responses;
 using Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Application;
 using Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Requests.HttpContracts;
+using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Mediator;
 using Mes.Shopfloor.Shared.ObjectMapping;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -61,9 +62,7 @@ internal static class GetProductionProcessByIdV1
                 .AsEager()
                 .SingleOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
 
-            return process == null
-                ? QueryResponseFactory.BadRequest_400<ProductionProcess>().Build()
-                : QueryResponseFactory.OK_200(process).Build();
+            return process.ToResponse();
         }
     }
 }

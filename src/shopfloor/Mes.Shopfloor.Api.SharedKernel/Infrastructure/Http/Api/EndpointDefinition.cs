@@ -11,27 +11,27 @@ public sealed class EndpointDefinition
     public string? DisplayName { get; set; }
     public string? Description { get; set; }
 
-    public List<IProducesResponseTypeMetadata> ProducesMetadata { get; set; } = [];
+    // public List<IProducesResponseTypeMetadata> ProducesMetadata { get; set; } = [];
 
-    public EndpointDefinition Produces<TResponse>(int statusCode = StatusCodes.Status200OK)
-    {
-        
-    }
-
-    public EndpointDefinition Produces(int statusCode = StatusCodes.Status200OK, Type? responseType = null)
-    {
-        
-    }
-
-    public EndpointDefinition ProducesProblem(int statusCode)
-    {
-        
-    }
-
-    public EndpointDefinition ProducesValidationProblem(int statusCode = StatusCodes.Status400BadRequest)
-    {
-        
-    }
+    // public EndpointDefinition Produces<TResponse>(int statusCode = StatusCodes.Status200OK)
+    // {
+    //     
+    // }
+    //
+    // public EndpointDefinition Produces(int statusCode = StatusCodes.Status200OK, Type? responseType = null)
+    // {
+    //     
+    // }
+    //
+    // public EndpointDefinition ProducesProblem(int statusCode)
+    // {
+    //     
+    // }
+    //
+    // public EndpointDefinition ProducesValidationProblem(int statusCode = StatusCodes.Status400BadRequest)
+    // {
+    //     
+    // }
 
     [MemberNotNullWhen(true, nameof(Uri))]
     public bool IsSufficientDefinition()
