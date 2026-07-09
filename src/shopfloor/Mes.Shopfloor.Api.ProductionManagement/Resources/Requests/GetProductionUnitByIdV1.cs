@@ -20,7 +20,7 @@ internal static class GetProductionUnitByIdV1
     {
         public void Map(IEndpointRouteBuilder app)
         {
-            app.MapGet("/api/v1/resources/prod-unit/{id:guid}", async (
+            app.MapGet("/api/v1/pm/resources/production-units/{id:guid}", async (
                 [FromServices] IMediator mediator,
                 [FromRoute(Name = "id")] Guid id,
                 CancellationToken cancellationToken) =>

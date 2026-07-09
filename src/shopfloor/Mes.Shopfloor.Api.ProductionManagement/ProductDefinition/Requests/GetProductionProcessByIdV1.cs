@@ -16,7 +16,7 @@ namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Requests;
 // {
 //     protected override Delegate DefineEndpoint(EndpointDefinition definition)
 //     {
-//         definition.Uri = "/api/v1/pm/product-definition/prod-process/{id:guid}";
+//         definition.Uri = "/api/v1/pm/product-definition/production-processes/{id:guid}";
 //         definition.DisplayName = "Map production process by ID";
 //         definition.Description = "Finds the production process with they specified ID as its key";
 //
@@ -38,7 +38,7 @@ namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Requests;
 
 internal static class GetProductionProcessByIdV1
 {
-    [HttpGet("/api/v1/production-process/{id:guid}")]
+    [HttpGet("/api/v1/pm/product-definition/production-processes/{id:guid}")]
     [EndpointName("Get production process by ID")]
     [EndpointDescription("Finds the production process with the specified ID as its key.")]
     [Produces<ProductionProcessHc>]

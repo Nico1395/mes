@@ -5,7 +5,6 @@ using DandyMediator.Responses;
 using Mes.Shopfloor.Api.ProductionManagement.Resources.Application;
 using Mes.Shopfloor.Api.ProductionManagement.Resources.Requests.HttpContracts;
 using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Mediator;
-using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence;
 using Mes.Shopfloor.Shared.ObjectMapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +19,7 @@ public static class GetProductionUnitByKeyV1
     {
         public void Map(IEndpointRouteBuilder app)
         {
-            app.MapGet("/api/v1/resources/prod-unit/key/{key}", async (
+            app.MapGet("/api/v1/pm/resources/production-units/by-key/{key}", async (
                 [FromServices] IMediator mediator,
                 [FromRoute(Name = "key")] string key,
                 CancellationToken cancellationToken) =>

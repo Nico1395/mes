@@ -19,7 +19,7 @@ internal static class GetWorkerByNumberV1
     {
         public void Map(IEndpointRouteBuilder app)
         {
-            app.MapGet("/api/v1/resources/worker/Number/{Number}", async (
+            app.MapGet("/api/v1/pm/resources/workers/by-number/{number}", async (
                 [FromServices] IMediator mediator,
                 [FromRoute] string number,
                 CancellationToken cancellationToken) =>
