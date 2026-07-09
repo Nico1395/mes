@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NLog.Web.AspNetCore" />
+    <PackageReference Include="DandyEndpoints" />
+    <PackageReference Include="DandyMediator.Validation" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="Scalar.AspNetCore" />
+    <ProjectReference Include="..\Mes.Shopfloor.Shared\Mes.Shopfloor.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
