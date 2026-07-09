@@ -1,6 +1,8 @@
 ﻿using DandyMediator;
 using DandyMediator.Queries;
 using DandyMediator.Responses;
+using Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Application;
+using Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Requests.HttpContracts;
 using Mes.Shopfloor.Shared.ObjectMapping;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,8 +10,6 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Requests;
-
-public sealed record ProductionProcessHc;
 
 // private sealed class HttpEndpoint : QueryHttpEndpoint
 // {
@@ -58,9 +58,7 @@ internal static class GetProductionProcessByIdV1
         {
             var process = await context
                 .Set<ProductionProcess>()
-                .Include(p => p.Steps!).ThenInclude(s => s.Parts!).ThenInclude(p => p.Part)
-                .Include(p => p.Steps!).ThenInclude(s => s.Material!).ThenInclude(p => p.Material)
-                .Include(p => p.Steps!).ThenInclude(s => s.Parameters)
+                .AsEager()
                 .SingleOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
 
             return process == null

@@ -1,6 +1,6 @@
-﻿namespace Mes.Shopfloor.Api.ProductionManagement.Api.Subdomains.ProductDefinition.Contracts;
+﻿namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Requests.HttpContracts;
 
-public class PartDto
+public class PartHc
 {
     public Guid Id { get; init; }
     public required string Sku { get; set; }

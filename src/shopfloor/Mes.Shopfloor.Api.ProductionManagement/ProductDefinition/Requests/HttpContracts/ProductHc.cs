@@ -1,6 +1,6 @@
-﻿namespace Mes.Shopfloor.Api.ProductionManagement.Api.Subdomains.ProductDefinition.Contracts;
+﻿namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Requests.HttpContracts;
 
-internal sealed class ProductDto
+internal sealed class ProductHc
 {
     public Guid Id { get; init; }
     public required string Name { get; set; }

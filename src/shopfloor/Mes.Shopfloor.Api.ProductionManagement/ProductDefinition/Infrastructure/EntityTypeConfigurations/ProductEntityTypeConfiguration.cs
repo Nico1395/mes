@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Infrastructure.EntityConfigurations;
+namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Infrastructure.EntityTypeConfigurations;
 
 internal sealed class ProductEntityTypeConfiguration : IEntityTypeConfiguration<Product>
 {

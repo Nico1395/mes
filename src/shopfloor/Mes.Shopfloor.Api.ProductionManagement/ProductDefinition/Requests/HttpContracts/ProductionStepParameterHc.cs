@@ -1,6 +1,6 @@
-﻿namespace Mes.Shopfloor.Api.ProductionManagement.Api.Subdomains.ProductDefinition.Contracts;
+﻿namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Requests.HttpContracts;
 
-internal sealed class ProductionStepParameterDto
+internal sealed class ProductionStepParameterHc
 {
     public required Guid ProductionStepId { get; init; }
     public required string Key { get; set; }

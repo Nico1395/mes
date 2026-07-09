@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Infrastructure.EntityConfigurations;
+namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Infrastructure.EntityTypeConfigurations;
 
-internal sealed class PartEntityTypeConfiguration : IEntityTypeConfiguration<Part>
+internal sealed class MaterialEntityTypeConfiguration : IEntityTypeConfiguration<Material>
 {
-    public void Configure(EntityTypeBuilder<Part> builder)
+    public void Configure(EntityTypeBuilder<Material> builder)
     {
-        builder.ToTable("part", "pm_product_definition");
+        builder.ToTable("material", "pm_product_definition");
         builder.HasIndex(x => x.Id);
         builder.Property(s => s.Id).HasColumnName("id").IsRequired();
         builder.Property(s => s.Sku).HasColumnName("sku").HasMaxLength(128).IsRequired();
