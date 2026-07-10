@@ -10,7 +10,7 @@ internal sealed class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddOpenApi();
-        builder.Services.AddMesShopfloorApi();
+        builder.Services.AddMesShopfloorApi(builder.Configuration);
 
         var app = builder.Build();
         if (app.Environment.IsDevelopment())

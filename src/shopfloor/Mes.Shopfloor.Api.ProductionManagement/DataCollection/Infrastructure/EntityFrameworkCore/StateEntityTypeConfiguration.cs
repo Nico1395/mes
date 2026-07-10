@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.DataCollection.Infrastructure.EntityFrameworkCore;
 
-internal sealed class StateEntityTypeConfiguration : IEntityTypeConfiguration<State>
+internal sealed class StateEntityTypeConfiguration : IEntityTypeConfiguration<ProductionUnitState>
 {
-    public void Configure(EntityTypeBuilder<State> builder)
+    public void Configure(EntityTypeBuilder<ProductionUnitState> builder)
     {
         builder.ToTable("state", "data_collection");
         builder.HasIndex(d => d.Id);

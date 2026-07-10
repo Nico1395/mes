@@ -1,7 +1,7 @@
 ﻿using Mes.Shopfloor.Client.ProductionManagement.DataCollection.Repositories;
-using Mes.Shopfloor.Client.ProductionManagement.ProductDefinition.Repositories;
-using Mes.Shopfloor.Client.ProductionManagement.Resources.Repositories;
-using Mes.Shopfloor.Client.ProductionManagement.Scheduling.Repositories;
+using Mes.Shopfloor.Client.ProductionManagement.ProductDefinitionManagement.Repositories;
+using Mes.Shopfloor.Client.ProductionManagement.ProductionScheduling.Repositories;
+using Mes.Shopfloor.Client.ProductionManagement.ResourceManagement.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -2,6 +2,7 @@
 using DandyEndpoints;
 using DandyMediator;
 using DandyMediator.Validation;
+using Marten;
 using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Connections;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Consumer.Configuration;
@@ -9,6 +10,7 @@ using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
 using Mes.Shopfloor.Shared.SharedKernel.ObjectMapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
@@ -17,7 +19,7 @@ namespace Mes.Shopfloor.Api.SharedKernel;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddMesShopfloorSharedKernel(this IServiceCollection services, Assembly[] assemblies)
+    public static IServiceCollection AddMesShopfloorSharedKernel(this IServiceCollection services, IConfiguration configuration, Assembly[] assemblies)
     {
         // Logging
         services.AddLogging(logging =>
@@ -41,14 +43,21 @@ public static class DependencyInjection
         services.AddRabbitMQProducer();
         services.AddRabbitMQConsumer();
 
-        // Mediator
+        // Marten
+        var martenConnectionString = configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("No default connection string configured.");
+        services.AddMarten(options =>
+        {
+            options.Connection(martenConnectionString);
+        });
+
+        // DandyMediator
         services.AddDandyMediator(cfg =>
         {
             cfg.UseValidation();
             cfg.ScanInAssemblies(assemblies);
         });
 
-        // Endpoints
+        // DandyEndpoints
         services.AddDandyEndpoints(cfg =>
         {
             cfg.ScanInAssemblies(assemblies);

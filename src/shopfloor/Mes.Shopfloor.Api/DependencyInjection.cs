@@ -6,11 +6,11 @@ namespace Mes.Shopfloor.Api;
 
 internal static class DependencyInjection
 {
-    public static IServiceCollection AddMesShopfloorApi(this IServiceCollection services)
+    public static IServiceCollection AddMesShopfloorApi(this IServiceCollection services, IConfiguration configuration)
     {
         var assemblies = GetAssemblies();
 
-        services.AddMesShopfloorSharedKernel(assemblies);
+        services.AddMesShopfloorSharedKernel(configuration, assemblies);
         services.AddMesShopfloorProductionManagement();
 
         return services;

@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.DataCollection.Infrastructure.EntityFrameworkCore;
 
-internal sealed class StatusEntityTypeConfiguration : IEntityTypeConfiguration<Status>
+internal sealed class StatusEntityTypeConfiguration : IEntityTypeConfiguration<ProductionUnitStatus>
 {
-    public void Configure(EntityTypeBuilder<Status> builder)
+    public void Configure(EntityTypeBuilder<ProductionUnitStatus> builder)
     {
         builder.ToTable("status", "data_collection");
         builder.HasKey(d => d.ProductionUnitId);
