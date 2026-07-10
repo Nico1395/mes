@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Mes.Shopfloor.Client.SharedKernel.Configuration;
+using Mes.Shopfloor.Client.SharedKernel.Http;
 using Microsoft.Extensions.Options;
 
 namespace Mes.Shopfloor.Client.ProductionManagement.Resources.Repositories;
@@ -9,7 +10,7 @@ internal sealed class ProductionUnitModelRepository(IHttpClientFactory _httpClie
     public Task<ProductionUnitModel?> GetByKeyAsync(string key, CancellationToken cancellationToken)
     {
         return _httpClientFactory
-            .CreateClient("pm")
-            .GetFromJsonAsync<ProductionUnitModel>($"api/v1/resources/prod-unit/key/{key}?eager=true", cancellationToken);
+            .CreateApiClient()
+            .GetFromJsonAsync<ProductionUnitModel>($"/api/v1/pm/resources/production-unit/by-key/{key}", cancellationToken);
     }
 }

@@ -1,6 +1,8 @@
-﻿using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalInitialization;
+﻿using System.Reflection;
+using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalInitialization;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
 using Mes.Shopfloor.Client.SharedKernel.Configuration;
+using Mes.Shopfloor.Client.SharedKernel.Http;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Connections;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
 using Microsoft.Extensions.Configuration;
@@ -10,13 +12,11 @@ namespace Mes.Shopfloor.Client.SharedKernel;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddTerminalCore(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddTerminalCore(this IServiceCollection services, IConfiguration configuration, Assembly[] assemblies)
     {
         var brokerUserName = configuration["MessageBroker:UserName"] ?? throw new InvalidOperationException("No message broker user name configured.");
         var brokerPassword = configuration["MessageBroker:Password"] ?? throw new InvalidOperationException("No message broker user password configured.");
         var brokerNodes = configuration.GetSection("MessageBroker:Nodes").Get<string[]>() ?? throw new InvalidOperationException("No message broker nodes configured.");
-
-        var assemblies = new[] { typeof(DependencyInjection).Assembly, };
 
         services.AddRabbitMQConnection(connection =>
         {
@@ -26,6 +26,7 @@ public static class DependencyInjection
                 nodes: brokerNodes);
         });
         services.AddRabbitMQProducer();
+
         services.AddTerminalInitialization(assemblies);
         services.AddTerminalRoutine(assemblies);
 
@@ -33,6 +34,12 @@ public static class DependencyInjection
         services.AddOptions<ApiOptions>().Bind(configuration.GetSection("Apis"));
         services.AddOptions<MessageBrokerOptions>().Bind(configuration.GetSection("MessageBroker"));
         services.AddOptions<RoutineOptions>().Bind(configuration.GetSection("TerminalRoutine"));
+
+        var apiUrl = configuration["Apis:ApiUrl"] ?? throw new InvalidOperationException("No URL of the production management API configured.");
+        services.AddHttpClient(HttpClientConstants.ApiHttpClientName, client =>
+        {
+            client.BaseAddress = new Uri(apiUrl);
+        });
 
         return services;
     }

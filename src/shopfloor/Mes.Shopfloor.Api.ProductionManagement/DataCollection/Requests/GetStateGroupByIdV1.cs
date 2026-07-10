@@ -19,12 +19,12 @@ public static class GetStateGroupByIdV1
     {
         public void Map(IEndpointRouteBuilder app)
         {
-            app.MapGet("/api/v1/pm/data-collection/state-groups/{stateGroupId:guid}", async (
+            app.MapGet("/api/v1/pm/data-collection/state-groups/{id:guid}", async (
                 [FromServices] IMediator mediator,
-                [FromRoute(Name = "stateGroupId")] Guid stateGroupId,
+                [FromRoute(Name = "id")] Guid id,
                 CancellationToken cancellationToken) =>
             {
-                var query = new Query(stateGroupId);
+                var query = new Query(id);
                 var response = await mediator.SendAsync<Query, StateGroup>(query, cancellationToken);
                 return response.Map(r => r.Map<StateGroupHc>()).ToResult(); 
             });

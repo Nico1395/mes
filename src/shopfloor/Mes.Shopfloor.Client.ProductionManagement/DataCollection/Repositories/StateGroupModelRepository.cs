@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using Mes.Shopfloor.Client.SharedKernel.Http;
 
 namespace Mes.Shopfloor.Client.ProductionManagement.DataCollection.Repositories;
 
@@ -7,7 +8,7 @@ internal sealed class StateGroupModelRepository(IHttpClientFactory _httpClientFa
     public Task<StateGroupModel?> GetByIdAsync(Guid stateGroupId, CancellationToken cancellationToken)
     {
         return _httpClientFactory
-            .CreateClient("pm")
-            .GetFromJsonAsync<StateGroupModel>($"api/v1/data-collection/state-group/{stateGroupId}?eager=true", cancellationToken);
+            .CreateApiClient()
+            .GetFromJsonAsync<StateGroupModel>($"/api/v1/pm/data-collection/state-groups/{stateGroupId}", cancellationToken);
     }
 }

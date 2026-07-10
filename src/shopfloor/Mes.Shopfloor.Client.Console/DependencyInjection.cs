@@ -1,4 +1,5 @@
-﻿using Mes.Shopfloor.Client.ProductionManagement;
+﻿using System.Reflection;
+using Mes.Shopfloor.Client.ProductionManagement;
 using Mes.Shopfloor.Client.SharedKernel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +12,8 @@ internal static class DependencyInjection
 {
     public static IServiceCollection AddMesShopfloorConsoleClient(this IServiceCollection service, IConfiguration configuration)
     {
-        service.AddTerminalCore(configuration);
-        service.AddTerminalProductionManagement(configuration);
+        var assemblies = GetAssemblies();
+
         service.AddLogging(logging =>
         {
             logging.ClearProviders();
@@ -20,6 +21,20 @@ internal static class DependencyInjection
         });
         service.AddSingleton<ILoggerProvider, DebugLoggerProvider>();
 
+        service.AddTerminalCore(configuration, assemblies);
+        service.AddTerminalProductionManagement(configuration);
+
         return service;
+    }
+
+    private static Assembly[] GetAssemblies()
+    {
+        return YieldAssemblyNames().Select(Assembly.Load).ToArray();
+    }
+    
+    private static IEnumerable<string> YieldAssemblyNames()
+    {
+        yield return "Mes.Shopfloor.Client.SharedKernel";
+        yield return "Mes.Shopfloor.Client.ProductionManagement";
     }
 }
