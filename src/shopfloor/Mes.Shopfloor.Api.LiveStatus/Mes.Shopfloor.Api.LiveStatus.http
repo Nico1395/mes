@@ -1,6 +1,0 @@
-@Mes.Shopfloor.Api.LiveStatus_HostAddress = http://localhost:5009
-
-GET {{Mes.Shopfloor.Api.LiveStatus_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

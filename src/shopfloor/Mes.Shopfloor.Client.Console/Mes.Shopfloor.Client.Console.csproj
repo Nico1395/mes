@@ -8,10 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mes.Shopfloor.Client.InventoryManagement\Mes.Shopfloor.Client.InventoryManagement.csproj" />
-    <ProjectReference Include="..\Mes.Shopfloor.Client.MaintenanceManagement\Mes.Shopfloor.Client.MaintenanceManagement.csproj" />
     <ProjectReference Include="..\Mes.Shopfloor.Client.ProductionManagement\Mes.Shopfloor.Client.ProductionManagement.csproj" />
-    <ProjectReference Include="..\Mes.Shopfloor.Client.QualityManagement\Mes.Shopfloor.Client.QualityManagement.csproj" />
   </ItemGroup>
 
   <ItemGroup>

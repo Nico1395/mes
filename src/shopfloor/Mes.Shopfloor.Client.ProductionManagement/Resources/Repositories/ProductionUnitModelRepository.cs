@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Json;
-using Mes.Shopfloor.Client.Configuration;
+using Mes.Shopfloor.Client.SharedKernel.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace Mes.Shopfloor.Client.ProductionManagement.Resources.Repositories;

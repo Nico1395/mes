@@ -1,6 +1,6 @@
 ﻿using Mes.Shopfloor.Client.Console.Startup;
-using Mes.Shopfloor.Client.Infrastructure.TerminalInitialization;
-using Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
+using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalInitialization;
+using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Mes.Shopfloor.Client.Console;

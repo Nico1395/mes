@@ -1,4 +1,4 @@
-﻿using Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
+﻿using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
 
 namespace Mes.Shopfloor.Client.ProductionManagement.DataCollection.Jobs;
 
@@ -25,7 +25,7 @@ internal sealed class CollectQuantitiesJob : TerminalRoutineJob
         return Task.CompletedTask;
     }
 
-    public override void Synchronize(ITerminalRoutineContext context)
+    public override void HydrateContext(ITerminalRoutineContext context)
     {
         context.Set(DataKey.ProducedQuantity, _producedQuantity);
         context.Set(DataKey.RejectQuantity, _rejectQuantity);

@@ -1,12 +1,12 @@
-﻿using Mes.Shopfloor.Client.Configuration;
-using Mes.Shopfloor.Client.Infrastructure.Input;
-using Mes.Shopfloor.Client.Infrastructure.TerminalInitialization;
-using Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
-using Mes.Shopfloor.Client.ProductionManagement.DataCollection.Repositories;
+﻿using Mes.Shopfloor.Client.ProductionManagement.DataCollection.Repositories;
 using Mes.Shopfloor.Client.ProductionManagement.ProductDefinition.Repositories;
 using Mes.Shopfloor.Client.ProductionManagement.Resources;
 using Mes.Shopfloor.Client.ProductionManagement.Resources.Repositories;
 using Mes.Shopfloor.Client.ProductionManagement.Scheduling.Repositories;
+using Mes.Shopfloor.Client.SharedKernel.Configuration;
+using Mes.Shopfloor.Client.SharedKernel.Infrastructure.Input;
+using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalInitialization;
+using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
 using Microsoft.Extensions.Options;
 
 namespace Mes.Shopfloor.Client.ProductionManagement;

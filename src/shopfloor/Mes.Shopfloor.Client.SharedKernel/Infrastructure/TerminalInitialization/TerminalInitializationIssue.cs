@@ -1,0 +1,3 @@
+﻿namespace Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalInitialization;
+
+public sealed record TerminalInitializationIssue(TerminalInitializationIssueSeverity Severity, string Message);
