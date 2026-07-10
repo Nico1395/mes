@@ -3,10 +3,9 @@ using DandyMediator;
 using DandyMediator.Queries;
 using DandyMediator.Responses;
 using Mes.Shopfloor.Api.ProductionManagement.Resources.Application;
-using Mes.Shopfloor.Api.ProductionManagement.Resources.Requests.HttpContracts;
+using Mes.Shopfloor.Api.ProductionManagement.Resources.Requests.Http;
 using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Mediator;
-using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence;
-using Mes.Shopfloor.Shared.ObjectMapping;
+using Mes.Shopfloor.Shared.SharedKernel.ObjectMapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -37,7 +36,7 @@ internal static class GetProductionUnitByIdV1
     {
         public async Task<IQueryResponse<ProductionUnit>> HandleAsync(Query request, CancellationToken cancellationToken)
         {
-            var productionUnit = await context.Set<ProductionUnit>().AsEager().SingleOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
+            var productionUnit = await context.GetProductionUnitByIdEagerAsync(request.Id, cancellationToken);
             return productionUnit.ToResponse();
         }
     }

@@ -1,6 +1,4 @@
-﻿using Mes.Shopfloor.Shared.Messaging.Consumer;
-
-namespace Mes.Shopfloor.Api.ProductionManagement.Execution.Requests;
+﻿namespace Mes.Shopfloor.Api.ProductionManagement.Execution.Requests;
 
 // internal static class UpdateProductionStrategyV1
 // {

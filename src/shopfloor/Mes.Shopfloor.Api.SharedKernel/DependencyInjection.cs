@@ -3,10 +3,10 @@ using DandyEndpoints;
 using DandyMediator;
 using DandyMediator.Validation;
 using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence;
-using Mes.Shopfloor.Shared.Messaging.Connections;
-using Mes.Shopfloor.Shared.Messaging.Consumer.Configuration;
-using Mes.Shopfloor.Shared.Messaging.Producer;
-using Mes.Shopfloor.Shared.ObjectMapping;
+using Mes.Shopfloor.Shared.SharedKernel.Messaging.Connections;
+using Mes.Shopfloor.Shared.SharedKernel.Messaging.Consumer.Configuration;
+using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
+using Mes.Shopfloor.Shared.SharedKernel.ObjectMapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,7 +55,6 @@ public static class DependencyInjection
         });
 
         // Core persistence
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddDbContext<DbContext, ShopfloorDbContext>();
         services.AddTransient<IInterceptor, DomainInterfaceSaveChangesInterceptor>();
 

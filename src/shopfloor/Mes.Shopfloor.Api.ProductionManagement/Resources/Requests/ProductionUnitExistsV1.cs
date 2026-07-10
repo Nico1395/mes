@@ -2,6 +2,7 @@
 using DandyMediator;
 using DandyMediator.Queries;
 using DandyMediator.Responses;
+using Mes.Shopfloor.Api.ProductionManagement.Resources.Application;
 using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ internal static class ProductionUnitExistsV1
     { 
         public async Task<IQueryResponse<bool>> HandleAsync(Query request, CancellationToken cancellationToken)
         {
-            var exists = await context.Set<ProductionUnit>().AnyAsync(p => p.Id == request.Id, cancellationToken);
+            var exists = await context.ProductionUnitExistsAsync(request.Id, cancellationToken);
             return exists.ToResponse();
         }
     }

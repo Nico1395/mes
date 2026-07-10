@@ -1,6 +1,5 @@
 <Solution>
   <Folder Name="/Api/">
-    <Project Path="Mes.Shopfloor.Api.ProductionManagement.Api/Mes.Shopfloor.Api.ProductionManagement.Api.csproj" />
     <Project Path="Mes.Shopfloor.Api.ProductionManagement/Mes.Shopfloor.Api.ProductionManagement.csproj" />
     <Project Path="Mes.Shopfloor.Api.SharedKernel/Mes.Shopfloor.Api.SharedKernel.csproj" />
     <Project Path="Mes.Shopfloor.Api/Mes.Shopfloor.Api.csproj" />
@@ -14,11 +13,7 @@
     <Project Path="Mes.Shopfloor.Client/Mes.Shopfloor.Client.csproj" />
   </Folder>
   <Folder Name="/Shared/">
-    <Project Path="Mes.Shopfloor.Shared.InventoryManagement/Mes.Shopfloor.Shared.InventoryManagement.csproj" />
-    <Project Path="Mes.Shopfloor.Shared.MaintenanceManagement/Mes.Shopfloor.Shared.MaintenanceManagement.csproj" />
-    <Project Path="Mes.Shopfloor.Shared.ProductionManagement/Mes.Shopfloor.Shared.ProductionManagement.csproj" />
-    <Project Path="Mes.Shopfloor.Shared.QualityManagement/Mes.Shopfloor.Shared.QualityManagement.csproj" />
-    <Project Path="Mes.Shopfloor.Shared/Mes.Shopfloor.Shared.csproj" />
+    <Project Path="Mes.Shopfloor.Shared.SharedKernel/Mes.Shopfloor.Shared.SharedKernel.csproj" />
   </Folder>
   <Folder Name="/_/">
     <File Path="Directory.Packages.props" />

@@ -2,9 +2,9 @@
 using DandyMediator.Queries;
 using DandyMediator.Responses;
 using Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Application;
-using Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Requests.HttpContracts;
+using Mes.Shopfloor.Api.ProductionManagement.ProductDefinition.Requests.Http;
 using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Mediator;
-using Mes.Shopfloor.Shared.ObjectMapping;
+using Mes.Shopfloor.Shared.SharedKernel.ObjectMapping;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;

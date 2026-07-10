@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Mes.Shopfloor.Shared.InventoryManagement\Mes.Shopfloor.Shared.InventoryManagement.csproj" />
       <ProjectReference Include="..\Mes.Shopfloor.Client\Mes.Shopfloor.Client.csproj" />
     </ItemGroup>
 

@@ -1,8 +1,8 @@
 ﻿using Mes.Shopfloor.Client.Configuration;
 using Mes.Shopfloor.Client.Infrastructure.TerminalInitialization;
 using Mes.Shopfloor.Client.Infrastructure.TerminalRoutine;
-using Mes.Shopfloor.Shared.Messaging.Connections;
-using Mes.Shopfloor.Shared.Messaging.Producer;
+using Mes.Shopfloor.Shared.SharedKernel.Messaging.Connections;
+using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
