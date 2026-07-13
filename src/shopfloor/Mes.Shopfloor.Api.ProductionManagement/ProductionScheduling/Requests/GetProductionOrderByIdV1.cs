@@ -36,7 +36,7 @@ public static class GetProductionOrderByIdV1
     {
         public async Task<IQueryResponse<ProductionOrder>> HandleAsync(Query request, CancellationToken cancellationToken)
         {
-            var order = await context.GetProductionOrderByIdEagerAsync(request.ProductionOrderId, cancellationToken);
+            var order = await context.GetProductionOrderByIdAsync(request.ProductionOrderId, cancellationToken);
             return order.ToResponse();
         }
     }

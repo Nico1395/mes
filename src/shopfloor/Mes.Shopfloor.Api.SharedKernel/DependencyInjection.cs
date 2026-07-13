@@ -48,6 +48,7 @@ public static class DependencyInjection
         services.AddMarten(options =>
         {
             options.Connection(martenConnectionString);
+            options.DatabaseSchemaName = "event_store";
         });
 
         // DandyMediator

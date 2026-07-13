@@ -7,7 +7,7 @@ internal sealed class ProductionUnitScheduleEntityTypeConfiguration : IEntityTyp
 {
     public void Configure(EntityTypeBuilder<ProductionUnitSchedule> builder)
     {
-        builder.ToTable("production_unit_schedule", "scheduling");
+        builder.ToTable("production_unit_schedule", "production_scheduling");
         builder.HasKey(p => p.Id);
         builder.Property(p => p.Id).HasColumnName("id").IsRequired();
         builder.Property(p => p.ProductionUnitId).HasColumnName("production_unit_id").IsRequired();

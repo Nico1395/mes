@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Mes.Shopfloor.Shared.SharedKernel\Mes.Shopfloor.Shared.SharedKernel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Domain\Abstractions\" />
+  </ItemGroup>
+
 </Project>

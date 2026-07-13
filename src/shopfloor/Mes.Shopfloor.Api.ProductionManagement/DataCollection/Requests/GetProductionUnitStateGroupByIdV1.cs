@@ -32,7 +32,7 @@ public static class GetProductionUnitStateGroupByIdV1
     }
 
     private sealed record Query(Guid Id) : IQuery<ProductionUnitStateGroup>;
-    
+
     private sealed class QueryHandler(DbContext context) : IQueryHandler<Query, ProductionUnitStateGroup>
     {
         public async Task<IQueryResponse<ProductionUnitStateGroup>> HandleAsync(Query request, CancellationToken cancellationToken)

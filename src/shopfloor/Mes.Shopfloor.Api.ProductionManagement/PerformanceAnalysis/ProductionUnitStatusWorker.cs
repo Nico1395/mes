@@ -2,13 +2,10 @@
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis;
 
-internal sealed class ProductionUnitStatusState : IDurational
+internal sealed class ProductionUnitStatusWorker : IDurational
 {
-    public Guid Id { get; init; } = Guid.NewGuid();
     public required Guid ProductionUnitId { get; init; }
-    public required Guid StateId { get; init; }
-    public required bool IsProductive { get; init; }
-    public required bool IsIdle { get; init; }
+    public required Guid WorkerId { get; init; }
     public required DateTime StartedAt { get; set; }
     public DateTime? EndedAt { get; set; }
 }

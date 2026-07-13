@@ -1,4 +1,5 @@
 ﻿using Mes.Shopfloor.Api.SharedKernel.Domain;
+using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Timestamped;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;

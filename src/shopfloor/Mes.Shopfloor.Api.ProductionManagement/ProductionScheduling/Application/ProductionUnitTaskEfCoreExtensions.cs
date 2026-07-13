@@ -6,7 +6,7 @@ internal static class ProductionUnitTaskEfCoreExtensions
 {
     public static IQueryable<ProductionUnitTask> AsEager(this IQueryable<ProductionUnitTask> query, bool eager = true)
     {
-        return query.Include(t => t.Order).ThenInclude(o => o!.Progress);
+        return query.Include(t => t.Order);
     }
 
     public static Task<ProductionUnitTask?> GetProductionUnitTaskForProductionUnitAtPointInTimeAsync(
