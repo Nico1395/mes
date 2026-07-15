@@ -7,8 +7,8 @@ internal sealed class ProductionUnitStatus
     public required Guid ProductionUnitId { get; init; }
     public int Version { get; set; }
     public Guid? ProductionOrderId { get; set; }
-    public Guid? ProductionProcessId { get; set; }
-    public Guid? ProductionProcessStepId { get; set; }
+    public Guid? ProductionStepId { get; set; }
+    public Guid? ScheduledTaskId { get; set; }
     public List<ProductionUnitStatusState> States { get; init; } = [];
     public List<ProductionUnitProducedQuantity> ProducedQuantities { get; init; } = [];
     public List<ProductionUnitProducedReject> ProducedRejectQuantities { get; init; } = [];
@@ -18,7 +18,16 @@ internal sealed class ProductionUnitStatus
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
 
-    public bool TrySetState(Guid stateId, bool isProductive, bool isIdle, DateTime startedAt)
+    public void SetOrder(Guid productionOrderId, Guid productionStepId, Guid scheduledTaskId)
+    {
+        ProductionOrderId = productionOrderId;
+        ProductionStepId = productionStepId;
+        ScheduledTaskId = scheduledTaskId;
+
+        Touch();
+    }
+    
+    public void SetState(Guid stateId, bool isProductive, bool isIdle, DateTime startedAt)
     {
         var mostRecentState = GetMostRecentState();
         // if (currentState != null && currentState.WorkerId != workerId)
@@ -41,13 +50,9 @@ internal sealed class ProductionUnitStatus
         // (3) the current state has ended and the new state started afterward
         if (mostRecentState == null || !mostRecentState.HasEnded() || newState.StartedAfter(mostRecentState))
         {
-            mostRecentState?.TouchEndedAt(newState.StartedAt);         // End the current state
-            States.Add(newState);                              // Append the new state, making it the current one
-
-            return true;
+            mostRecentState?.TouchEndedAt(newState.StartedAt);      // End the current state
+            States.Add(newState);                                   // Append the new state, making it the current one
         }
-
-        return false;
     }
 
     public ProductionUnitStatusState? GetMostRecentState()

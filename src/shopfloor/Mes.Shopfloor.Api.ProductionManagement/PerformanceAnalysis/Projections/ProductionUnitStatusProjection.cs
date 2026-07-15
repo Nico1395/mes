@@ -23,13 +23,23 @@ internal partial class ProductionUnitStatusProjection(DbContext context) : Singl
         return status;
     }
 
+    public void Apply(OrderBookedV1 orderBooked, ProductionUnitStatus status)
+    {
+        status.SetOrder(
+            orderBooked.ProductionOrderId,
+            orderBooked.ProductionStepId,
+            orderBooked.ScheduledTaskId);
+        
+        // Should the state be set? No because the production unit's state being set is dealt with using another event.
+    }
+
     public async Task Apply(ProductionUnitStateChangedV1 stateChanged, ProductionUnitStatus status)
     {
         var state = await context.GetProductionUnitStateByIdAsync(stateChanged.NewStateId, CancellationToken.None);
         if (state == null)
             throw new InvalidOperationException($"State with ID '{stateChanged.NewStateId}' not found.");
 
-        status.TrySetState(
+        status.SetState(
             state.Id,
             state.IsProductive,
             state.IsIdle,
