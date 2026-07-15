@@ -2,12 +2,13 @@
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
 
-internal sealed class ProductionOrderScheduleTask : IDurational
+internal sealed class ScheduledProductionOrderTask : IDurational
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public required Guid ProductionOrderScheduleId { get; set; }
     public required Guid ProductionUnitId { get; set; }
-    public List<ProductionOrderScheduleTaskWorker>? Workers { get; set; }
+    public Guid? ProductionProcessStepId { get; set; }
+    public List<ScheduledProductionOrderTaskWorker>? Workers { get; set; }
     public required DateTime StartedAt { get; set; }
     public required DateTime? EndedAt { get; set; }
 }

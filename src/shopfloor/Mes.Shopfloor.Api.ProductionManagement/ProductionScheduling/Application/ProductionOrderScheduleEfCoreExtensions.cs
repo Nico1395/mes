@@ -4,7 +4,7 @@ namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Applicatio
 
 internal static class ProductionOrderScheduleEfCoreExtensions
 {
-    public static IQueryable<ProductionOrderSchedule> AsEager(this IQueryable<ProductionOrderSchedule> query, bool eager = true)
+    public static IQueryable<ScheduledProductionOrder> AsEager(this IQueryable<ScheduledProductionOrder> query, bool eager = true)
     {
         if (!eager)
             return query;
@@ -12,8 +12,8 @@ internal static class ProductionOrderScheduleEfCoreExtensions
         return query.Include(q => q.Tasks!).ThenInclude(t => t.Workers);
     }
     
-    public static Task<ProductionOrderSchedule?> GetProductionOrderScheduleByOrderIdEagerAsync(this DbContext context, Guid orderId, CancellationToken cancellationToken)
+    public static Task<ScheduledProductionOrder?> GetProductionOrderScheduleByOrderIdEagerAsync(this DbContext context, Guid orderId, CancellationToken cancellationToken)
     {
-        return context.Set<ProductionOrderSchedule>().AsEager().SingleOrDefaultAsync(p => p.ProductionOrderId == orderId, cancellationToken);
+        return context.Set<ScheduledProductionOrder>().AsEager().SingleOrDefaultAsync(p => p.ProductionOrderId == orderId, cancellationToken);
     }
 }
