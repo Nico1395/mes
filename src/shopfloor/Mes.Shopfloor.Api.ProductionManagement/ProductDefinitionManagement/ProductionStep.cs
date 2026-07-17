@@ -10,7 +10,7 @@ internal sealed class ProductionStep
     public required string Name { get; set; }
     public string? Description { get; set; }
     public Duration Duration { get; set; } = Duration.Empty;
-    public Guid? ProductionUnitGroupId { get; set; }
+    public required Guid ProductionUnitGroupId { get; set; }
     public List<ProductionStepPart>? Parts { get; set; }
     public List<ProductionStepMaterial>? Material { get; set; }
     public List<ProductionStepParameter>? Parameters { get; set; }

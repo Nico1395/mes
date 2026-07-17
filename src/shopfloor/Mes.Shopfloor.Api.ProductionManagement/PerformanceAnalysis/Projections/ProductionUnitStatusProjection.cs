@@ -25,9 +25,8 @@ internal partial class ProductionUnitStatusProjection(DbContext context) : Singl
 
     public void Apply(OrderBookedV1 orderBooked, ProductionUnitStatus status)
     {
-        status.SetOrder(
+        status.BookOrder(
             orderBooked.ProductionOrderId,
-            orderBooked.ProductionStepId,
             orderBooked.ScheduledTaskId);
         
         // Should the state be set? No because the production unit's state being set is dealt with using another event.

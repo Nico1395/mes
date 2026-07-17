@@ -4,7 +4,7 @@ using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Application;
 using Mes.Shopfloor.Api.SharedKernel.Domain.Events;
 using Mes.Shopfloor.Shared.SharedKernel.Events;
 using Microsoft.EntityFrameworkCore;
-
+ 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.Projections;
 
 internal partial class ProductionOrderStatusProjection(
@@ -24,7 +24,7 @@ internal partial class ProductionOrderStatusProjection(
         return new ProductionOrderStatus
         {
             ProductionOrderId = productionOrder.Id,
-            ProductionOrderScheduleId = productionOrderSchedule.Id,
+            ScheduledProductionOrderId = productionOrderSchedule.Id,
             ProductId = productionOrder.ProductId,
             Priority = productionOrder.Priority,
             Name = productionOrder.Name,
@@ -34,9 +34,25 @@ internal partial class ProductionOrderStatusProjection(
         };
     }
 
+    public void Apply(OrderBookedV1 orderBooked, ProductionOrderStatus status)
+    {
+        if (orderBooked.ProductionOrderId == status.ProductionOrderId) // Order was just booked
+        {
+            var notCompletedAndBooked = status.TryBook(orderBooked.ProductionUnitId, orderBooked.ScheduledTaskId, orderBooked.OccurredAtUtc);
+            if (!notCompletedAndBooked)
+            {
+                // TODO -> Send some information message to some notification center
+            }
+        }
+        else if (orderBooked.PreviousProductionOrderId == status.ProductionOrderId) // Order was 'unbooked'
+        {
+            status.SetNotBooked();
+        }
+    }
+
     public async Task Apply(QuantityProducedV1 quantityProduced, ProductionOrderStatus status)
     {
-        var alreadyCompleted = status.IsCompleted();
+        var alreadyCompleted = status.IsAbortedOrCompleted();
 
         status.AddProducedQuantity(
             quantityProduced.ProductionUnitId,
@@ -44,7 +60,7 @@ internal partial class ProductionOrderStatusProjection(
             quantityProduced.OccurredAtUtc);
 
         // Order has just been completed
-        if (!alreadyCompleted && status.IsCompleted())
+        if (!alreadyCompleted && status.IsAbortedOrCompleted())
         {
             var orderCompleted = new OrderCompletedV1(
                 status.ProductionOrderId,
@@ -84,7 +100,8 @@ internal partial class ProductionOrderStatusProjection(
             MaterialId = materialConsumed.MaterialId,
             Quantity = materialConsumed.Quantity,
             ReportedAt = materialConsumed.OccurredAtUtc,
-        };
+        }
+            ;
 
         status.MaterialConsumption.Add(materialConsumption);
         status.Touch();

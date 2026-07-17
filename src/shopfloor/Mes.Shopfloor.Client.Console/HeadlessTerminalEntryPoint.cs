@@ -1,11 +1,13 @@
 ﻿using Mes.Shopfloor.Client.Console.Startup;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalInitialization;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
+using Mes.Shopfloor.Shared.SharedKernel.Events;
+using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Mes.Shopfloor.Client.Console;
 
-internal sealed class HeadlessTerminalEntryPoint : EntryPoint
+internal sealed class HeadlessTerminalEntryPoint(IMessagePublisher messagePublisher) : EntryPoint
 {
     public override async Task RunAsync(CancellationToken cancellationToken)
     {
@@ -32,6 +34,8 @@ internal sealed class HeadlessTerminalEntryPoint : EntryPoint
         System.Console.WriteLine("Terminal initialized!");
 
         System.Console.WriteLine("\nBeginning production...");
+
+        var wentOnline = new ProductionUnitWentOnlineV1();
 
         // All services related to the terminal routine are registered as scoped so this should execute in its very own scope
         using var scope = Services.CreateScope();

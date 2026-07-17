@@ -3,7 +3,8 @@ using DandyEndpoints;
 using DandyMediator;
 using DandyMediator.Validation;
 using Marten;
-using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence;
+using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence.EntityFrameworkCore;
+using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence.Marten;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Connections;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Consumer.Configuration;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
@@ -47,8 +48,9 @@ public static class DependencyInjection
         var martenConnectionString = configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("No default connection string configured.");
         services.AddMarten(options =>
         {
-            options.Connection(martenConnectionString);
             options.DatabaseSchemaName = "event_store";
+            options.Connection(martenConnectionString);
+            options.ConfigureWithConfigurationsFromAssemblies(assemblies);
         });
 
         // DandyMediator

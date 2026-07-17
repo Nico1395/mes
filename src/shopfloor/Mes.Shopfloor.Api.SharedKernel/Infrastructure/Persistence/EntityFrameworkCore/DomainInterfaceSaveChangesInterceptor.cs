@@ -1,10 +1,9 @@
-﻿using Mes.Shopfloor.Api.SharedKernel.Domain;
-using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Timestamped;
+﻿using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Timestamped;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence;
+namespace Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence.EntityFrameworkCore;
 
 internal sealed class DomainInterfaceSaveChangesInterceptor : SaveChangesInterceptor
 {

@@ -4,7 +4,7 @@ namespace Mes.Shopfloor.Client.Console.Startup;
 
 public abstract class EntryPoint : IDisposable
 {
-    private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
 
     private IServiceProvider? _services;
     private IConfiguration? _configuration;

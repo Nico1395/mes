@@ -1,13 +1,13 @@
-﻿using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Durational;
+﻿using JasperFx.Events.Projections;
+using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Durational;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis;
 
 internal sealed class ProductionUnitStatus
 {
-    public required Guid ProductionUnitId { get; init; }
+    public Guid ProductionUnitId { get; init; }
     public int Version { get; set; }
     public Guid? ProductionOrderId { get; set; }
-    public Guid? ProductionStepId { get; set; }
     public Guid? ScheduledTaskId { get; set; }
     public List<ProductionUnitStatusState> States { get; init; } = [];
     public List<ProductionUnitProducedQuantity> ProducedQuantities { get; init; } = [];
@@ -18,15 +18,18 @@ internal sealed class ProductionUnitStatus
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
 
-    public void SetOrder(Guid productionOrderId, Guid productionStepId, Guid scheduledTaskId)
+    public void BookOrder(Guid productionOrderId, Guid scheduledTaskId)
     {
+        // Needs to be idempotent because this event is likely published once for the current and previous order each
+        if (ProductionOrderId == productionOrderId && ScheduledTaskId == scheduledTaskId)
+            return;
+
         ProductionOrderId = productionOrderId;
-        ProductionStepId = productionStepId;
         ScheduledTaskId = scheduledTaskId;
 
         Touch();
     }
-    
+
     public void SetState(Guid stateId, bool isProductive, bool isIdle, DateTime startedAt)
     {
         var mostRecentState = GetMostRecentState();
@@ -62,6 +65,9 @@ internal sealed class ProductionUnitStatus
 
     public TimeSpan GetProductiveTimeBetween(DateTime start, DateTime end)
     {
+        // TODO -> The time the production unit is idling should not be part of the total time
+        // TODO -> Check whether this can be simplified by summing up the time of productive states and simply do prodTime / totalTime
+        
         var totalProductiveTime = TimeSpan.Zero;
         if (start >= end)
             return totalProductiveTime;

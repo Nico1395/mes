@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence;
+namespace Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence.EntityFrameworkCore;
 
 internal sealed class ShopfloorDbContext(IConfiguration _configuration) : DbContext
 {

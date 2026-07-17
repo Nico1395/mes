@@ -6,11 +6,9 @@ namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis;
 internal sealed class ProductionOrderStatus
 {
     public required Guid ProductionOrderId { get; init; }
-    public required Guid ProductionOrderScheduleId { get; init; }
+    public required Guid ScheduledProductionOrderId { get; init; }
     public required Guid ProductId { get; init; }
     public int Version { get; set; }
-    public Guid? ProductionProcessId { get; init; }
-    public Guid? ProductionProcessStepId { get; set; }
     public required ProductionOrderPriority Priority { get; init; }
     public required string Name { get; set; }
     public required double TargetQuantity { get; init; }
@@ -21,6 +19,9 @@ internal sealed class ProductionOrderStatus
     public List<ProductionOrderProducedReject> ProducedRejectQuantities { get; init; } = [];
     public List<ProductionOrderMaterialConsumption> MaterialConsumption { get; init; } = [];
     public List<ProductionOrderPartsConsumption> PartConsumption { get; init; } = [];
+    public List<ProductionOrderBooking> Bookings { get; init; } = [];
+    public Guid? CurrentProductionUnitId { get; set; }
+    public Guid? CurrentScheduledTaskId { get; set; }
     public DateTime? StartedAt { get; set; }       // Represents the time when the order has actually started, not when it was scheduled
     public DateTime? CompletedAt { get; set; }
     public required DateTime ScheduledToStartAt { get; set; }
@@ -28,6 +29,39 @@ internal sealed class ProductionOrderStatus
     public ProductionOrderStatusState State { get; set; } = ProductionOrderStatusState.Scheduled;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
+
+    public bool TryBook(Guid productionUnitId, Guid scheduledTaskId, DateTime bookedAt)
+    {
+        if (IsAbortedOrCompleted())
+            return false;
+
+        StartOrResume();
+
+        CurrentProductionUnitId = productionUnitId;
+        CurrentScheduledTaskId = scheduledTaskId;
+
+        var booking = new ProductionOrderBooking()
+        {
+            ProductionUnitId = productionUnitId,
+            ScheduledTaskId = scheduledTaskId,
+            BookedAt = bookedAt,
+        };
+        Bookings.Add(booking);
+
+        Touch();
+        return true;
+    }
+
+    public void SetNotBooked()
+    {
+        CurrentProductionUnitId = null;
+        CurrentScheduledTaskId = null;
+
+        PauseIfStarted();
+        State = ProductionOrderStatusState.Paused;
+        
+        Touch();
+    }
 
     [MemberNotNullWhen(true, nameof(StartedAt))]
     public bool HasStarted()
@@ -42,15 +76,21 @@ internal sealed class ProductionOrderStatus
         StartedAt ??= DateTime.UtcNow;
         State = ProductionOrderStatusState.InProduction;
     }
+
+    public void PauseIfStarted()
+    {
+        if (HasStarted())
+            State = ProductionOrderStatusState.Paused;
+    }
     
     [MemberNotNullWhen(true, nameof(StartedAt))]
     [MemberNotNullWhen(true, nameof(CompletedAt))]
-    public bool IsCompleted()
+    public bool IsAbortedOrCompleted()
     {
         return HasStarted() &&
                CompletedAt.HasValue &&
                ProgressPercent >= 100 &&
-               State == ProductionOrderStatusState.Completed;
+               State is ProductionOrderStatusState.Completed or ProductionOrderStatusState.Aborted;
     }
 
     public void AddProducedQuantity(Guid productionUnitId, double quantity, DateTime reportedAt)
@@ -98,7 +138,7 @@ internal sealed class ProductionOrderStatus
 
     public double GetQuantityLeftToBeProduced()
     {
-        if (IsCompleted())
+        if (IsAbortedOrCompleted())
             return 0;
 
         return TargetQuantity - ProducedQuantity;
@@ -106,7 +146,7 @@ internal sealed class ProductionOrderStatus
 
     public DateTime GetProjectedCompletionDate()
     {
-        if (!HasStarted() || IsCompleted())
+        if (!HasStarted() || IsAbortedOrCompleted())
             return ScheduledToCompleteAt;
 
         // Current qty/min could return 0, so a check for division by 0 is mandatory, but not sure whether this is the
