@@ -1,6 +1,6 @@
 ﻿using Marten;
 
-namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.Application;
+namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderStatus.Application;
 
 internal static class ProductionOrderStateMartenExtensions
 {

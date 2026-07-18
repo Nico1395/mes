@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
 
-namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis;
+namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderStatus;
 
 internal class ProductionOrderStatus
 {

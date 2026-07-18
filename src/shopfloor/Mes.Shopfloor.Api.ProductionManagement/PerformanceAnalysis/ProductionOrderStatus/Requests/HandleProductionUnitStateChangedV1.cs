@@ -5,7 +5,7 @@ using Marten;
 using Mes.Shopfloor.Shared.SharedKernel.Events;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Consumer;
 
-namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.Requests;
+namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderStatus.Requests;
 
 internal static class HandleProductionUnitStateChangedV1
 {

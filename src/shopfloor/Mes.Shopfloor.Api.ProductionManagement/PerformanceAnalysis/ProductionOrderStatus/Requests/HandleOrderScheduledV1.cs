@@ -7,7 +7,7 @@ using Mes.Shopfloor.Shared.SharedKernel.Events;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Consumer;
 using Microsoft.EntityFrameworkCore;
 
-namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.Requests;
+namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderStatus.Requests;
 
 internal static class HandleOrderScheduledV1
 {

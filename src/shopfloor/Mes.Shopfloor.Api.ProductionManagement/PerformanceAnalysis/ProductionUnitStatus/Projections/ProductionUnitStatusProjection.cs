@@ -4,7 +4,7 @@ using Mes.Shopfloor.Api.ProductionManagement.ResourceManagement.Application;
 using Mes.Shopfloor.Shared.SharedKernel.Events;
 using Microsoft.EntityFrameworkCore;
 
-namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.Projections;
+namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionUnitStatus.Projections;
 
 internal partial class ProductionUnitStatusProjection(DbContext context) : SingleStreamProjection<ProductionUnitStatus, Guid>
 {

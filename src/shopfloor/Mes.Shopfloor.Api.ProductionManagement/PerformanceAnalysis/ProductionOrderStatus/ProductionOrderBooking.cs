@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis;
+﻿namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderStatus;
 
 internal sealed class ProductionOrderBooking
 {

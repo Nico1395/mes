@@ -1,6 +1,6 @@
-﻿namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis;
+﻿namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderStatus;
 
-internal sealed class ProductionUnitPartsConsumption
+internal sealed class ProductionOrderPartsConsumption
 {
     public Guid Id { get; init; } = Guid.NewGuid();
     public required Guid ProductionOrderId { get; init; }

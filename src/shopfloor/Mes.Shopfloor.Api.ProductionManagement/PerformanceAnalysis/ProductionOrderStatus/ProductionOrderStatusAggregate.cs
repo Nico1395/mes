@@ -2,7 +2,7 @@
 using Mes.Shopfloor.Api.SharedKernel.Domain.Exceptions;
 using Mes.Shopfloor.Shared.SharedKernel.Events;
 
-namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis;
+namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderStatus;
 
 internal sealed class ProductionOrderStatusAggregate : ProductionOrderStatus
 {

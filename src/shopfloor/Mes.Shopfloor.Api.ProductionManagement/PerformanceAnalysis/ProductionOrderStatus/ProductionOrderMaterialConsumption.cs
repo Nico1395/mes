@@ -1,11 +1,11 @@
-﻿namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis;
+﻿namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderStatus;
 
-internal sealed class ProductionOrderProducedReject
+internal sealed class ProductionOrderMaterialConsumption
 {
     public Guid Id { get; init; } = Guid.NewGuid();
     public required Guid ProductionOrderId { get; init; }
     public required Guid ProductionUnitId { get; init; }
-    public required Guid? RejectId { get; init; }
+    public required Guid MaterialId { get; init; }
     public required double Quantity { get; init; }
     public required DateTime ReportedAt { get; set; }
 }
