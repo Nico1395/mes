@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Mes.Shopfloor.Api.ProductionManagement\Mes.Shopfloor.Api.ProductionManagement.csproj" />
+      <ProjectReference Include="..\Mes.Shopfloor.Api.SystemManagement\Mes.Shopfloor.Api.SystemManagement.csproj" />
     </ItemGroup>
 
 </Project>

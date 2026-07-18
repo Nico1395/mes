@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Domain\Abstractions\" />
+    <Folder Include="Domain\Events\" />
   </ItemGroup>
 
 </Project>

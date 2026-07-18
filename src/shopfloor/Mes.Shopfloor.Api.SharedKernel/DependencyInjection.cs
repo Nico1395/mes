@@ -3,6 +3,7 @@ using DandyEndpoints;
 using DandyMediator;
 using DandyMediator.Validation;
 using Marten;
+using Mes.Shopfloor.Api.SharedKernel.Configurations;
 using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence.EntityFrameworkCore;
 using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence.Marten;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Connections;
@@ -70,6 +71,9 @@ public static class DependencyInjection
         services.AddDbContext<DbContext, ShopfloorDbContext>();
         services.AddTransient<IInterceptor, DomainInterfaceSaveChangesInterceptor>();
 
+        // Options
+        services.AddOptions<AppOptions>().Bind(configuration.GetSection("App"));            // TODO -> Make sure this is containerizable
+        
         return services;
     }
 }

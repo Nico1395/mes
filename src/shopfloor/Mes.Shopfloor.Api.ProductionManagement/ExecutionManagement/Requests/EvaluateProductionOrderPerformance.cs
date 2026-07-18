@@ -1,9 +1,9 @@
-﻿using DandyMediator;
-using DandyMediator.Commands;
+﻿using DandyMediator.Commands;
 using Marten;
 using Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.Application;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Application;
-using Mes.Shopfloor.Api.SharedKernel.Domain.Events;
+using Mes.Shopfloor.Shared.SharedKernel.Events;
+using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ExecutionManagement.Requests;
@@ -14,7 +14,7 @@ internal static class EvaluateProductionOrderPerformance
 
     private sealed class CommandHandler(
         DbContext context,
-        IMediator mediator,
+        IMessagePublisher messagePublisher,
         IDocumentSession session) : ICommandHandler<Command>
     {
         public async Task<ICommandResponse> HandleAsync(Command request, CancellationToken cancellationToken)
@@ -36,20 +36,21 @@ internal static class EvaluateProductionOrderPerformance
 
             var quantityLeftToBeProduced = productionOrderStatus.GetQuantityLeftToBeProduced();
             var projectedCompletionDate = productionOrderStatus.GetProjectedCompletionDate();
-            var notification = new OrderNotOnTrackV1(
-                productionOrderStatus.ProductionOrderId,
-                productionOrderStatus.TargetQuantity,
-                productionOrderStatus.ProducedQuantity,
-                quantityLeftToBeProduced,
-                targetQtyPerMin,
-                currentQtyPerMin,
-                currentDeviation,
-                productionOrderStatus.StartedAt.Value,
-                productionOrderStatus.ScheduledToCompleteAt,
-                projectedCompletionDate
-            );
+            var notOnTrack = new OrderNotOnTrackV1
+            {
+                ProductionOrderId = productionOrderStatus.ProductionOrderId,
+                TargetQuantity = productionOrderStatus.TargetQuantity,
+                ProducedQuantity = productionOrderStatus.ProducedQuantity,
+                QuantityLeftToBeProduced = quantityLeftToBeProduced,
+                TargetQuantityPerMinute = targetQtyPerMin,
+                CurrentQuantityPerMinute = currentQtyPerMin,
+                CurrentDeviation = currentDeviation,
+                StartedAt = productionOrderStatus.StartedAt.Value,
+                ScheduledToCompleteAt = productionOrderStatus.ScheduledToCompleteAt,
+                ProjectedCompletionDate = projectedCompletionDate,
+            };
 
-            await mediator.PublishAsync(notification, cancellationToken);
+            await messagePublisher.PublishAsync(notOnTrack, cancellationToken);
             return CommandResponseFactory.NoContent_204().Build();
         }
     }

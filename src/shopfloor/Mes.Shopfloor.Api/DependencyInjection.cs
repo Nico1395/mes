@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Mes.Shopfloor.Api.ProductionManagement;
 using Mes.Shopfloor.Api.SharedKernel;
+using Mes.Shopfloor.Api.SystemManagement;
 
 namespace Mes.Shopfloor.Api;
 
@@ -12,6 +13,7 @@ internal static class DependencyInjection
 
         services.AddMesShopfloorSharedKernel(configuration, assemblies);
         services.AddMesShopfloorProductionManagement();
+        services.AddMesShopfloorSystemManagement();
 
         return services;
     }
@@ -25,5 +27,6 @@ internal static class DependencyInjection
     {
         yield return "Mes.Shopfloor.Api.SharedKernel";
         yield return "Mes.Shopfloor.Api.ProductionManagement";
+        yield return "Mes.Shopfloor.Api.SystemManagement";
     }
 }

@@ -3,15 +3,15 @@ using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis;
 
-internal sealed class ProductionOrderStatus
+internal class ProductionOrderStatus
 {
-    public required Guid ProductionOrderId { get; init; }
-    public required Guid ScheduledProductionOrderId { get; init; }
-    public required Guid ProductId { get; init; }
+    public Guid ProductionOrderId { get; init; }
+    public Guid ScheduledProductionOrderId { get; init; }
+    public Guid ProductId { get; init; }
     public int Version { get; set; }
-    public required ProductionOrderPriority Priority { get; init; }
-    public required string Name { get; set; }
-    public required double TargetQuantity { get; init; }
+    public ProductionOrderPriority Priority { get; init; }
+    public string Name { get; set; } = string.Empty;
+    public double TargetQuantity { get; init; }
     public double ProducedQuantity { get; set; }
     public double ProgressPercent { get; set; }
     public double ProducedRejectQuantity { get; set; }
@@ -24,16 +24,16 @@ internal sealed class ProductionOrderStatus
     public Guid? CurrentScheduledTaskId { get; set; }
     public DateTime? StartedAt { get; set; }       // Represents the time when the order has actually started, not when it was scheduled
     public DateTime? CompletedAt { get; set; }
-    public required DateTime ScheduledToStartAt { get; set; }
-    public required DateTime ScheduledToCompleteAt { get; init; }
+    public DateTime ScheduledToStartAt { get; set; }
+    public DateTime ScheduledToCompleteAt { get; init; }
     public ProductionOrderStatusState State { get; set; } = ProductionOrderStatusState.Scheduled;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
 
-    public bool TryBook(Guid productionUnitId, Guid scheduledTaskId, DateTime bookedAt)
+    public OrderBookedResult Book(Guid productionUnitId, Guid scheduledTaskId, DateTime bookedAt)
     {
         if (IsAbortedOrCompleted())
-            return false;
+            return OrderBookedResult.BookedButAbortedOrCompleted;
 
         StartOrResume();
 
@@ -49,7 +49,7 @@ internal sealed class ProductionOrderStatus
         Bookings.Add(booking);
 
         Touch();
-        return true;
+        return OrderBookedResult.Booked;
     }
 
     public void SetNotBooked()
@@ -82,7 +82,7 @@ internal sealed class ProductionOrderStatus
         if (HasStarted())
             State = ProductionOrderStatusState.Paused;
     }
-    
+
     [MemberNotNullWhen(true, nameof(StartedAt))]
     [MemberNotNullWhen(true, nameof(CompletedAt))]
     public bool IsAbortedOrCompleted()
@@ -93,6 +93,7 @@ internal sealed class ProductionOrderStatus
                State is ProductionOrderStatusState.Completed or ProductionOrderStatusState.Aborted;
     }
 
+    [MemberNotNullWhen(true, nameof(StartedAt))]
     public void AddProducedQuantity(Guid productionUnitId, double quantity, DateTime reportedAt)
     {
         StartOrResume();

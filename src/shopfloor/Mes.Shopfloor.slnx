@@ -2,6 +2,7 @@
   <Folder Name="/Api/">
     <Project Path="Mes.Shopfloor.Api.ProductionManagement/Mes.Shopfloor.Api.ProductionManagement.csproj" />
     <Project Path="Mes.Shopfloor.Api.SharedKernel/Mes.Shopfloor.Api.SharedKernel.csproj" />
+    <Project Path="Mes.Shopfloor.Api.SystemManagement/Mes.Shopfloor.Api.SystemManagement.csproj" />
     <Project Path="Mes.Shopfloor.Api/Mes.Shopfloor.Api.csproj" />
   </Folder>
   <Folder Name="/Client/">

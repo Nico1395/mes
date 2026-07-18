@@ -1,0 +1,18 @@
+﻿using Mes.Shopfloor.Shared.SharedKernel.Messaging;
+
+namespace Mes.Shopfloor.Api.SharedKernel.Domain.Exceptions;
+
+public sealed class InvalidMessageException(string message) : Exception(message)
+{
+    public static InvalidMessageException Create<TMessage>()
+        where TMessage : IMessage
+    {
+        return new InvalidMessageException($"Invalid message: {typeof(TMessage).Name}");
+    }
+
+    public static void Throw<TMessage>()
+        where TMessage : IMessage
+    {
+        throw Create<TMessage>();
+    }
+}
