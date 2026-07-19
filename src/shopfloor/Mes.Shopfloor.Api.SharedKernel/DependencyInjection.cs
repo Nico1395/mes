@@ -2,6 +2,7 @@
 using DandyEndpoints;
 using DandyMediator;
 using DandyMediator.Validation;
+using DandyStrategies;
 using Marten;
 using Mes.Shopfloor.Api.SharedKernel.Configurations;
 using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence.EntityFrameworkCore;
@@ -66,6 +67,9 @@ public static class DependencyInjection
         {
             cfg.ScanInAssemblies(assemblies);
         });
+
+        // DandyStrategies
+        services.AddDandyStrategies(cfg => cfg.ScanInAssemblies(assemblies));
 
         // Core persistence
         services.AddDbContext<DbContext, ShopfloorDbContext>();
