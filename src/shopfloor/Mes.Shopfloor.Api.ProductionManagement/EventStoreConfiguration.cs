@@ -11,8 +11,5 @@ internal sealed class EventStoreConfiguration : IEventStoreConfiguration
     {
         storeOptions.Projections.Add<ProductionOrderReportProjection>(ProjectionLifecycle.Async);
         storeOptions.Schema.For<ProductionOrderReport>().Identity(p => p.ProductionOrderId);
-
-        storeOptions.Projections.Add<ProductionOrderLiveStatusProjection>(ProjectionLifecycle.Async);
-        storeOptions.Schema.For<ProductionOrderLiveStatus>().Identity(p => p.ProductionOrderId);
     }
 }
