@@ -1,7 +1,11 @@
 # What is this repository?
 This is my hobby project to explore software architecture. I am a developer in the field of Manufacturing Execution Systems (MES) and thus simply use it as a domain to experiment with.
 
-# Under construction
+# Disclaimers
+## Source code
+**None** of the code in this repository has been sourced or stolen from any commercial MES I have worked on from any company. I have not reused data structures, logic or anything similar. The entire codebase is built from the ground up with little use of AI.
+
+## Under construction
 Everything in this repository is under construction, potentially experimentative and this not taken too seriously. However I try to aim at achieving functioning software with high qualitative standards.
 
 # Goals
@@ -24,3 +28,4 @@ My goals with this project span from the system and software architecture over t
 - How are architectural paradrigms such as EDA, event sourcing, clean architecture as vertical slicing and others best combined?
 - How can software be designed, so the developer does not have to traverse through layers and layers and layers of abstractions of generic *services*, *managers* or *providers*?
 - Does one really need a repository?
+- How does a modular monolith look like, how is it implemented in .NET and how are interactions between modules handled?
