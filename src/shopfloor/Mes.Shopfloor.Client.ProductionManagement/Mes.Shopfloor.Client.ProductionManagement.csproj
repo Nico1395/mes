@@ -7,12 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Mes.Shopfloor.Shared.ProductionManagement\Mes.Shopfloor.Shared.ProductionManagement.csproj" />
-      <ProjectReference Include="..\Mes.Shopfloor.Client\Mes.Shopfloor.Client.csproj" />
+      <ProjectReference Include="..\Mes.Shopfloor.Client.SharedKernel\Mes.Shopfloor.Client.SharedKernel.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Execution\" />
+      <Folder Include="ExecutionManagement\" />
     </ItemGroup>
 
 </Project>

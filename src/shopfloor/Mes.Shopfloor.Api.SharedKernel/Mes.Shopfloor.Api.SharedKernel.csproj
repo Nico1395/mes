@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DandyStrategies" />
+    <PackageReference Include="Marten.AspNetCore" />
+    <PackageReference Include="NLog.Web.AspNetCore" />
+    <PackageReference Include="DandyEndpoints" />
+    <PackageReference Include="DandyMediator.Validation" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="Scalar.AspNetCore" />
+    <ProjectReference Include="..\Mes.Shopfloor.Shared.SharedKernel\Mes.Shopfloor.Shared.SharedKernel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\Abstractions\" />
+    <Folder Include="Domain\Events\" />
+  </ItemGroup>
+
+</Project>
