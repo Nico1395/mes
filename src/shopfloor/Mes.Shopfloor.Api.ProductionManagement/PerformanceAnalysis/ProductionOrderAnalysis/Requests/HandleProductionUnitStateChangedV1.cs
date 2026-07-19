@@ -32,7 +32,7 @@ internal static class HandleProductionUnitStateChangedV1
             session.Events.StartStream(request.StateChanged.ProductionUnitId, request.StateChanged);
             await session.SaveChangesAsync(cancellationToken);
 
-            return CommandResponseFactory.Accepted_202().Build();
+            return CommandResponse.Accepted_202().Build();
         }
     }
 }

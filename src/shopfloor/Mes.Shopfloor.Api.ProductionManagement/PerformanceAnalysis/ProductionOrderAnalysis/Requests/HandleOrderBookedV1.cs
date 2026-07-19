@@ -32,19 +32,19 @@ internal static class HandleOrderBookedV1
         {
             var success = await TryBookOrderAsync(request.OrderBooked, cancellationToken);
             if (success)
-                return CommandResponseFactory.BadRequest_400().Build();
+                return CommandResponse.NotFound_404().Build();
 
             if (request.OrderBooked.PreviousProductionOrderId.HasValue)
             {
                 success = await UnbookPreviousOrderAsync(request.OrderBooked.PreviousProductionOrderId.Value, request.OrderBooked, cancellationToken);
                 if (!success)
-                    return CommandResponseFactory.BadRequest_400().Build();
+                    return CommandResponse.NotFound_404().Build();
             }
 
             session.Events.StartStream(request.OrderBooked.ProductionOrderId, request.OrderBooked);
             await session.SaveChangesAsync(cancellationToken);
 
-            return CommandResponseFactory.Accepted_202().Build();
+            return CommandResponse.Accepted_202().Build();
         }
 
         private async Task<bool> TryBookOrderAsync(OrderBookedV1 orderBooked, CancellationToken cancellationToken)

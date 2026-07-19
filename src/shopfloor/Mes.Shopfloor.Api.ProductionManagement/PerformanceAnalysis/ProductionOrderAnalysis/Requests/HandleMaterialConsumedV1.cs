@@ -28,14 +28,14 @@ internal static class HandleMaterialConsumedV1
         {
             var status = await session.Events.AggregateStreamAsync<ProductionOrderStatusAggregate>(request.MaterialConsumed.ProductionOrderId, token: cancellationToken);
             if (status == null)
-                return CommandResponseFactory.BadRequest_400().Build();
+                return CommandResponse.NotFound_404().Build();
 
             status.Apply(request.MaterialConsumed);
 
             session.Events.StartStream(status.ProductionOrderId, request.MaterialConsumed);
             await session.SaveChangesAsync(cancellationToken);
 
-            return CommandResponseFactory.Accepted_202().Build();
+            return CommandResponse.Accepted_202().Build();
         }
     }
 }

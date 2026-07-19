@@ -31,7 +31,7 @@ internal static class HandleQuantityProducedV1
         {
             var status = await session.Events.AggregateStreamAsync<ProductionOrderStatusAggregate>(request.QuantityProduced.ProductionOrderId, token: cancellationToken);
             if (status == null)
-                return CommandResponseFactory.BadRequest_400().Build();
+                return CommandResponse.NotFound_404().Build();
 
             var hasBeenCompleted = status.Apply(request.QuantityProduced);
             if (status.HasStarted() && status.IsAbortedOrCompleted() && hasBeenCompleted)
@@ -54,7 +54,7 @@ internal static class HandleQuantityProducedV1
             session.Events.StartStream(request.QuantityProduced.ProductionOrderId, request.QuantityProduced);
 
             await session.SaveChangesAsync(cancellationToken);
-            return CommandResponseFactory.Accepted_202().Build();
+            return CommandResponse.Accepted_202().Build();
         }
     }
 }

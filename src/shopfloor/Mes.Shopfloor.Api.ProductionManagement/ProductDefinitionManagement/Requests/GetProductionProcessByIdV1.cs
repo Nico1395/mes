@@ -4,7 +4,6 @@ using DandyMediator.Queries;
 using DandyMediator.Responses;
 using Mes.Shopfloor.Api.ProductionManagement.ProductDefinitionManagement.Application;
 using Mes.Shopfloor.Api.ProductionManagement.ProductDefinitionManagement.Requests.Http;
-using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Mediator;
 using Mes.Shopfloor.Shared.SharedKernel.ObjectMapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -15,43 +14,6 @@ namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinitionManagement.Req
 
 internal static class GetProductionProcessByIdV1
 {
-    // [HttpGet("/api/v1/pm/product-definition/production-processes/{id:guid}")]
-    // [EndpointName("Get production process by ID")]
-    // [EndpointDescription("Finds the production process with the specified ID as its key.")]
-    // [Produces<ProductionProcessHc>]
-    // private static async Task<IResult> HttpEndpoint(
-    //     [FromServices] IMediator mediator,
-    //     [FromRoute(Name = "id")] Guid id,
-    //     CancellationToken cancellationToken)
-    // {
-    //     var query = new Query(id);
-    //     var response = await mediator.SendAsync<Query, ProductionProcess>(query, cancellationToken);
-    //     return response.Map(p => p.Map<ProductionProcessHc>()).ToResult();
-    // }
-
-    // private sealed class HttpEndpoint : QueryHttpEndpoint
-    // {
-    //     protected override Delegate DefineEndpoint(EndpointDefinition definition)
-    //     {
-    //         definition.Uri = "/api/v1/pm/product-definition/production-processes/{id:guid}";
-    //         definition.DisplayName = "Map production process by ID";
-    //         definition.Description = "Finds the production process with they specified ID as its key";
-    //
-    //         // definition.Produces<ProductionProcessHc>();
-    //         // definition.ProducesProblem(StatusCodes.Status400BadRequest);
-    //
-    //         return async (
-    //             [FromServices] IMediator mediator,
-    //             [FromRoute(Name = "id")] Guid id,
-    //             CancellationToken cancellationToken) =>
-    //         {
-    //             var query = new Query(id);
-    //             var response = await mediator.SendAsync<Query, ProductionProcess>(query, cancellationToken);
-    //             return response.Map(p => p.Map<ProductionProcessHc>()).ToResult();
-    //         };
-    //     }
-    // }
-    
     private sealed class Endpoint : IEndpoint
     {
         public void Map(IEndpointRouteBuilder app)

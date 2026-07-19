@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.DataCollection.Infrastructure.EntityFrameworkCore;
 
-internal sealed class StateGroupEntityTypeConfiguration : IEntityTypeConfiguration<ProductionUnitStateGroup>
+internal sealed class ProductionUnitStateGroupEntityTypeConfiguration : IEntityTypeConfiguration<ProductionUnitStateGroup>
 {
     public void Configure(EntityTypeBuilder<ProductionUnitStateGroup> builder)
     {

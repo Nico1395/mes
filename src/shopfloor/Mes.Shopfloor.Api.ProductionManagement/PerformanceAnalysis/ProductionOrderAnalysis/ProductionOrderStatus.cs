@@ -13,6 +13,7 @@ internal class ProductionOrderStatus
     public string Name { get; set; } = string.Empty;
     public double TargetQuantity { get; init; }
     public double ProducedQuantity { get; set; }
+    public double AcceptableDeviationPercent  { get; init; }
     public double ProgressPercent { get; set; }
     public double ProducedRejectQuantity { get; set; }
     public List<ProductionOrderProducedQuantity> ProducedQuantities { get; init; } = [];
@@ -160,6 +161,15 @@ internal class ProductionOrderStatus
         var projectedMinutesLeft = quantityLeft / currentQtyPerMin;
 
         return DateTime.UtcNow.AddMinutes(projectedMinutesLeft);
+    }
+
+    public bool IsOnTrack()
+    {
+        var targetQtyPerMin = GetTargetQuantityPerMinute();
+        var currentQtyPerMin = GetCurrentQuantityPerMinute();
+        var currentDeviation = targetQtyPerMin - currentQtyPerMin;
+
+        return currentDeviation / targetQtyPerMin * 100 <= AcceptableDeviationPercent;
     }
 
     internal void Touch() => UpdatedAt = DateTime.UtcNow;

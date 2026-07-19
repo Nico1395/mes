@@ -3,7 +3,6 @@ using DandyMediator;
 using DandyMediator.Queries;
 using DandyMediator.Responses;
 using Mes.Shopfloor.Api.ProductionManagement.ResourceManagement.Application;
-using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;

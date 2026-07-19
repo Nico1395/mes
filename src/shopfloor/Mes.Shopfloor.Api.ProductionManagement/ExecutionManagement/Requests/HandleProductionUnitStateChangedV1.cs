@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ExecutionManagement.Requests;
 
-internal sealed class AdjustProductionStrategyOnProductionUnitStateChangedV1
+internal sealed class HandleProductionUnitStateChangedV1
 {
     private sealed class StatusStateChangedConsumer(IMediator mediator) : IConsumer<ProductionUnitStateChangedV1>
     {
@@ -40,14 +40,14 @@ internal sealed class AdjustProductionStrategyOnProductionUnitStateChangedV1
                 // TODO -> Maybe the terminals should rehydrate their cache every so often.
                 // TODO -> Maybe the edge server could send out a message to all terminals to refresh after every sync.
 
-                return CommandResponseFactory.Accepted_202().Build();
+                return CommandResponse.Accepted_202().Build();
             }
 
             if (newState.IsProductive)
             {
                 // TODO -> Maybe this logic should rather be part of reacting to quantity, but if done so, we should limit of often we do that
-                await mediator.SendAsync(new EvaluateProductionOrderPerformance.Command(request.StateChanged.ProductionOrderId), cancellationToken);
-                return CommandResponseFactory.Accepted_202().Build();
+                await mediator.SendAsync(new EvaluateProductionOrderPerformanceV1.Command(request.StateChanged.ProductionOrderId), cancellationToken);
+                return CommandResponse.Accepted_202().Build();
             }
 
             if (newState.IsIdle)
@@ -65,7 +65,9 @@ internal sealed class AdjustProductionStrategyOnProductionUnitStateChangedV1
 
             var productionUnitStatus = await session.GetProductionUnitStatusByIdAsync(request.StateChanged.ProductionUnitId, cancellationToken);
 
-            return CommandResponseFactory.Accepted_202().Build();
+            // TODO
+
+            return CommandResponse.Accepted_202().Build();
         }
     }
 }

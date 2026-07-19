@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ExecutionManagement.Requests;
 
-internal static class EvaluateProductionOrderPerformance
+internal static class EvaluateProductionOrderPerformanceV1
 {
     internal sealed record Command(Guid ProductionOrderId) : ICommand;
-
+ 
     private sealed class CommandHandler(
         DbContext context,
         IMessagePublisher messagePublisher,
@@ -21,19 +21,19 @@ internal static class EvaluateProductionOrderPerformance
         {
             var productionOrderStatus = await session.GetProductionOrderStatusByIdAsync(request.ProductionOrderId, cancellationToken);
             if (productionOrderStatus == null || !productionOrderStatus.HasStarted())
-                return CommandResponseFactory.NoContent_204().Build();
+                return CommandResponse.NotFound_404().Build();
 
             var productionOrder = await context.GetProductionOrderByIdAsync(request.ProductionOrderId, cancellationToken);
             if (productionOrder == null)
-                return CommandResponseFactory.NoContent_204().Build();
+                return CommandResponse.NotFound_404().Build();
+
+            var orderOnTrack = productionOrderStatus.IsOnTrack();
+            if (orderOnTrack)
+                return CommandResponse.NoContent_204().Build();
 
             var targetQtyPerMin = productionOrderStatus.GetTargetQuantityPerMinute();
             var currentQtyPerMin = productionOrderStatus.GetCurrentQuantityPerMinute();
             var currentDeviation = targetQtyPerMin - currentQtyPerMin;
-            var orderOnTrack = currentDeviation / targetQtyPerMin * 100 <= productionOrder.AcceptableDeviationPercent;
-            if (orderOnTrack)
-                return CommandResponseFactory.NoContent_204().Build();
-
             var quantityLeftToBeProduced = productionOrderStatus.GetQuantityLeftToBeProduced();
             var projectedCompletionDate = productionOrderStatus.GetProjectedCompletionDate();
             var notOnTrack = new OrderNotOnTrackV1
@@ -51,7 +51,7 @@ internal static class EvaluateProductionOrderPerformance
             };
 
             await messagePublisher.PublishAsync(notOnTrack, cancellationToken);
-            return CommandResponseFactory.NoContent_204().Build();
+            return CommandResponse.NoContent_204().Build();
         }
     }
 }

@@ -32,18 +32,18 @@ internal static class HandleOrderScheduledV1
         {
             var productionOrder = await context.GetProductionOrderByIdAsync(request.OrderScheduled.ProductionOrderId, cancellationToken);
             if (productionOrder == null)
-                return CommandResponseFactory.BadRequest_400().Build();
+                return CommandResponse.NotFound_404().Build();
 
             var scheduledProductionOrder = await context.GetScheduledProductionOrderByIdAsync(request.OrderScheduled.ScheduledProductionOrderId, cancellationToken);
             if (scheduledProductionOrder == null)
-                return CommandResponseFactory.BadRequest_400().Build();
+                return CommandResponse.NotFound_404().Build();
             
             _ = ProductionOrderStatusAggregate.Create(request.OrderScheduled, productionOrder, scheduledProductionOrder);
             
             session.Events.StartStream(productionOrder.Id, request.OrderScheduled);
             await session.SaveChangesAsync(cancellationToken);
 
-            return CommandResponseFactory.Accepted_202().Build();
+            return CommandResponse.Accepted_202().Build();
         }
     }
 }

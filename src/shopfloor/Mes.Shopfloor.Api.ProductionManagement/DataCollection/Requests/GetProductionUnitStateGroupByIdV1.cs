@@ -4,7 +4,6 @@ using DandyMediator.Queries;
 using DandyMediator.Responses;
 using Mes.Shopfloor.Api.ProductionManagement.DataCollection.Application;
 using Mes.Shopfloor.Api.ProductionManagement.DataCollection.Requests.Http;
-using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Mediator;
 using Mes.Shopfloor.Shared.SharedKernel.ObjectMapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;

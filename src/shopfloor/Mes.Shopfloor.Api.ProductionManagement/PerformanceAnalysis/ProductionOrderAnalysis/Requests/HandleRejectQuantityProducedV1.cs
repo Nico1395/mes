@@ -28,14 +28,14 @@ internal static class HandleRejectQuantityProducedV1
         {
             var status = await session.Events.AggregateStreamAsync<ProductionOrderStatusAggregate>(request.RejectQuantityProduced.ProductionOrderId, token: cancellationToken);
             if (status == null)
-                return CommandResponseFactory.BadRequest_400().Build();
+                return CommandResponse.NotFound_404().Build();
 
             status.Apply(request.RejectQuantityProduced);
 
             session.Events.StartStream(status.ProductionOrderId, request.RejectQuantityProduced);
             await session.SaveChangesAsync(cancellationToken);
 
-            return CommandResponseFactory.Accepted_202().Build();
+            return CommandResponse.Accepted_202().Build();
         }
     }
 }
