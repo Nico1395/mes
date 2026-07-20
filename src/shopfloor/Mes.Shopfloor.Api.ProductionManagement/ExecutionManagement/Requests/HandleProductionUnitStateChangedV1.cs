@@ -32,7 +32,7 @@ internal sealed class HandleProductionUnitStateChangedV1
     {
         public async Task<ICommandResponse> HandleAsync(Command request, CancellationToken cancellationToken)
         {
-            var newState = await context.GetProductionUnitStateByIdAsync(request.StateChanged.NewStateId, cancellationToken);
+            var newState = await context.GetProductionUnitStateByIdAsync(request.StateChanged.StateId, cancellationToken);
             if (newState == null)
             {
                 // This is not good but for now I don't know what the system should do here.
