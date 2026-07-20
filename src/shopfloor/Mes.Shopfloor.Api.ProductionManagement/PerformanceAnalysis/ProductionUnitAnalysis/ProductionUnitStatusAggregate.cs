@@ -1,19 +1,11 @@
-﻿using Marten.Events.Aggregation;
-using Mes.Shopfloor.Api.ProductionManagement.DataCollection.Application;
-using Mes.Shopfloor.Api.ProductionManagement.ResourceManagement.Application;
-using Mes.Shopfloor.Shared.SharedKernel.Events;
-using Microsoft.EntityFrameworkCore;
+﻿using Mes.Shopfloor.Shared.SharedKernel.Events;
 
-namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionUnitAnalysis.Projections;
+namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionUnitAnalysis;
 
-internal partial class ProductionUnitStatusProjection(DbContext context) : SingleStreamProjection<ProductionUnitStatus, Guid>
+internal sealed class ProductionUnitStatusAggregate : ProductionUnitStatus
 {
-    public async Task<ProductionUnitStatus> Create(ProductionUnitWentOnlineV1 wentOnline)
+    public static ProductionUnitStatus Create(ProductionUnitWentOnlineV1 wentOnline)
     {
-        var exists = await context.ProductionUnitExistsAsync(wentOnline.ProductionUnitId, CancellationToken.None);
-        if (exists)
-            throw new InvalidOperationException();
-
         var status = new ProductionUnitStatus
         {
             ProductionUnitId = wentOnline.ProductionUnitId,
@@ -32,16 +24,12 @@ internal partial class ProductionUnitStatusProjection(DbContext context) : Singl
         // Should the state be set? No because the production unit's state being set is dealt with using another event.
     }
 
-    public async Task Apply(ProductionUnitStateChangedV1 stateChanged, ProductionUnitStatus status)
+    public void Apply(ProductionUnitStateChangedV1 stateChanged, ProductionUnitStatus status)
     {
-        var state = await context.GetProductionUnitStateByIdAsync(stateChanged.NewStateId, CancellationToken.None);
-        if (state == null)
-            throw new InvalidOperationException($"State with ID '{stateChanged.NewStateId}' not found.");
-
         status.SetState(
-            state.Id,
-            state.IsProductive,
-            state.IsIdle,
+            stateChanged.StateId,
+            stateChanged.StateIsProductive,
+            stateChanged.StateIsIdle,
             stateChanged.OccurredAtUtc);
     }
 
