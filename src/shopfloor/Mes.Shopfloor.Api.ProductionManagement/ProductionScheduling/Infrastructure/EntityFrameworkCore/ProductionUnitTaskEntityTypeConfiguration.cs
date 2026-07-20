@@ -8,12 +8,11 @@ internal sealed class ProductionUnitTaskEntityTypeConfiguration : IEntityTypeCon
     public void Configure(EntityTypeBuilder<ProductionUnitTask> builder)
     {
         builder.ToTable("production_unit_task", "production_scheduling");
-        builder.HasKey(p => p.ProductionScheduleId);
-        builder.Property(p => p.ProductionScheduleId).HasColumnName("production_schedule_Id").IsRequired();
-        builder.Property(p => p.ProductionUnitId).HasColumnName("production_unit_id").IsRequired();
-        builder.Property(p => p.ProductionOrderId).HasColumnName("production_order_id").IsRequired();
+        builder.HasKey(p => p.Id);
+        builder.Property(p => p.Id).HasColumnName("id").IsRequired();
+        builder.Property(p => p.ProductionUnitScheduleId).HasColumnName("production_unit_schedule_id").IsRequired();
+        builder.Property(p => p.ScheduledProductionOrderTaskId).HasColumnName("scheduled_production_order_task_id").IsRequired();
         builder.Property(p => p.StartingAt).HasColumnName("starting_at").IsRequired();
         builder.Property(p => p.CompletingAt).HasColumnName("completing_at").IsRequired();
-        builder.HasOne(p => p.Order).WithOne().HasForeignKey<ProductionUnitTask>(p => p.ProductionOrderId);
     }
 }

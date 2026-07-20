@@ -6,8 +6,10 @@ internal sealed class ScheduledProductionOrderTask : IDurational
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public required Guid ScheduledProductionOrderId { get; set; }
+    public ScheduledProductionOrder? ScheduledProductionOrder { get; set; }
     public required Guid ProductionProcessStepId { get; set; }
-    public required Guid ProductionUnitId { get; set; }
+    public required Guid ProductionUnitTaskId { get; set; }
+    public ProductionUnitTask? ProductionUnitTask { get; set; }
     public List<ScheduledProductionOrderTaskWorker>? Workers { get; set; }
     public required DateTime StartedAt { get; set; }
     public required DateTime? EndedAt { get; set; }

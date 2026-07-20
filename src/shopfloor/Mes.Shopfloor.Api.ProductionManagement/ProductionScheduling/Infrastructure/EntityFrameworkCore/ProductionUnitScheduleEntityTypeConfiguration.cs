@@ -13,6 +13,6 @@ internal sealed class ProductionUnitScheduleEntityTypeConfiguration : IEntityTyp
         builder.Property(p => p.ProductionUnitId).HasColumnName("production_unit_id").IsRequired();
         builder.Property(p => p.CreatedAt).HasColumnName("created_at").IsRequired();
         builder.Property(p => p.UpdatedAt).HasColumnName("updated_at").IsRequired();
-        builder.HasMany(p => p.Tasks).WithOne().HasForeignKey(p => p.ProductionScheduleId);
+        builder.HasMany(p => p.Tasks).WithOne().HasForeignKey(p => p.ProductionUnitScheduleId);
     }
 }
