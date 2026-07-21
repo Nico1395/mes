@@ -6,18 +6,18 @@ namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionO
 
 internal sealed class ProductionOrderStatusAggregate : ProductionOrderStatus
 {
-    public static ProductionOrderStatus Create(OrderScheduledV1 orderScheduled, ProductionOrder productionOrder, ScheduledProductionOrder scheduledProductionOrder)
+    public static ProductionOrderStatus Create(OrderScheduledV1 orderScheduled, Order order, ScheduledOrder scheduledOrder)
     {
         return new ProductionOrderStatus
         {
-            ProductionOrderId = productionOrder.Id,
-            ScheduledProductionOrderId = scheduledProductionOrder.Id,
-            ProductId = productionOrder.ProductId,
-            Name = productionOrder.Name,
-            Priority = productionOrder.Priority,
-            TargetQuantity = productionOrder.TargetQuantity,
-            ScheduledToStartAt = scheduledProductionOrder.ScheduledToStartAt,
-            ScheduledToCompleteAt = scheduledProductionOrder.ScheduledToCompleteAt,
+            ProductionOrderId = order.Id,
+            ScheduledProductionOrderId = scheduledOrder.Id,
+            ProductId = order.ProductId,
+            Name = order.Name,
+            Priority = order.Priority,
+            TargetQuantity = order.TargetQuantity,
+            ScheduledToStartAt = scheduledOrder.StartingAt,
+            ScheduledToCompleteAt = scheduledOrder.EndingAt,
         };
     }
 

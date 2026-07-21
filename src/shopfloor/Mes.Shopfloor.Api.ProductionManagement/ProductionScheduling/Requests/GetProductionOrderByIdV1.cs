@@ -23,17 +23,17 @@ public static class GetProductionOrderByIdV1
                 [FromRoute(Name = "id")] Guid id,
                 CancellationToken cancellationToken) =>
             {
-                var response = await mediator.SendAsync<Query, ProductionOrder>(new Query(id), cancellationToken);
+                var response = await mediator.SendAsync<Query, Order>(new Query(id), cancellationToken);
                 return response.Map(t => t.Map<ProductionOrderHc>()).ToResult();
             });
         }
     }
 
-    private sealed record Query(Guid ProductionOrderId) : IQuery<ProductionOrder>;
+    private sealed record Query(Guid ProductionOrderId) : IQuery<Order>;
 
-    private sealed class QueryHandler(DbContext context) : IQueryHandler<Query, ProductionOrder>
+    private sealed class QueryHandler(DbContext context) : IQueryHandler<Query, Order>
     {
-        public async Task<IQueryResponse<ProductionOrder>> HandleAsync(Query request, CancellationToken cancellationToken)
+        public async Task<IQueryResponse<Order>> HandleAsync(Query request, CancellationToken cancellationToken)
         {
             var order = await context.GetProductionOrderByIdAsync(request.ProductionOrderId, cancellationToken);
             return order.ToResponse();

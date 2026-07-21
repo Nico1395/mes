@@ -9,7 +9,7 @@ internal class ProductionOrderStatus
     public Guid ScheduledProductionOrderId { get; init; }
     public Guid ProductId { get; init; }
     public int Version { get; set; }
-    public ProductionOrderPriority Priority { get; init; }
+    public OrderPriority Priority { get; init; }
     public string Name { get; set; } = string.Empty;
     public double TargetQuantity { get; init; }
     public double ProducedQuantity { get; set; }

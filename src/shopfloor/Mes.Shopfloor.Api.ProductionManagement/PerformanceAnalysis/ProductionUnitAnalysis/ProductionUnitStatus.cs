@@ -2,7 +2,7 @@
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionUnitAnalysis;
 
-internal sealed class ProductionUnitStatus
+internal class ProductionUnitStatus
 {
     public Guid ProductionUnitId { get; init; }
     public int Version { get; set; }

@@ -4,10 +4,10 @@ namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Applicatio
 
 internal static class ProductionOrderEfCoreExtensions
 {
-    public static Task<ProductionOrder?> GetProductionOrderByIdAsync(this DbContext context, Guid id, CancellationToken cancellationToken)
+    public static Task<Order?> GetProductionOrderByIdAsync(this DbContext context, Guid id, CancellationToken cancellationToken)
     {
         return context
-            .Set<ProductionOrder>()
+            .Set<Order>()
             .SingleOrDefaultAsync(o => o.Id == id, cancellationToken);
     }
 }

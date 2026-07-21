@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Infrastructure.EntityFrameworkCore;
 
-internal sealed class ProductionOrderEntityTypeConfiguration : IEntityTypeConfiguration<ProductionOrder>
+internal sealed class ProductionOrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
 {
-    public void Configure(EntityTypeBuilder<ProductionOrder> builder)
+    public void Configure(EntityTypeBuilder<Order> builder)
     {
         builder.ToTable("production_order", "production_scheduling");
         builder.HasKey(p => p.Id);

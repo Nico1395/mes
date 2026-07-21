@@ -1,0 +1,18 @@
+﻿using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Graphs;
+using Microsoft.EntityFrameworkCore;
+
+namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Application;
+
+internal static class ScheduledProductionOrderEfCoreExtensions
+{
+    public static async Task<ScheduledOrder?> GetScheduledProductionOrderByOrderIdAsync(this DbContext context, Guid orderId, CancellationToken cancellationToken)
+    {
+        var scheduledOrders = await context
+            .Set<ScheduledOrder>()
+            .Where(s => s.OrderId == orderId)
+            .Include(o => o.Edges)
+            .ToDictionaryAsync(o => o.Id, cancellationToken);
+
+        return scheduledOrders.ToGraph();
+    }
+}
