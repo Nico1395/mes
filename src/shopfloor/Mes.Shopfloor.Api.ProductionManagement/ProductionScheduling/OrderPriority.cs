@@ -1,6 +1,6 @@
 ﻿namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
 
-internal enum ProductionOrderPriority
+internal enum OrderPriority
 {
     Highest = 0,
     High = 1,

@@ -1,0 +1,28 @@
+﻿using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Graphs;
+using Mes.Shopfloor.Api.SharedKernel.Extensions;
+
+namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
+
+internal sealed class ScheduledOrder : IScheduledDag<ScheduledOrder>
+{
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public required Guid OrderId { get; init; }
+    public required Order? Order { get; init; }
+    public Guid? ProductionUnitId { get; init; }
+    public ScheduledOrderType Type { get; init; } = ScheduledOrderType.Individual;
+    public List<ScheduledOrderEdge> Edges { get; init; } = [];
+    public List<ScheduledOrder> Previous { get; init; } = [];
+    public List<ScheduledOrder> Next { get; init; } = [];
+    public List<ScheduledOrderParameter>? Parameters { get; init; }
+    public List<ScheduledOrderParts>? Parts { get; init; }
+    public List<ScheduledOrderMaterial>? Material { get; init; }
+    public List<ScheduledOrderEquipment>? Equipment { get; init; }
+    public DateTime ScheduledAt { get; init; } = DateTime.UtcNow;
+    public required DateTime StartingAt { get; init; }
+    public required DateTime EndingAt { get; init; }
+    
+    public List<IDagEdge> GetEdges()
+    {
+        return Edges.CastToList<IDagEdge>();
+    }
+}

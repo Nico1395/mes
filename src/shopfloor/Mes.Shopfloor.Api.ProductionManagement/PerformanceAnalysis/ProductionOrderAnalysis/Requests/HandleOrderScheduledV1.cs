@@ -3,6 +3,7 @@ using DandyMediator.Commands;
 using DandyMediator.Responses;
 using Marten;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Application;
+using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Graphs;
 using Mes.Shopfloor.Shared.SharedKernel.Events;
 using Mes.Shopfloor.Shared.SharedKernel.Messaging.Consumer;
 using Microsoft.EntityFrameworkCore;
@@ -34,11 +35,14 @@ internal static class HandleOrderScheduledV1
             if (productionOrder == null)
                 return CommandResponse.NotFound_404().Build();
 
-            var scheduledProductionOrder = await context.GetScheduledProductionOrderByIdAsync(request.OrderScheduled.ScheduledProductionOrderId, cancellationToken);
+            var scheduledProductionOrder = await context.GetScheduledProductionOrderByOrderIdAsync(request.OrderScheduled.ProductionOrderId, cancellationToken);
             if (scheduledProductionOrder == null)
                 return CommandResponse.NotFound_404().Build();
-            
-            _ = ProductionOrderStatusAggregate.Create(request.OrderScheduled, productionOrder, scheduledProductionOrder);
+
+            _ = ProductionOrderStatusAggregate.Create(
+                request.OrderScheduled,
+                productionOrder,
+                scheduledProductionOrder);
             
             session.Events.StartStream(productionOrder.Id, request.OrderScheduled);
             await session.SaveChangesAsync(cancellationToken);
