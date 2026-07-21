@@ -1,9 +1,10 @@
 ﻿namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinitionManagement;
 
-internal sealed class ProductionStepEquipment
+internal sealed record RequiredPart
 {
     public required Guid ProductionStepId { get; init; }
     public ProductionStep? ProductionStep { get; init; }
-    public required Guid EquipmentId { get; init; }
-    public required int Quantity { get; set; }
+    public required Guid PartId { get; init; }
+    public Part? Part { get; init; }
+    public required uint Quantity { get; set; }
 }

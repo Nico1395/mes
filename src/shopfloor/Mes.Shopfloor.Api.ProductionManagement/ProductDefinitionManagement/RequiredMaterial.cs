@@ -1,6 +1,6 @@
 ﻿namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinitionManagement;
 
-internal sealed record ProductionStepMaterial
+internal sealed record RequiredMaterial
 {
     public required Guid ProductionStepId { get; init; }
     public ProductionStep? ProductionStep { get; init; }

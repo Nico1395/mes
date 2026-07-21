@@ -6,7 +6,7 @@ internal sealed class ProductionOrder
     public required Guid ProductId { get; init; }
     public required string Name { get; set; }
     public string? Description { get; set; }
-    public DateTime? TargetDate { get; init; }
+    public required DateTime TargetDate { get; init; }
     public ProductionOrderPriority Priority { get; init; } = ProductionOrderPriority.Lowest;
     public required double TargetQuantity { get; init; }
     public required double AcceptableDeviationPercent { get; init; }
