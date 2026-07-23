@@ -108,7 +108,8 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
 
         // Assert - edges should be properly synchronized
         Assert.True(result);
-        Assert.Contains(newNode.Id, newNode.Edges.Select(e => e.ToId));
+        // newNode has edges to node1 and node2 (as FROM)
+        Assert.Contains(node1.Id, newNode.Edges.Select(e => e.ToId));
         Assert.Contains(node2.Id, newNode.Edges.Select(e => e.ToId));
     }
 
@@ -150,24 +151,17 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
     public void InsertAfter_RemoveEdgeFailure_RollsBack()
     {
         // Arrange
-        var node1 = new DagMock();
+        var node1 = new DagMockWithFailingRemoveEdge();
         var node2 = new DagMock();
         var newNode = new DagMock();
-        var initialCount = node1.Next.Count;
 
         node1.Next.Add(node2);
         node2.Previous.Add(node1);
 
-        // Make RemoveEdge fail by using a mock that tracks calls
-        var failingNode = new DagMockWithFailingRemoveEdge();
-        failingNode.Next.Add(node2);
-        node2.Previous.Clear();
-        node2.Previous.Add(failingNode);
+        // Act - RemoveEdge will fail because node1 always returns false
+        var result = node1.InsertAfter(newNode, node1.Id);
 
-        // Act
-        var result = failingNode.InsertAfter(newNode, failingNode.Id);
-
-        // Assert - should return false on RemoveEdge failure
+        // Assert - should return false when RemoveEdge fails
         Assert.False(result);
     }
 
@@ -203,25 +197,38 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
     public void InsertBefore_MultipleIncomingEdges_TransfersAllCorrectly()
     {
         // Arrange
+        var nodeStart = new DagMock();  // Common start node
         var nodeA = new DagMock();
         var nodeB = new DagMock();
         var nodeC = new DagMock(); // target node
         var newNode = new DagMock();
 
-        nodeA.Next.AddRange(new[] { nodeC });
-        nodeB.Next.AddRange(new[] { nodeC });
+        // Build graph: start → A, start → B, A → C, B → C
+        nodeStart.Next.AddRange(new[] { nodeA, nodeB });
+        nodeA.Previous.Add(nodeStart);
+        nodeB.Previous.Add(nodeStart);
+        
+        nodeA.Next.Add(nodeC);
+        nodeB.Next.Add(nodeC);
         nodeC.Previous.AddRange(new[] { nodeA, nodeB });
 
         // Act
-        var result = nodeA.InsertBefore(newNode, nodeC.Id);
+        var result = nodeStart.InsertBefore(newNode, nodeC.Id);
 
         // Assert
         Assert.True(result);
+        // newNode should have both A and B as previous
         Assert.Equal(2, newNode.Previous.Count);
         Assert.Contains(nodeA, newNode.Previous);
         Assert.Contains(nodeB, newNode.Previous);
+        // C should only have newNode as previous
         Assert.Single(nodeC.Previous);
         Assert.Contains(newNode, nodeC.Previous);
+        // A and B should now point to newNode, not C
+        Assert.Contains(newNode, nodeA.Next);
+        Assert.Contains(newNode, nodeB.Next);
+        Assert.DoesNotContain(nodeC, nodeA.Next);
+        Assert.DoesNotContain(nodeC, nodeB.Next);
     }
 
     [Fact]
@@ -261,19 +268,19 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
     [Fact]
     public void InsertBefore_InsertEdgeFailure_RollsBack()
     {
-        // Arrange
-        var node1 = new DagMock();
+        // Arrange - use failing node for testing error handling
+        var failingNode = new DagMockWithFailingRemoveEdge();
         var node2 = new DagMock();
         var newNode = new DagMock();
 
-        node1.Next.Add(node2);
-        node2.Previous.Add(node1);
+        failingNode.Next.Add(node2);
+        node2.Previous.Add(failingNode);
 
-        // Act - if InsertEdge fails, should return false
-        var result = node1.InsertBefore(newNode, node2.Id);
+        // Act - RemoveEdge will fail, so InsertBefore should return false
+        var result = failingNode.InsertBefore(newNode, node2.Id);
 
-        // Assert - should complete successfully (we're mocking success here)
-        Assert.True(result);
+        // Assert - should return false due to RemoveEdge failure
+        Assert.False(result);
     }
 
     #endregion
@@ -331,9 +338,10 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
 
         // Assert
         Assert.True(result);
-        // Verify that targetNode.RemoveEdge was called (edges cleared from RAM)
+        // Verify that targetNode.RemoveEdge was called (edges cleared from RAM and Edges)
         Assert.Empty(nodeB.Next);
         Assert.Empty(nodeB.Previous);
+        Assert.Empty(nodeB.GetEdges());  // Verify Edges collection is also cleared
     }
 
     [Fact]
@@ -419,11 +427,12 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
 
         // Assert
         Assert.True(result);
-        // Verify edges from A to C exist
+        // Verify edges from A to C exist (A has edge to C)
         Assert.Contains(nodeC.Id, nodeA.Edges.Select(e => e.ToId));
-        Assert.Contains(nodeA.Id, nodeC.Edges.Select(e => e.FromId));
-        // Verify edges to/from B are removed
+        // Verify edges to/from B are removed from A
         Assert.DoesNotContain(nodeB.Id, nodeA.Edges.Select(e => e.ToId));
+        // Verify B's edges are cleared
+        Assert.Empty(nodeB.Edges);
     }
 
     [Fact]
@@ -456,27 +465,33 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
     public void Remove_MultiplePreviousNodes_ConnectsAllPreviousToAllNext()
     {
         // Arrange
+        var nodeStart = new DagMock();  // Common start node
         var nodeA = new DagMock();
         var nodeB = new DagMock();
         var nodeC = new DagMock(); // to remove
         var nodeD = new DagMock();
 
-        // A → C → D, B → C
+        // Build graph: start → A, start → B, A → C, B → C, C → D
+        nodeStart.Next.AddRange(new[] { nodeA, nodeB });
+        nodeA.Previous.Add(nodeStart);
+        nodeB.Previous.Add(nodeStart);
+        
         nodeA.Next.Add(nodeC);
-        nodeC.Previous.Add(nodeA);
         nodeB.Next.Add(nodeC);
-        nodeC.Previous.Add(nodeB);
+        nodeC.Previous.AddRange(new[] { nodeA, nodeB });
         nodeC.Next.Add(nodeD);
         nodeD.Previous.Add(nodeC);
 
         // Act
-        var result = nodeA.Remove(nodeC);
+        var result = nodeStart.Remove(nodeC);
 
         // Assert
         Assert.True(result);
         Assert.Contains(nodeD, nodeA.Next);
         Assert.Contains(nodeD, nodeB.Next);
         Assert.Equal(2, nodeD.Previous.Count);
+        Assert.Contains(nodeA, nodeD.Previous);
+        Assert.Contains(nodeB, nodeD.Previous);
     }
 
     [Fact]
