@@ -44,31 +44,171 @@ public static class DagExtensions
     public static bool InsertAfter<TDag>(this TDag startNode, TDag node, Guid fromId)
         where TDag : class, IDag<TDag>
     {
+        var fromNode = startNode.Flatten().SingleOrDefault(n => n.Id == fromId);
+        if (fromNode == null)
+            return false;
+
+        // Check if the node would create a cycle
+        if (startNode.IsAfter(node.Id))
+            return false;
+
+        // Get all nodes that fromNode currently points to
+        var nextNodes = fromNode.Next.ToList();
+
+        // Clear current edges from fromNode
+        foreach (var nextNode in nextNodes)
+        {
+            fromNode.Next.Remove(nextNode);
+            nextNode.Previous.Remove(fromNode);
+            fromNode.RemoveEdge(nextNode.Id);
+            nextNode.RemoveEdge(fromNode.Id);
+        }
+
+        // Add new node after fromNode
+        fromNode.Next.Add(node);
+        node.Previous.Add(fromNode);
+        if (!fromNode.InsertEdge(node.Id) || !node.InsertEdge(fromNode.Id))
+            return false;
+
+        // Connect the new node to the old next nodes
+        foreach (var nextNode in nextNodes)
+        {
+            node.Next.Add(nextNode);
+            nextNode.Previous.Add(node);
+            if (!node.InsertEdge(nextNode.Id) || !nextNode.InsertEdge(node.Id))
+                return false;
+        }
+
+        return true;
     }
 
     public static bool InsertBefore<TDag>(this TDag startNode, TDag node, Guid toId)
         where TDag : class, IDag<TDag>
     {
-    }
+        var toNode = startNode.Flatten().FirstOrDefault(n => n.Id == toId);
+        if (toNode == null)
+            return false;
 
-    public static bool Insert<TDag>(this TDag startNode, TDag node, Guid? fromId, Guid? toId)
-        where TDag : class, IDag<TDag>
-    {
+        // Check if the node would create a cycle
+        if (startNode.IsBefore(node.Id))
+            return false;
+
+        // Get all nodes that currently point to toNode
+        var previousNodes = toNode.Previous.ToList();
+
+        // Clear current edges to toNode
+        foreach (var prevNode in previousNodes)
+        {
+            prevNode.Next.Remove(toNode);
+            toNode.Previous.Remove(prevNode);
+            prevNode.RemoveEdge(toNode.Id);
+            toNode.RemoveEdge(prevNode.Id);
+        }
+
+        // Add new node before toNode
+        toNode.Previous.Add(node);
+        node.Next.Add(toNode);
+        toNode.InsertEdge(node.Id);
+        node.InsertEdge(toNode.Id);
+
+        // Connect the old previous nodes to the new node
+        foreach (var prevNode in previousNodes)
+        {
+            prevNode.Next.Add(node);
+            node.Previous.Add(prevNode);
+            prevNode.InsertEdge(node.Id);
+            node.InsertEdge(prevNode.Id);
+        }
+
+        return true;
     }
 
     public static bool Replace<TDag>(this TDag startNode, TDag node, Guid targetId)
         where TDag : class, IDag<TDag>
     {
+        var targetNode = startNode.Flatten().FirstOrDefault(n => n.Id == targetId);
+        if (targetNode == null)
+            return false;
+
+        // Check if the node would create a cycle
+        if (startNode.IsAfter(node.Id) || startNode.IsBefore(node.Id))
+            return false;
+
+        // Transfer all previous nodes
+        foreach (var prevNode in targetNode.Previous.ToList())
+        {
+            prevNode.Next.Remove(targetNode);
+            prevNode.Next.Add(node);
+            node.Previous.Add(prevNode);
+            prevNode.RemoveEdge(targetNode.Id);
+            prevNode.InsertEdge(node.Id);
+        }
+
+        // Transfer all next nodes
+        foreach (var nextNode in targetNode.Next.ToList())
+        {
+            nextNode.Previous.Remove(targetNode);
+            nextNode.Previous.Add(node);
+            node.Next.Add(nextNode);
+            nextNode.RemoveEdge(targetNode.Id);
+            nextNode.InsertEdge(node.Id);
+        }
+
+        // Clear target node's references
+        targetNode.Next.Clear();
+        targetNode.Previous.Clear();
+
+        return true;
     }
 
     public static bool Remove<TDag>(this TDag startNode, Guid id)
         where TDag : class, IDag<TDag>
     {
+        var nodeToRemove = startNode.Flatten().FirstOrDefault(n => n.Id == id);
+        return nodeToRemove != null && startNode.Remove(nodeToRemove);
     }
 
     public static bool Remove<TDag>(this TDag startNode, TDag node)
         where TDag : class, IDag<TDag>
     {
+        // Cannot remove the start node if it would break the graph
+        if (node.IsStartNode() && node.Next.Count != 1)
+            return false;
+
+        // Get previous and next nodes
+        var previousNodes = node.Previous.ToList();
+        var nextNodes = node.Next.ToList();
+
+        // Connect all previous nodes to all next nodes
+        foreach (var prevNode in previousNodes)
+        {
+            foreach (var nextNode in nextNodes)
+            {
+                if (!prevNode.Next.Contains(nextNode))
+                {
+                    prevNode.Next.Add(nextNode);
+                    nextNode.Previous.Add(prevNode);
+                    prevNode.InsertEdge(nextNode.Id);
+                    nextNode.InsertEdge(prevNode.Id);
+                }
+            }
+
+            prevNode.Next.Remove(node);
+            prevNode.RemoveEdge(node.Id);
+        }
+
+        // Disconnect all next nodes from the removed node
+        foreach (var nextNode in nextNodes)
+        {
+            nextNode.Previous.Remove(node);
+            nextNode.RemoveEdge(node.Id);
+        }
+
+        // Clear the node's references
+        node.Next.Clear();
+        node.Previous.Clear();
+
+        return true;
     }
 
     public static bool IsAfter<TDag>(this TDag node, Guid id)
@@ -158,7 +298,7 @@ public static class DagExtensions
         if (startNodes.Count != 1)
             return null;
 
-        // Check whether there is a cycle for validation purposes. This is slower but the graphs in our application
+        // Check whether there is a cycle for validation purposes. This is slower, but the graphs in our application
         // should not be large enough for this to be a serious bottleneck. But if it is one day, then this might be
         // a way for optimizing, given that no cyclic dependencies are stored.
         var startNode = startNodes[0].Value;

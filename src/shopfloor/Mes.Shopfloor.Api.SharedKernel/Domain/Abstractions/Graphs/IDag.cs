@@ -33,23 +33,23 @@ public interface IDag<TDag>
     /// <remarks>
     ///     <para>
     ///         Only returns edges of <b>the calling node</b>. This does <b>not</b> mean that the root node contains all
-    ///         the graph's edges and this method returns all nodes.
+    ///         the graph's edges, and this method returns all nodes.
     ///     </para>
     /// </remarks>
     /// <returns>The edges of the node.</returns>
     internal List<IDagEdge> GetEdges();
 
     /// <summary>
-    /// Called when a node is inserted and edges are to be synchronized.
+    /// Called when an edge to an adjacent node is to be synchronized.
     /// </summary>
-    /// <param name="id">ID of this node.</param>
-    /// <param name="toId">ID of the 'to' node.</param>
-    internal void InsertEdge(Guid id, Guid toId);
+    /// <param name="otherId">ID of the 'to' node.</param>
+    /// <returns><see langword="true"/> if the edge was inserted, <see langword="false"/> otherwise.</returns>
+    internal bool InsertEdge(Guid otherId);
 
     /// <summary>
-    /// Called when a node is removed and edges are to be synchronized.
+    /// Called when an edge to an adjacent node is to be removed and edges are to be synchronized.
     /// </summary>
-    /// <param name="fromId">ID of the 'from' node.</param>
-    /// <param name="toId">ID of the 'to' node.</param>
-    internal void RemoveEdge(Guid fromId, Guid toId);
+    /// <param name="otherId">ID of the 'to' node.</param>
+    /// <returns><see langword="true"/> if the edge was removed, <see langword="false"/> otherwise.</returns>
+    internal bool RemoveEdge(Guid otherId);
 }

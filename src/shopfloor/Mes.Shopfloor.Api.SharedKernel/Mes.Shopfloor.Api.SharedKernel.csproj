@@ -14,11 +14,15 @@
     <PackageReference Include="DandyMediator.Validation" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="Scalar.AspNetCore" />
-    <ProjectReference Include="..\Mes.Shopfloor.Shared.SharedKernel\Mes.Shopfloor.Shared.SharedKernel.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Domain\Events\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mes.Shopfloor.Shared.SharedKernel\Mes.Shopfloor.Shared.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

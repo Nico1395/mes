@@ -26,15 +26,19 @@ internal sealed class ScheduledOrder : IScheduledDag<ScheduledOrder>
         return Edges.CastToList<IDagEdge>();
     }
 
-    public void InsertEdge(Guid id, Guid toId)
+    public bool InsertEdge(Guid otherId)
     {
-        // TODO -> Brauche ich die 'id' überhaupt? Falls nein -> InsertNext() damit die API klarer ist. Allerdings: Was ist wenn das Ding in anderen Verweisen liegt?
-        throw new NotImplementedException();
+        var edge = new ScheduledOrderEdge { FromId = Id, ToId = otherId };
+        if (Edges.Contains(edge))
+            return false;
+
+        Edges.Add(edge);
+        return true;
     }
 
-    public void RemoveEdge(Guid fromId, Guid toId)
+    public bool RemoveEdge(Guid otherId)
     {
-        // TODO -> Brauche ich 'fromId' überhaupt oder ist das wie oben einfach 'Id'? Falls nein -> RemoveNext() damit die API klarer ist. Allerings: Was ist wenn das Ding in anderen Verweisen liegt?
-        throw new NotImplementedException();
+        var edge = new ScheduledOrderEdge { FromId = Id, ToId = otherId };
+        return Edges.Remove(edge);
     }
 }
