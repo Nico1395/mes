@@ -76,6 +76,9 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
 
         node1.Next.Add(node2);
         node2.Previous.Add(node1);
+        // Initialize edges (must be synchronized with Next/Previous)
+        node1.InsertEdge(node2.Id);
+        node2.InsertEdge(node1.Id);
 
         // Act
         var result = node1.InsertAfter(newNode, node1.Id);
@@ -179,6 +182,9 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
 
         node1.Next.Add(node2);
         node2.Previous.Add(node1);
+        // Initialize edges (must be synchronized with Next/Previous)
+        node1.InsertEdge(node2.Id);
+        node2.InsertEdge(node1.Id);
 
         // Act
         var result = node1.InsertBefore(newNode, node2.Id);
@@ -300,6 +306,12 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
         nodeB.Previous.Add(nodeA);
         nodeB.Next.Add(nodeC);
         nodeC.Previous.Add(nodeB);
+        
+        // Initialize edges
+        nodeA.InsertEdge(nodeB.Id);
+        nodeB.InsertEdge(nodeA.Id);
+        nodeB.InsertEdge(nodeC.Id);
+        nodeC.InsertEdge(nodeB.Id);
 
         // Act
         var result = nodeA.Replace(newNode, nodeB.Id);
@@ -392,6 +404,12 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
         nodeB.Previous.Add(nodeA);
         nodeB.Next.Add(nodeC);
         nodeC.Previous.Add(nodeB);
+        
+        // Initialize edges
+        nodeA.InsertEdge(nodeB.Id);
+        nodeB.InsertEdge(nodeA.Id);
+        nodeB.InsertEdge(nodeC.Id);
+        nodeC.InsertEdge(nodeB.Id);
 
         // Act
         var result = nodeA.Remove(nodeB);
