@@ -20,9 +20,21 @@ internal sealed class ScheduledOrder : IScheduledDag<ScheduledOrder>
     public DateTime ScheduledAt { get; init; } = DateTime.UtcNow;
     public required DateTime StartingAt { get; init; }
     public required DateTime EndingAt { get; init; }
-    
+
     public List<IDagEdge> GetEdges()
     {
         return Edges.CastToList<IDagEdge>();
+    }
+
+    public void InsertEdge(Guid id, Guid toId)
+    {
+        // TODO -> Brauche ich die 'id' überhaupt? Falls nein -> InsertNext() damit die API klarer ist. Allerdings: Was ist wenn das Ding in anderen Verweisen liegt?
+        throw new NotImplementedException();
+    }
+
+    public void RemoveEdge(Guid fromId, Guid toId)
+    {
+        // TODO -> Brauche ich 'fromId' überhaupt oder ist das wie oben einfach 'Id'? Falls nein -> RemoveNext() damit die API klarer ist. Allerings: Was ist wenn das Ding in anderen Verweisen liegt?
+        throw new NotImplementedException();
     }
 }

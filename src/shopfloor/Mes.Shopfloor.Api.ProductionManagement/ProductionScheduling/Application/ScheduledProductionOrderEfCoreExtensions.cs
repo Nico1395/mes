@@ -11,6 +11,10 @@ internal static class ScheduledProductionOrderEfCoreExtensions
             .Set<ScheduledOrder>()
             .Where(s => s.OrderId == orderId)
             .Include(o => o.Edges)
+            .Include(o => o.Material)
+            .Include(o => o.Parameters)
+            .Include(o => o.Parts)
+            .Include(o => o.Equipment)
             .ToDictionaryAsync(o => o.Id, cancellationToken);
 
         return scheduledOrders.ToGraph();

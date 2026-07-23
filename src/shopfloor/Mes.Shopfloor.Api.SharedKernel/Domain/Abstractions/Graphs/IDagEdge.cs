@@ -3,7 +3,7 @@
 /// <summary>
 /// Abstraction for the edge of a directed acyclic graph.
 /// </summary>
-public interface IDagEdge
+public interface IDagEdge : IEquatable<IDagEdge>
 {
     /// <summary>
     /// ID of the current node.
