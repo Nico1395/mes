@@ -25,7 +25,7 @@ public class DagMock : IDag<DagMock>
         return true;
     }
 
-    public bool RemoveEdge(Guid otherId)
+    public virtual bool RemoveEdge(Guid otherId)
     {
         var edge = new DagEdgeMock { FromId = Id, ToId = otherId };
         return Edges.Remove(edge);

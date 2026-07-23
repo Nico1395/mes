@@ -44,7 +44,7 @@ public static class DagExtensions
     public static bool InsertAfter<TDag>(this TDag startNode, TDag node, Guid fromId)
         where TDag : class, IDag<TDag>
     {
-        var fromNode = startNode.Flatten().SingleOrDefault(n => n.Id == fromId);
+        var fromNode = startNode.Flatten().FirstOrDefault(n => n.Id == fromId);
         if (fromNode == null)
             return false;
 
@@ -60,8 +60,8 @@ public static class DagExtensions
         {
             fromNode.Next.Remove(nextNode);
             nextNode.Previous.Remove(fromNode);
-            fromNode.RemoveEdge(nextNode.Id);
-            nextNode.RemoveEdge(fromNode.Id);
+            if (!fromNode.RemoveEdge(nextNode.Id) || !nextNode.RemoveEdge(fromNode.Id))
+                return false;
         }
 
         // Add new node after fromNode
@@ -101,23 +101,23 @@ public static class DagExtensions
         {
             prevNode.Next.Remove(toNode);
             toNode.Previous.Remove(prevNode);
-            prevNode.RemoveEdge(toNode.Id);
-            toNode.RemoveEdge(prevNode.Id);
+            if (!prevNode.RemoveEdge(toNode.Id) || !toNode.RemoveEdge(prevNode.Id))
+                return false;
         }
 
         // Add new node before toNode
         toNode.Previous.Add(node);
         node.Next.Add(toNode);
-        toNode.InsertEdge(node.Id);
-        node.InsertEdge(toNode.Id);
+        if (!toNode.InsertEdge(node.Id) || !node.InsertEdge(toNode.Id))
+            return false;
 
         // Connect the old previous nodes to the new node
         foreach (var prevNode in previousNodes)
         {
             prevNode.Next.Add(node);
             node.Previous.Add(prevNode);
-            prevNode.InsertEdge(node.Id);
-            node.InsertEdge(prevNode.Id);
+            if (!prevNode.InsertEdge(node.Id) || !node.InsertEdge(prevNode.Id))
+                return false;
         }
 
         return true;
@@ -140,8 +140,10 @@ public static class DagExtensions
             prevNode.Next.Remove(targetNode);
             prevNode.Next.Add(node);
             node.Previous.Add(prevNode);
-            prevNode.RemoveEdge(targetNode.Id);
-            prevNode.InsertEdge(node.Id);
+            if (!prevNode.RemoveEdge(targetNode.Id) || !targetNode.RemoveEdge(prevNode.Id))
+                return false;
+            if (!prevNode.InsertEdge(node.Id) || !node.InsertEdge(prevNode.Id))
+                return false;
         }
 
         // Transfer all next nodes
@@ -150,8 +152,10 @@ public static class DagExtensions
             nextNode.Previous.Remove(targetNode);
             nextNode.Previous.Add(node);
             node.Next.Add(nextNode);
-            nextNode.RemoveEdge(targetNode.Id);
-            nextNode.InsertEdge(node.Id);
+            if (!nextNode.RemoveEdge(targetNode.Id) || !targetNode.RemoveEdge(nextNode.Id))
+                return false;
+            if (!nextNode.InsertEdge(node.Id) || !node.InsertEdge(nextNode.Id))
+                return false;
         }
 
         // Clear target node's references
@@ -188,20 +192,22 @@ public static class DagExtensions
                 {
                     prevNode.Next.Add(nextNode);
                     nextNode.Previous.Add(prevNode);
-                    prevNode.InsertEdge(nextNode.Id);
-                    nextNode.InsertEdge(prevNode.Id);
+                    if (!prevNode.InsertEdge(nextNode.Id) || !nextNode.InsertEdge(prevNode.Id))
+                        return false;
                 }
             }
 
             prevNode.Next.Remove(node);
-            prevNode.RemoveEdge(node.Id);
+            if (!prevNode.RemoveEdge(node.Id) || !node.RemoveEdge(prevNode.Id))
+                return false;
         }
 
         // Disconnect all next nodes from the removed node
         foreach (var nextNode in nextNodes)
         {
             nextNode.Previous.Remove(node);
-            nextNode.RemoveEdge(node.Id);
+            if (!nextNode.RemoveEdge(node.Id) || !node.RemoveEdge(nextNode.Id))
+                return false;
         }
 
         // Clear the node's references
