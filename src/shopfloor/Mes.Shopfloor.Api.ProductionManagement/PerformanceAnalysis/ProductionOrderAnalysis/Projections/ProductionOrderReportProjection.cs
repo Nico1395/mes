@@ -1,7 +1,7 @@
 ﻿using Marten;
 using Marten.Events.Aggregation;
+using Mes.Shared.Contracts.ProductionData.Orders;
 using Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Application;
-using Mes.Shopfloor.Shared.SharedKernel.Events;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Projections;
 

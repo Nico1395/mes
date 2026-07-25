@@ -1,17 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Mapster.DependencyInjection" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" />
-    <PackageReference Include="Microsoft.Extensions.ObjectPool" />
-    <PackageReference Include="RabbitMQ.Client" />
+    <ProjectReference Include="..\..\libraries\Mes.Library.ObjectMapping\Mes.Library.ObjectMapping.csproj" />
+    <ProjectReference Include="..\..\libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\shared\Mes.Shared.Contracts\Mes.Shared.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

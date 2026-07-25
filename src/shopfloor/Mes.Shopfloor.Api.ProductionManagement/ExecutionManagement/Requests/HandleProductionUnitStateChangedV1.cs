@@ -2,10 +2,10 @@
 using DandyMediator.Commands;
 using DandyMediator.Responses;
 using Marten;
+using Mes.Library.RabbitMQ.Consumer;
+using Mes.Shared.Contracts.ProductionData.ProductionUnits;
 using Mes.Shopfloor.Api.ProductionManagement.DataCollection.Application;
 using Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionUnitAnalysis.Application;
-using Mes.Shopfloor.Shared.SharedKernel.Events;
-using Mes.Shopfloor.Shared.SharedKernel.Messaging.Consumer;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ExecutionManagement.Requests;

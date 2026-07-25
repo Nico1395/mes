@@ -1,4 +1,4 @@
-﻿using Mes.Shopfloor.Shared.SharedKernel.Messaging;
+﻿using Mes.Library.RabbitMQ;
 
 namespace Mes.Shopfloor.Api.SharedKernel.Domain.Exceptions;
 

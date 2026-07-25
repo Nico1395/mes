@@ -1,6 +1,8 @@
-﻿using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
+﻿using Mes.Shared.Contracts.ProductionData.MaterialsAndParts;
+using Mes.Shared.Contracts.ProductionData.Orders;
+using Mes.Shared.Contracts.ProductionData.Quantities;
+using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
 using Mes.Shopfloor.Api.SharedKernel.Domain.Exceptions;
-using Mes.Shopfloor.Shared.SharedKernel.Events;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis;
 

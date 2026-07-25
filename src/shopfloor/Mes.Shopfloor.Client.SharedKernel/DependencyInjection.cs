@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
+using Mes.Library.RabbitMQ.Connections;
+using Mes.Library.RabbitMQ.Producer;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalInitialization;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
 using Mes.Shopfloor.Client.SharedKernel.Configuration;
 using Mes.Shopfloor.Client.SharedKernel.Http;
-using Mes.Shopfloor.Shared.SharedKernel.Messaging.Connections;
-using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,11 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="DandyStrategies" />
     <PackageReference Include="Marten.AspNetCore" />
@@ -22,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\libraries\Mes.Library.Marten\Mes.Library.Marten.csproj" />
     <ProjectReference Include="..\Mes.Shopfloor.Shared.SharedKernel\Mes.Shopfloor.Shared.SharedKernel.csproj" />
   </ItemGroup>
 

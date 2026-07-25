@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Commands\" />
+      <Folder Include="MainData\" />
+    </ItemGroup>
+
+</Project>

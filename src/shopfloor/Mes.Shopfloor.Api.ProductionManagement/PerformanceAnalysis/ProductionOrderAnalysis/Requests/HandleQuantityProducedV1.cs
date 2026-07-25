@@ -2,9 +2,10 @@
 using DandyMediator.Commands;
 using DandyMediator.Responses;
 using Marten;
-using Mes.Shopfloor.Shared.SharedKernel.Events;
-using Mes.Shopfloor.Shared.SharedKernel.Messaging.Consumer;
-using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
+using Mes.Library.RabbitMQ.Consumer;
+using Mes.Library.RabbitMQ.Producer;
+using Mes.Shared.Contracts.ProductionData.Orders;
+using Mes.Shared.Contracts.ProductionData.Quantities;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Requests;
 

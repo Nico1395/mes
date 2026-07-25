@@ -1,0 +1,71 @@
+services:
+  rabbitmq-a:
+    image: rabbitmq:management
+    container_name: rabbitmq-a
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=dev
+      - RABBITMQ_DEFAULT_PASS=dev
+      - RABBITMQ_ERLANG_COOKIE="super_secret_cookie"
+      - RABBITMQ_NODENAME=mes-hub@rabbitmq-a
+    volumes:
+      - mes-hub-rmq-a-lib:/var/lib/rabbitmq/
+      - mes-hub-rmq-a-log:/var/log/rabbitmq/
+    networks:
+      - mes-hub
+
+  rabbitmq-b:
+    image: rabbitmq:management
+    container_name: rabbitmq-b
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=dev
+      - RABBITMQ_DEFAULT_PASS=dev
+      - RABBITMQ_ERLANG_COOKIE="super_secret_cookie"
+      - RABBITMQ_NODENAME=mes-hub@rabbitmq-b
+    volumes:
+      - mes-hub-rmq-b-lib:/var/lib/rabbitmq/
+      - mes-hub-rmq-b-log:/var/log/rabbitmq/
+    networks:
+      - mes-hub
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev
+    volumes:
+      - mes-hub-pg:/var/lib/postgresql
+    networks:
+      - mes-hub
+
+  redis:
+    image: redis
+    container_name: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - mes-hub-redis:/data
+    networks:
+      - mes-hub:
+
+volumes:
+  mes-hub-rmq-a-lib:
+  mes-hub-rmq-a-log:
+  mes-hub-rmq-b-lib:
+  mes-hub-rmq-b-log:
+  mes-hub-rdb-a:
+  mes-hub-rdb-b:
+  mes-hub-pg:
+  mes-hub-redis:
+
+networks:
+  mes-hub:
+    driver: bridge
