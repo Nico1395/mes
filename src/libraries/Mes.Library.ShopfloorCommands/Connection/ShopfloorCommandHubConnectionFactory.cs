@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Library.ShopfloorCommands.Receiver;
+namespace Mes.Library.ShopfloorCommands.Connection;
 
-internal sealed class ShopfloorCommandHubConnectionFactory(ShopfloorCommandReceiverConfiguration configuration) : IShopfloorCommandHubConnectionFactory
+internal sealed class ShopfloorCommandHubConnectionFactory(ShopfloorCommandHubConnectionReceiverConfiguration configuration) : IShopfloorCommandHubConnectionFactory
 {
     public async Task<HubConnection> CreateV1Async(CancellationToken cancellationToken)
     {
@@ -20,7 +20,7 @@ internal sealed class ShopfloorCommandHubConnectionFactory(ShopfloorCommandRecei
             .Build();
 
         await connection.StartAsync(cancellationToken);
-        await connection.InvokeAsync(ShopfloorCommandConstants.V1.Sender.RegisterShopfloor, configuration.ShopfloorKey, cancellationToken: cancellationToken);
+        await connection.InvokeAsync(ShopfloorCommandConstants.V1.Hub.RegisterShopfloor, configuration.ShopfloorKey, cancellationToken: cancellationToken);
 
         return connection;
     }
