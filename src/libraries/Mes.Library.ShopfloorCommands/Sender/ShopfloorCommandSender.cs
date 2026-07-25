@@ -1,46 +1,33 @@
-using Microsoft.AspNetCore.SignalR;
+﻿using Mes.Library.ShopfloorCommands.Connection;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
 
 namespace Mes.Library.ShopfloorCommands.Sender;
 
 internal sealed class ShopfloorCommandSender(
     ILogger<ShopfloorCommandSender> logger,
-    IHubContext<ShopfloorCommandHubV1> hubV1Context) : IShopfloorCommandSender
+    IShopfloorCommandHubConnectionProvider connectionProvider) : IShopfloorCommandSender
 {
-    public async Task<ShopfloorCommandResponse> SendAsync(IShopfloorCommand command, CancellationToken cancellationToken)
+    private HubConnection? _connection;
+
+    public async Task<ShopfloorCommandResponse> SendAsync(IShopfloorToShopfloorCommand command, CancellationToken cancellationToken)
     {
         try
         {
-            await hubV1Context.Clients.All.SendAsync(
-                nameof(ShopfloorCommandHubV1.SendCommandV1),
-                command.ShopfloorKey,
-                command,
-                cancellationToken);
+            var connection = await GetConnectionAsync(cancellationToken);
+            await connection.InvokeAsync(ShopfloorCommandConstants.V1.Hub.Forward, command, cancellationToken);
 
             return ShopfloorCommandResponse.Success;
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            logger.LogError(ex, "Sending a shopfloor command threw an exception.");
+            logger.LogError(e, "An exception was thrown when sending command {commandTypeName}", command.GetType().Name);
             return ShopfloorCommandResponse.Failure;
         }
     }
 
-    public async Task<ShopfloorCommandResponse> BroadcastAsync(IShopfloorCommand command, CancellationToken cancellationToken)
+    private async Task<HubConnection> GetConnectionAsync(CancellationToken cancellationToken)
     {
-        try
-        {
-            await hubV1Context.Clients.All.SendAsync(
-                nameof(ShopfloorCommandHubV1.BroadcastCommandV1),
-                command,
-                cancellationToken);
-
-            return ShopfloorCommandResponse.Success;
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Broadcasting a shopfloor command threw an exception.");
-            return ShopfloorCommandResponse.Failure;
-        }
+        return _connection ??= await connectionProvider.GetAsync("hub", cancellationToken);
     }
 }
