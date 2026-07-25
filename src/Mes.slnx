@@ -1,0 +1,25 @@
+<Solution>
+  <Folder Name="/Hub/" />
+  <Folder Name="/Libraries/">
+    <Project Path="libraries/Mes.Libraries.RabbitMQ/Mes.Libraries.RabbitMQ.csproj" />
+  </Folder>
+  <Folder Name="/Shared/" />
+  <Folder Name="/Shopfloor/">
+    <Project Path="shopfloor/Mes.Shopfloor.Shared.SharedKernel/Mes.Shopfloor.Shared.SharedKernel.csproj" />
+  </Folder>
+  <Folder Name="/Shopfloor/Apis/">
+    <Project Path="shopfloor/Mes.Shopfloor.Api.ProductionManagement/Mes.Shopfloor.Api.ProductionManagement.csproj" />
+    <Project Path="shopfloor/Mes.Shopfloor.Api.SharedKernel.Tests/Mes.Shopfloor.Api.SharedKernel.Tests.csproj" />
+    <Project Path="shopfloor/Mes.Shopfloor.Api.SharedKernel/Mes.Shopfloor.Api.SharedKernel.csproj" />
+    <Project Path="shopfloor/Mes.Shopfloor.Api.SystemManagement/Mes.Shopfloor.Api.SystemManagement.csproj" />
+    <Project Path="shopfloor/Mes.Shopfloor.Api/Mes.Shopfloor.Api.csproj" />
+  </Folder>
+  <Folder Name="/Shopfloor/Clients/">
+    <Project Path="shopfloor/Mes.Shopfloor.Client.Console/Mes.Shopfloor.Client.Console.csproj" />
+    <Project Path="shopfloor/Mes.Shopfloor.Client.ProductionManagement/Mes.Shopfloor.Client.ProductionManagement.csproj" />
+    <Project Path="shopfloor/Mes.Shopfloor.Client.SharedKernel/Mes.Shopfloor.Client.SharedKernel.csproj" />
+  </Folder>
+  <Folder Name="/_/">
+    <File Path="Directory.Packages.props" />
+  </Folder>
+</Solution>
