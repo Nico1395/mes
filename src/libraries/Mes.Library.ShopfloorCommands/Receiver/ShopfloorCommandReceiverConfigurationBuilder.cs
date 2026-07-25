@@ -12,18 +12,6 @@ public sealed class ShopfloorCommandReceiverConfigurationBuilder
         return this;
     }
 
-    public ShopfloorCommandReceiverConfigurationBuilder WithShopfloorKey(string shopfloorKey)
-    {
-        _configuration.ShopfloorKey = shopfloorKey;
-        return this;
-    }
-
-    public ShopfloorCommandReceiverConfigurationBuilder WithHubBaseUrl(string baseUrl)
-    {
-        _configuration.HubBaseUrl = baseUrl;
-        return this;
-    }
-
     internal ShopfloorCommandReceiverConfiguration Build()
     {
         return _configuration;

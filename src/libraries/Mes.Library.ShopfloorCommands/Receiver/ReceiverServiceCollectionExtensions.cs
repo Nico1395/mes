@@ -15,9 +15,8 @@ public static class ReceiverServiceCollectionExtensions
         var builder = new ShopfloorCommandReceiverConfigurationBuilder();
         configuration(builder);
         var cfg = builder.Build();
-        
+
         services.AddSingleton(cfg);
-        services.AddSingleton<IShopfloorCommandHubConnectionFactory, ShopfloorCommandHubConnectionFactory>();
         services.AddSingleton<IShopfloorCommandReceiver, ShopfloorCommandReceiver>();
         services.AddSingleton<IShopfloorCommandHandler, ShopfloorCommandHandler>();
 

@@ -1,9 +1,11 @@
+using Mes.Library.RabbitMQ.Producer;
+
 namespace Mes.Library.ShopfloorCommands.Receiver;
 
-internal sealed class ShopfloorCommandHandler : IShopfloorCommandHandler
+internal sealed class ShopfloorCommandHandler(IMessagePublisher messagePublisher) : IShopfloorCommandHandler
 {
     public Task HandleAsync(IShopfloorCommand command, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return messagePublisher.PublishAsync(command, cancellationToken);
     }
 }

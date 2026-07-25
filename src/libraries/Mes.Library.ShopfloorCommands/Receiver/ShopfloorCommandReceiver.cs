@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Reflection;
+using Mes.Library.ShopfloorCommands.Connection;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -9,15 +10,10 @@ namespace Mes.Library.ShopfloorCommands.Receiver;
 internal sealed class ShopfloorCommandReceiver(
     IServiceProvider serviceProvider,
     ILogger<ShopfloorCommandReceiver> logger,
-    IShopfloorCommandHubConnectionFactory connectionFactory) : IShopfloorCommandReceiver, IAsyncDisposable
+    IShopfloorCommandHubConnectionProvider connectionProvider) : IShopfloorCommandReceiver
 {
     private readonly ConcurrentDictionary<Type, (Type HandlerType, MethodInfo HandleAsync)> _commandHandlerTypes = [];
     private HubConnection? _connection;
-
-    public async ValueTask DisposeAsync()
-    {
-        await StopReceivingAsync(CancellationToken.None);
-    }
 
     public async Task StartReceivingAsync(CancellationToken cancellationToken)
     {
@@ -50,17 +46,9 @@ internal sealed class ShopfloorCommandReceiver(
         });
     }
 
-    public async Task StopReceivingAsync(CancellationToken cancellationToken)
-    {
-        if (_connection != null)
-            await _connection.DisposeAsync();
-
-        _connection = null;
-    }
-
     private async Task<HubConnection> GetConnectionAsync(CancellationToken cancellationToken)
     {
-        return _connection ??= await connectionFactory.CreateV1Async(cancellationToken);
+        return _connection ??= await connectionProvider.GetAsync("hub", cancellationToken);
     }
 
     private (Type HandlerType, MethodInfo HandleAsync) GetHandlerMetadataForCommand(IShopfloorCommand command)
