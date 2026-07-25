@@ -1,4 +1,4 @@
-namespace Mes.Library.ShopfloorCommands.Connection;
+namespace Mes.Library.ShopfloorCommands;
 
 /// <summary>
 /// Contains constant strings for shopfloor command SignalR hub method names.
@@ -9,8 +9,7 @@ namespace Mes.Library.ShopfloorCommands.Connection;
 /// </summary>
 /// <remarks>
 /// This class is internal and used within the library to maintain consistency between
-/// hub method names and client invocations. Version 1 (V1) constants are used for the
-/// current SignalR hub implementation.
+/// hub method names and client invocations.
 /// </remarks>
 internal static class ShopfloorCommandConstants
 {

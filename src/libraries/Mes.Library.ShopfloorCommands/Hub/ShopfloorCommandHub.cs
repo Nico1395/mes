@@ -1,7 +1,6 @@
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using Mes.Library.RabbitMQ.Producer;
-using Mes.Library.ShopfloorCommands.Connection;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Mes.Library.ShopfloorCommands.Hub;
@@ -56,44 +55,6 @@ internal sealed class ShopfloorCommandHub(IMessagePublisher messagePublisher) : 
     }
 
     /// <summary>
-    /// Sends a command to a specific shopfloor.
-    /// <para>
-    /// This method routes the command to the shopfloor identified by
-    /// <see cref="IShopfloorCommand.ReceiverShopfloorKey"/>. If the target shopfloor
-    /// is not currently connected, an exception is thrown.
-    /// </para>
-    /// </summary>
-    /// <param name="command">The command to send. Must have a valid <see cref="IShopfloorCommand.ReceiverShopfloorKey"/>.</param>
-    /// <returns>A task that represents the asynchronous send operation.</returns>
-    /// <exception cref="Exception">
-    /// Thrown if the target shopfloor (identified by <see cref="IShopfloorCommand.ReceiverShopfloorKey"/>) 
-    /// is not currently connected.
-    /// </exception>
-    [HubMethodName(ShopfloorCommandConstants.V1.Hub.SendCommand)]
-    public async Task SendCommandV1(IShopfloorCommand command)
-    {
-        if (!TryGetConnectionId(command.ReceiverShopfloorKey, out var connectionId))
-            throw new Exception($"Shopfloor mit Key {command.ReceiverShopfloorKey} nicht verbunden.");
-
-        await Clients.Client(connectionId).SendAsync(ShopfloorCommandConstants.V1.Receiver.ReceiveCommand, command);
-    }
-
-    /// <summary>
-    /// Broadcasts a command to all connected shopfloors.
-    /// <para>
-    /// This method sends the specified command to all currently connected clients.
-    /// It can be used for commands that need to be received by all shopfloors simultaneously.
-    /// </para>
-    /// </summary>
-    /// <param name="command">The command to broadcast to all connected shopfloors.</param>
-    /// <returns>A task that represents the asynchronous broadcast operation.</returns>
-    [HubMethodName(ShopfloorCommandConstants.V1.Hub.BroadcastCommand)]
-    public async Task BroadcastCommandV1(IShopfloorCommand command)
-    {
-        await Clients.All.SendAsync(ShopfloorCommandConstants.V1.Receiver.ReceiveCommand, command);
-    }
-
-    /// <summary>
     /// Forwards a command to the RabbitMQ message bus for persistent delivery.
     /// <para>
     /// This method publishes <see cref="IShopfloorToShopfloorCommand"/> instances to the
@@ -119,7 +80,7 @@ internal sealed class ShopfloorCommandHub(IMessagePublisher messagePublisher) : 
     /// <param name="shopfloorKey">The shopfloor key to look up.</param>
     /// <param name="connectionId">When this method returns, contains the connection ID if found; otherwise, null.</param>
     /// <returns>True if the shopfloor key was found and has an active connection; otherwise, false.</returns>
-    private static bool TryGetConnectionId(string shopfloorKey, [NotNullWhen(true)] out string? connectionId)
+    public static bool TryGetConnectionId(string shopfloorKey, [NotNullWhen(true)] out string? connectionId)
     {
         return ShopfloorConnections.TryGetValue(shopfloorKey, out connectionId);
     }

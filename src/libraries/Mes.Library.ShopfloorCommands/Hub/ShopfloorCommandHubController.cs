@@ -25,7 +25,7 @@ namespace Mes.Library.ShopfloorCommands.Hub;
 /// <seealso cref="ShopfloorCommandHub"/>
 internal sealed class ShopfloorCommandHubController(
     ILogger<ShopfloorCommandHubController> logger,
-    IHubContext<ShopfloorCommandHub> hubV1Context) : IShopfloorCommandHubController
+    IHubContext<ShopfloorCommandHub> hubContext) : IShopfloorCommandHubController
 {
     /// <summary>
     /// Asynchronously sends a command to a specific shopfloor through the hub.
@@ -46,11 +46,10 @@ internal sealed class ShopfloorCommandHubController(
     {
         try
         {
-            await hubV1Context.Clients.All.SendAsync(
-                nameof(ShopfloorCommandHub.SendCommandV1),
-                command,
-                cancellationToken);
+            if (!ShopfloorCommandHub.TryGetConnectionId(command.ReceiverShopfloorKey, out var connectionId))
+                return ShopfloorCommandResponse.Failure;
 
+            await hubContext.Clients.Client(connectionId).SendAsync(ShopfloorCommandConstants.V1.Receiver.ReceiveCommand, command, cancellationToken);
             return ShopfloorCommandResponse.Success;
         }
         catch (Exception ex)
@@ -78,8 +77,8 @@ internal sealed class ShopfloorCommandHubController(
     {
         try
         {
-            await hubV1Context.Clients.All.SendAsync(
-                nameof(ShopfloorCommandHub.BroadcastCommandV1),
+            await hubContext.Clients.All.SendAsync(
+                ShopfloorCommandConstants.V1.Hub.BroadcastCommand,
                 command,
                 cancellationToken);
 
