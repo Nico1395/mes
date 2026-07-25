@@ -55,13 +55,13 @@ public static class DagExtensions
         // Get all nodes that fromNode currently points to
         var nextNodes = fromNode.Next.ToList();
 
-        // Clear current edges from fromNode
+        // Clear current edges from fromNode (ignore failures if edges don't exist)
         foreach (var nextNode in nextNodes)
         {
             fromNode.Next.Remove(nextNode);
             nextNode.Previous.Remove(fromNode);
-            if (!fromNode.RemoveEdge(nextNode.Id) || !nextNode.RemoveEdge(fromNode.Id))
-                return false;
+            fromNode.RemoveEdge(nextNode.Id);
+            nextNode.RemoveEdge(fromNode.Id);
         }
 
         // Add new node after fromNode

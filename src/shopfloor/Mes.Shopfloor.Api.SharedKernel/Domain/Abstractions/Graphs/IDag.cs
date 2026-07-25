@@ -37,19 +37,19 @@ public interface IDag<TDag>
     ///     </para>
     /// </remarks>
     /// <returns>The edges of the node.</returns>
-    internal List<IDagEdge> GetEdges();
+    List<IDagEdge> GetEdges();
 
     /// <summary>
     /// Called when an edge to an adjacent node is to be synchronized.
     /// </summary>
     /// <param name="otherId">ID of the 'to' node.</param>
     /// <returns><see langword="true"/> if the edge was inserted, <see langword="false"/> otherwise.</returns>
-    internal bool InsertEdge(Guid otherId);
+    bool InsertEdge(Guid otherId);
 
     /// <summary>
     /// Called when an edge to an adjacent node is to be removed and edges are to be synchronized.
     /// </summary>
     /// <param name="otherId">ID of the 'to' node.</param>
     /// <returns><see langword="true"/> if the edge was removed, <see langword="false"/> otherwise.</returns>
-    internal bool RemoveEdge(Guid otherId);
+    bool RemoveEdge(Guid otherId);
 }

@@ -76,11 +76,11 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
 
         node1.Next.Add(node2);
         node2.Previous.Add(node1);
-        // Initialize edges (must be synchronized with Next/Previous)
+        // Initialize edges correctly (bidirectional: node1→node2 and node2→node1)
         node1.InsertEdge(node2.Id);
         node2.InsertEdge(node1.Id);
 
-        // Act
+        // Act - InsertAfter needs 2 params: the graph and the node to insert after
         var result = node1.InsertAfter(newNode, node1.Id);
 
         // Assert
@@ -91,6 +91,9 @@ public class DagExtensionsTests(DagFixture _fixture) : IClassFixture<DagFixture>
         Assert.Contains(node1, newNode.Previous);
         Assert.Contains(newNode, node2.Previous);
         Assert.Contains(node2, newNode.Next);
+        // Verify edges are also created
+        Assert.Contains(node1.Id, newNode.Edges.Select(e => e.ToId));
+        Assert.Contains(node2.Id, newNode.Edges.Select(e => e.ToId));
     }
 
     [Fact]
