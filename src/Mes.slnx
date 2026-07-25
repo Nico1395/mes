@@ -3,6 +3,7 @@
   <Folder Name="/Libraries/">
     <Project Path="libraries/Mes.Libraries.ObjectMapping/Mes.Libraries.ObjectMapping.csproj" />
     <Project Path="libraries/Mes.Libraries.RabbitMQ/Mes.Libraries.RabbitMQ.csproj" />
+    <Project Path="libraries/Mes.Library.ShopfloorCommands/Mes.Library.ShopfloorCommands.csproj" />
     <Project Path="libraries\Mes.Libraries.Marten\Mes.Libraries.Marten.csproj" />
   </Folder>
   <Folder Name="/Shared/">
