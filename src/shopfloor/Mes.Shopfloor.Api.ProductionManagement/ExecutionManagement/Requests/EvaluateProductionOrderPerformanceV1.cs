@@ -1,9 +1,9 @@
 ﻿using DandyMediator.Commands;
 using Marten;
+using Mes.Libraries.RabbitMQ.Producer;
 using Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Application;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Application;
 using Mes.Shopfloor.Shared.SharedKernel.Events;
-using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ExecutionManagement.Requests;

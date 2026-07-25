@@ -1,6 +1,6 @@
-﻿using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
+﻿using Mes.Libraries.RabbitMQ.Producer;
+using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
 using Mes.Shopfloor.Shared.SharedKernel.Events;
-using Mes.Shopfloor.Shared.SharedKernel.Messaging.Producer;
 
 namespace Mes.Shopfloor.Client.ProductionManagement.DataCollection.Jobs;
 

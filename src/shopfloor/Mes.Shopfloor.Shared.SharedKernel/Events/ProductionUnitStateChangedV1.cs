@@ -1,4 +1,4 @@
-﻿using Mes.Shopfloor.Shared.SharedKernel.Messaging;
+﻿using Mes.Libraries.RabbitMQ;
 
 namespace Mes.Shopfloor.Shared.SharedKernel.Events;
 
