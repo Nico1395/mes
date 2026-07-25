@@ -1,9 +1,8 @@
+using Mes.Library.RabbitMQ;
+
 namespace Mes.Library.ShopfloorCommands;
 
-public interface IShopfloorCommand
+public interface IShopfloorCommand : IMessage
 {
-    Guid Id { get; }
-    string ShopfloorKey { get; }
-    string Key { get; }
-    DateTime SentAt { get; }
+    string ReceiverShopfloorKey { get; }
 }

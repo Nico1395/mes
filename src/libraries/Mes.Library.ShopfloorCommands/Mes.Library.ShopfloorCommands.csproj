@@ -9,4 +9,8 @@
         <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" />
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj"/>
+    </ItemGroup>
+
 </Project>
