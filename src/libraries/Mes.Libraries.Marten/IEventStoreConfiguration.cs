@@ -1,6 +1,6 @@
 ﻿using Marten;
 
-namespace Mes.Libraries.EventSourcing.Marten;
+namespace Mes.Libraries.Marten;
 
 public interface IEventStoreConfiguration
 {

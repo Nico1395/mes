@@ -4,7 +4,7 @@ using DandyMediator;
 using DandyMediator.Validation;
 using DandyStrategies;
 using Marten;
-using Mes.Libraries.EventSourcing.Marten;
+using Mes.Libraries.Marten;
 using Mes.Libraries.ObjectMapping;
 using Mes.Libraries.RabbitMQ.Connections;
 using Mes.Libraries.RabbitMQ.Consumer.Configuration;

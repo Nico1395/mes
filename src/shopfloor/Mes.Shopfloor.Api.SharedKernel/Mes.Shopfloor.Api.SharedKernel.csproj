@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\libraries\Mes.Libraries.EventSourcing\Mes.Libraries.EventSourcing.csproj" />
+    <ProjectReference Include="..\..\libraries\Mes.Libraries.Marten\Mes.Libraries.Marten.csproj" />
     <ProjectReference Include="..\Mes.Shopfloor.Shared.SharedKernel\Mes.Shopfloor.Shared.SharedKernel.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿using JasperFx.Events.Projections;
 using Marten;
-using Mes.Libraries.EventSourcing.Marten;
+using Mes.Libraries.Marten;
 using Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Projections;
 
 namespace Mes.Shopfloor.Api.ProductionManagement;
