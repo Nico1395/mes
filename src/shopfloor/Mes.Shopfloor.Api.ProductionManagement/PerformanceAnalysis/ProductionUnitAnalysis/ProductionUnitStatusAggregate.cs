@@ -1,4 +1,7 @@
-﻿using Mes.Shopfloor.Shared.SharedKernel.Events;
+﻿using Mes.Shared.Events.MaterialsAndParts;
+using Mes.Shared.Events.Orders;
+using Mes.Shared.Events.ProductionUnits;
+using Mes.Shared.Events.Quantities;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionUnitAnalysis;
 

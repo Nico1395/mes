@@ -3,8 +3,8 @@ using DandyMediator.Commands;
 using DandyMediator.Responses;
 using Marten;
 using Mes.Libraries.RabbitMQ.Consumer;
+using Mes.Shared.Events.Orders;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Application;
-using Mes.Shopfloor.Shared.SharedKernel.Events;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Requests;

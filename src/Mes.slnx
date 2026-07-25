@@ -5,7 +5,9 @@
     <Project Path="libraries/Mes.Libraries.RabbitMQ/Mes.Libraries.RabbitMQ.csproj" />
     <Project Path="libraries\Mes.Libraries.Marten\Mes.Libraries.Marten.csproj" />
   </Folder>
-  <Folder Name="/Shared/" />
+  <Folder Name="/Shared/">
+    <Project Path="shared/Mes.Shared.Events/Mes.Shared.Events.csproj" />
+  </Folder>
   <Folder Name="/Shopfloor/">
     <Project Path="shopfloor/Mes.Shopfloor.Shared.SharedKernel/Mes.Shopfloor.Shared.SharedKernel.csproj" />
   </Folder>

@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\libraries\Mes.Libraries.ObjectMapping\Mes.Libraries.ObjectMapping.csproj" />
     <ProjectReference Include="..\..\libraries\Mes.Libraries.RabbitMQ\Mes.Libraries.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\shared\Mes.Shared.Events\Mes.Shared.Events.csproj" />
   </ItemGroup>
 
 </Project>

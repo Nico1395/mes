@@ -1,6 +1,6 @@
 ﻿using Mes.Libraries.RabbitMQ;
 
-namespace Mes.Shopfloor.Shared.SharedKernel.Events;
+namespace Mes.Shared.Events.Orders;
 
 public sealed class OrderBookedV1 : Message
 {
