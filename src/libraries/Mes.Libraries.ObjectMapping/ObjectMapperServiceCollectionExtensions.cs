@@ -1,7 +1,7 @@
 ﻿using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mes.Shopfloor.Shared.SharedKernel.ObjectMapping;
+namespace Mes.Libraries.ObjectMapping;
 
 public static class ObjectMapperServiceCollectionExtensions
 {

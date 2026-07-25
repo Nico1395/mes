@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Shared.SharedKernel.ObjectMapping;
+﻿namespace Mes.Libraries.ObjectMapping;
 
 public interface IObjectMapper
 {

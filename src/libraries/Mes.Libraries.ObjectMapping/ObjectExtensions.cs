@@ -1,6 +1,6 @@
 ﻿using Mapster;
 
-namespace Mes.Shopfloor.Shared.SharedKernel.ObjectMapping;
+namespace Mes.Libraries.ObjectMapping;
 
 public static class ObjectExtensions
 {

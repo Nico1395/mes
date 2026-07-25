@@ -1,6 +1,6 @@
 ﻿using MapsterMapper;
 
-namespace Mes.Shopfloor.Shared.SharedKernel.ObjectMapping;
+namespace Mes.Libraries.ObjectMapping;
 
 internal sealed class ObjectMapper(IMapper _mapper) : IObjectMapper
 {

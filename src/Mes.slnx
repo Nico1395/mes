@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Hub/" />
   <Folder Name="/Libraries/">
+    <Project Path="libraries/Mes.Libraries.ObjectMapping/Mes.Libraries.ObjectMapping.csproj" />
     <Project Path="libraries/Mes.Libraries.RabbitMQ/Mes.Libraries.RabbitMQ.csproj" />
   </Folder>
   <Folder Name="/Shared/" />
