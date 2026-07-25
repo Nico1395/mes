@@ -1,6 +1,6 @@
 ﻿using Mes.Libraries.RabbitMQ;
 
-namespace Mes.Shared.Events.Orders;
+namespace Mes.Shared.Contracts.ProductionData.Orders;
 
 public sealed class ProductionProcessStepCompletedV1 : Message
 {

@@ -1,5 +1,5 @@
 ﻿using Mes.Libraries.RabbitMQ.Consumer;
-using Mes.Shared.Events.Orders;
+using Mes.Shared.Contracts.ProductionData.Orders;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ExecutionManagement.Requests;
 

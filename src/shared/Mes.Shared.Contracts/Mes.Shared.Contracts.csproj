@@ -10,4 +10,9 @@
       <ProjectReference Include="..\..\libraries\Mes.Libraries.RabbitMQ\Mes.Libraries.RabbitMQ.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Commands\" />
+      <Folder Include="MainData\" />
+    </ItemGroup>
+
 </Project>

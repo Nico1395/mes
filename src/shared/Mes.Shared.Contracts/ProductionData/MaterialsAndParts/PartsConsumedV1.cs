@@ -1,6 +1,6 @@
 ﻿using Mes.Libraries.RabbitMQ;
 
-namespace Mes.Shared.Events.MaterialsAndParts;
+namespace Mes.Shared.Contracts.ProductionData.MaterialsAndParts;
 
 public sealed class PartsConsumedV1 : Message
 {

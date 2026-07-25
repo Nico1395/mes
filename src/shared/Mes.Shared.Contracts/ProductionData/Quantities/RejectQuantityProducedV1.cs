@@ -1,6 +1,6 @@
 ﻿using Mes.Libraries.RabbitMQ;
 
-namespace Mes.Shared.Events.Quantities;
+namespace Mes.Shared.Contracts.ProductionData.Quantities;
 
 public sealed class RejectQuantityProducedV1 : Message
 {

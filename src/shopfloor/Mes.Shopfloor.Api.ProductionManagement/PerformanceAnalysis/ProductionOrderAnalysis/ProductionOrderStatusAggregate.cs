@@ -1,6 +1,6 @@
-﻿using Mes.Shared.Events.MaterialsAndParts;
-using Mes.Shared.Events.Orders;
-using Mes.Shared.Events.Quantities;
+﻿using Mes.Shared.Contracts.ProductionData.MaterialsAndParts;
+using Mes.Shared.Contracts.ProductionData.Orders;
+using Mes.Shared.Contracts.ProductionData.Quantities;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
 using Mes.Shopfloor.Api.SharedKernel.Domain.Exceptions;
 

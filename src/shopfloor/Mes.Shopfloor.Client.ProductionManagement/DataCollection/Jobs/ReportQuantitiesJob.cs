@@ -1,5 +1,5 @@
 ﻿using Mes.Libraries.RabbitMQ.Producer;
-using Mes.Shared.Events.Quantities;
+using Mes.Shared.Contracts.ProductionData.Quantities;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
 
 namespace Mes.Shopfloor.Client.ProductionManagement.DataCollection.Jobs;

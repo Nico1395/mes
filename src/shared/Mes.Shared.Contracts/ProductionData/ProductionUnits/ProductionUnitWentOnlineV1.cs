@@ -1,6 +1,6 @@
 ﻿using Mes.Libraries.RabbitMQ;
 
-namespace Mes.Shared.Events.ProductionUnits;
+namespace Mes.Shared.Contracts.ProductionData.ProductionUnits;
 
 public sealed class ProductionUnitWentOnlineV1 : Message
 {

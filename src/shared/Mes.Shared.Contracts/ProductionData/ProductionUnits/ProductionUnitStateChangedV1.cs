@@ -1,6 +1,6 @@
 ﻿using Mes.Libraries.RabbitMQ;
 
-namespace Mes.Shared.Events.ProductionUnits;
+namespace Mes.Shared.Contracts.ProductionData.ProductionUnits;
 
 [MessageRoute("state.changed")]
 public sealed class ProductionUnitStateChangedV1 : Message

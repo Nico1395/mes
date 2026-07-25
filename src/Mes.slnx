@@ -6,7 +6,7 @@
     <Project Path="libraries\Mes.Libraries.Marten\Mes.Libraries.Marten.csproj" />
   </Folder>
   <Folder Name="/Shared/">
-    <Project Path="shared/Mes.Shared.Events/Mes.Shared.Events.csproj" />
+    <Project Path="shared\Mes.Shared.Contracts\Mes.Shared.Contracts.csproj" />
   </Folder>
   <Folder Name="/Shopfloor/">
     <Project Path="shopfloor/Mes.Shopfloor.Shared.SharedKernel/Mes.Shopfloor.Shared.SharedKernel.csproj" />
