@@ -1,4 +1,4 @@
-﻿using Mes.Libraries.RabbitMQ.Producer;
+﻿using Mes.Library.RabbitMQ.Producer;
 using Mes.Shared.Contracts.ProductionData.Quantities;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
 

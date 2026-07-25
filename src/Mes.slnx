@@ -1,10 +1,10 @@
 <Solution>
   <Folder Name="/Hub/" />
   <Folder Name="/Libraries/">
-    <Project Path="libraries/Mes.Libraries.ObjectMapping/Mes.Libraries.ObjectMapping.csproj" />
-    <Project Path="libraries/Mes.Libraries.RabbitMQ/Mes.Libraries.RabbitMQ.csproj" />
     <Project Path="libraries/Mes.Library.ShopfloorCommands/Mes.Library.ShopfloorCommands.csproj" />
-    <Project Path="libraries\Mes.Libraries.Marten\Mes.Libraries.Marten.csproj" />
+    <Project Path="libraries\Mes.Library.Marten\Mes.Library.Marten.csproj" />
+    <Project Path="libraries\Mes.Library.ObjectMapping\Mes.Library.ObjectMapping.csproj" />
+    <Project Path="libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj" />
   </Folder>
   <Folder Name="/Shared/">
     <Project Path="shared\Mes.Shared.Contracts\Mes.Shared.Contracts.csproj" />

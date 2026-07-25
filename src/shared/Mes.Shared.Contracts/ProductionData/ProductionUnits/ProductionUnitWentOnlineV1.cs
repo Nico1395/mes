@@ -1,4 +1,4 @@
-﻿using Mes.Libraries.RabbitMQ;
+﻿using Mes.Library.RabbitMQ;
 
 namespace Mes.Shared.Contracts.ProductionData.ProductionUnits;
 

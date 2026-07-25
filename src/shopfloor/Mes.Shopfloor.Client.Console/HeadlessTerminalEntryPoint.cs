@@ -1,4 +1,4 @@
-﻿using Mes.Libraries.RabbitMQ.Producer;
+﻿using Mes.Library.RabbitMQ.Producer;
 using Mes.Shopfloor.Client.Console.Startup;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalInitialization;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using Mes.Libraries.RabbitMQ.Connections;
-using Mes.Libraries.RabbitMQ.Producer;
+using Mes.Library.RabbitMQ.Connections;
+using Mes.Library.RabbitMQ.Producer;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalInitialization;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
 using Mes.Shopfloor.Client.SharedKernel.Configuration;

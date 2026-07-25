@@ -2,8 +2,8 @@
 using DandyMediator.Commands;
 using DandyMediator.Responses;
 using Marten;
-using Mes.Libraries.RabbitMQ.Consumer;
-using Mes.Libraries.RabbitMQ.Producer;
+using Mes.Library.RabbitMQ.Consumer;
+using Mes.Library.RabbitMQ.Producer;
 using Mes.Shared.Contracts.ProductionData.Orders;
 using Mes.Shared.Contracts.ProductionData.Quantities;
 

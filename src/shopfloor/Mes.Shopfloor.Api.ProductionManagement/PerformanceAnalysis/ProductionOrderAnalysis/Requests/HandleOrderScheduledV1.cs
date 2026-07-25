@@ -2,7 +2,7 @@
 using DandyMediator.Commands;
 using DandyMediator.Responses;
 using Marten;
-using Mes.Libraries.RabbitMQ.Consumer;
+using Mes.Library.RabbitMQ.Consumer;
 using Mes.Shared.Contracts.ProductionData.Orders;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Application;
 using Microsoft.EntityFrameworkCore;
