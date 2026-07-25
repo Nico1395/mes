@@ -1,6 +1,6 @@
 ﻿using Marten;
 
-namespace Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence.Marten;
+namespace Mes.Libraries.EventSourcing.Marten;
 
 public interface IEventStoreConfiguration
 {
