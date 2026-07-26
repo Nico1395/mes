@@ -1,12 +1,11 @@
-﻿using Mes.Library.RabbitMQ.Producer;
-using Mes.Shopfloor.Client.Console.Startup;
+﻿using Mes.Shopfloor.Client.Console.Startup;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalInitialization;
 using Mes.Shopfloor.Client.SharedKernel.Infrastructure.TerminalRoutine;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Mes.Shopfloor.Client.Console;
 
-internal sealed class HeadlessTerminalEntryPoint(IMessagePublisher messagePublisher) : EntryPoint
+internal sealed class HeadlessTerminalEntryPoint : EntryPoint
 {
     public override async Task RunAsync(CancellationToken cancellationToken)
     {
@@ -42,7 +41,7 @@ internal sealed class HeadlessTerminalEntryPoint(IMessagePublisher messagePublis
             var routine = scope.ServiceProvider.GetRequiredService<ITerminalRoutine>();
             await routine.ExecuteAsync(cancellationToken);
         }
-        
+
         System.Console.ReadKey();
     }
 }
