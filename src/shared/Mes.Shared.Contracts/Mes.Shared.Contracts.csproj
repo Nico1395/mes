@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
+        <ProjectReference Include="..\..\libraries\Mes.Library.Domain\Mes.Library.Domain.csproj"/>
       <ProjectReference Include="..\..\libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj" />
     </ItemGroup>
 

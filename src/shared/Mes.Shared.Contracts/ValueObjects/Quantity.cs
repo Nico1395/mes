@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Shared.SharedKernel.ValueObjects;
+﻿namespace Mes.Shared.Contracts.ValueObjects;
 
 public sealed record Quantity(double Value, string Unit)
 {

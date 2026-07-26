@@ -1,9 +1,9 @@
-﻿namespace Mes.Shopfloor.Shared.SharedKernel.ValueObjects;
+﻿namespace Mes.Shared.Contracts.ValueObjects;
 
 public sealed record Duration(TimeSpan Value, double DeviationSeconds)
 {
     public static Duration Empty => new(TimeSpan.MinValue, 0);
-    
+
     public bool IsWithinDeviation(Duration other)
     {
         return IsWithinDeviation(other.Value);
