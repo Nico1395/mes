@@ -5,6 +5,7 @@
     <Project Path="libraries\Mes.Library.Marten\Mes.Library.Marten.csproj" />
     <Project Path="libraries\Mes.Library.ObjectMapping\Mes.Library.ObjectMapping.csproj" />
     <Project Path="libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj" />
+    <Project Path="libraries\Mes.Library.SignalR\Mes.Library.SignalR.csproj" />
   </Folder>
   <Folder Name="/Shared/">
     <Project Path="shared\Mes.Shared.Contracts\Mes.Shared.Contracts.csproj" />
