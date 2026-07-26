@@ -1,4 +1,4 @@
-﻿using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Durational;
+﻿using Mes.Library.Domain.Abstractions.Durational;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionUnitAnalysis;
 
@@ -52,8 +52,8 @@ internal class ProductionUnitStatus
         // (3) the current state has ended and the new state started afterward
         if (mostRecentState == null || !mostRecentState.HasEnded() || newState.StartedAfter(mostRecentState))
         {
-            mostRecentState?.TouchEndedAt(newState.StartedAt);      // End the current state
-            States.Add(newState);                                   // Append the new state, making it the current one
+            mostRecentState?.TouchEndedAt(newState.StartedAt); // End the current state
+            States.Add(newState); // Append the new state, making it the current one
         }
     }
 
@@ -66,7 +66,7 @@ internal class ProductionUnitStatus
     {
         // TODO -> The time the production unit is idling should not be part of the total time
         // TODO -> Check whether this can be simplified by summing up the time of productive states and simply do prodTime / totalTime
-        
+
         var totalProductiveTime = TimeSpan.Zero;
         if (start >= end)
             return totalProductiveTime;
@@ -79,11 +79,11 @@ internal class ProductionUnitStatus
         {
             TimeSpan productiveTime;
 
-            if (start.LiesIn(state))        // State started earlier and ended after the start (or has not ended yet)
+            if (start.LiesIn(state)) // State started earlier and ended after the start (or has not ended yet)
             {
                 productiveTime = (state.EndedAt ?? now) - start;
             }
-            else if (end.LiesIn(state))     // State started earlier and ended after the end (or has not ended yet)
+            else if (end.LiesIn(state)) // State started earlier and ended after the end (or has not ended yet)
             {
                 productiveTime = end - state.StartedAt;
             }
@@ -127,7 +127,7 @@ internal class ProductionUnitStatus
 
         var duration = end - start;
         var downtime = GetDowntimeBetween(start, end);
-        
+
         return downtime / duration;
     }
 
@@ -156,6 +156,6 @@ internal class ProductionUnitStatus
     {
         return Workers.LastOrDefault();
     }
-    
+
     internal void Touch() => UpdatedAt = DateTime.UtcNow;
 }

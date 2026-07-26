@@ -1,5 +1,4 @@
-﻿using Mes.Shopfloor.Api.SharedKernel.Domain;
-using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Timestamped;
+﻿using Mes.Library.Domain.Abstractions.Timestamped;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.DataCollection;
 

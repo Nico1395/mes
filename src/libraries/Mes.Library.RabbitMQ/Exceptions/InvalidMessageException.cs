@@ -1,6 +1,4 @@
-﻿using Mes.Library.RabbitMQ;
-
-namespace Mes.Shopfloor.Api.SharedKernel.Domain.Exceptions;
+﻿namespace Mes.Library.RabbitMQ.Exceptions;
 
 public sealed class InvalidMessageException(string message) : Exception(message)
 {

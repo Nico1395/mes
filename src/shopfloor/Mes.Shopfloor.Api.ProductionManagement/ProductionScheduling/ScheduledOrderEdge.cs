@@ -1,4 +1,4 @@
-﻿using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Graphs;
+﻿using Mes.Library.Domain.Abstractions.Graphs;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
 
@@ -11,10 +11,10 @@ internal sealed record ScheduledOrderEdge : IDagEdge
     {
         if (other is null)
             return false;
-        
+
         if (ReferenceEquals(this, other))
             return true;
-        
+
         return FromId.Equals(other.FromId) && ToId.Equals(other.ToId);
     }
 

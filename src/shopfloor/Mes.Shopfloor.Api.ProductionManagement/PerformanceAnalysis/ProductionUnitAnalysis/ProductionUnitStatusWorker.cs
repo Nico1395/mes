@@ -1,4 +1,4 @@
-﻿using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Durational;
+﻿using Mes.Library.Domain.Abstractions.Durational;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionUnitAnalysis;
 

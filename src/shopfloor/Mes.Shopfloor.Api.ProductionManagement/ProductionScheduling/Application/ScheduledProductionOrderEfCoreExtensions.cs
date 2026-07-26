@@ -1,4 +1,4 @@
-﻿using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Graphs;
+﻿using Mes.Library.Domain.Abstractions.Graphs;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Application;

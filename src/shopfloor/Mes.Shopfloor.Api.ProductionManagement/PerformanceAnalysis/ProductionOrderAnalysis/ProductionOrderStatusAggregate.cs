@@ -1,8 +1,8 @@
-﻿using Mes.Shared.Contracts.ProductionData.MaterialsAndParts;
+﻿using Mes.Library.RabbitMQ.Exceptions;
+using Mes.Shared.Contracts.ProductionData.MaterialsAndParts;
 using Mes.Shared.Contracts.ProductionData.Orders;
 using Mes.Shared.Contracts.ProductionData.Quantities;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
-using Mes.Shopfloor.Api.SharedKernel.Domain.Exceptions;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis;
 
@@ -37,7 +37,7 @@ internal sealed class ProductionOrderStatusAggregate : ProductionOrderStatus
             {
                 ProductionUnitId = orderBooked.ProductionUnitId,
                 ScheduledTaskId = orderBooked.ScheduledTaskId,
-                BookedAt = orderBooked.OccurredAtUtc,           // TODO -> Implement IDurational
+                BookedAt = orderBooked.OccurredAtUtc, // TODO -> Implement IDurational
             };
             Bookings.Add(booking);
 

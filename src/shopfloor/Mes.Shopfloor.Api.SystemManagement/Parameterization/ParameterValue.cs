@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
-using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Timestamped;
+using Mes.Library.Domain.Abstractions.Timestamped;
 
 namespace Mes.Shopfloor.Api.SystemManagement.Parameterization;
 
@@ -53,7 +53,7 @@ internal sealed class ParameterValue : ITimestamped
 
         if (!TryGetValue(typeof(TValue), out var value) || value is not TValue casted)
             return false;
-        
+
         tValue = casted;
         return true;
     }

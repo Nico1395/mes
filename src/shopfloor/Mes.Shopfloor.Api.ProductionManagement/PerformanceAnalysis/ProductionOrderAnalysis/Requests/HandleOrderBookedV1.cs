@@ -2,10 +2,10 @@
 using DandyMediator.Commands;
 using DandyMediator.Responses;
 using Marten;
+using Mes.Library.Domain.Exceptions;
 using Mes.Library.RabbitMQ.Consumer;
 using Mes.Library.RabbitMQ.Producer;
 using Mes.Shared.Contracts.ProductionData.Orders;
-using Mes.Shopfloor.Api.SharedKernel.Domain.Exceptions;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Requests;
 
@@ -75,7 +75,7 @@ internal static class HandleOrderBookedV1
             var unbookedEvent = new OrderUnbookedV1
             {
                 ProductionOrderId = previousProductionOrderId,
-                NewProductionOrderId =  orderBooked.ProductionOrderId,
+                NewProductionOrderId = orderBooked.ProductionOrderId,
                 UnbookedAt = orderBooked.OccurredAtUtc,
             };
 
