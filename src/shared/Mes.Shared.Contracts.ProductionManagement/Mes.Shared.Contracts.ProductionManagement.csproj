@@ -1,8 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\..\libraries\Mes.Library.Domain\Mes.Library.Domain.csproj"/>
-      <ProjectReference Include="..\..\libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj" />
+        <ProjectReference Include="..\..\libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj"/>
         <ProjectReference Include="..\..\libraries\Mes.Library.ShopfloorCommands\Mes.Library.ShopfloorCommands.csproj"/>
     </ItemGroup>
 
