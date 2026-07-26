@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Graphs;
+﻿namespace Mes.Library.Domain.Abstractions.Graphs;
 
 /// <summary>
 /// Abstraction for the edge of a directed acyclic graph.

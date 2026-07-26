@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Durational;
+﻿namespace Mes.Library.Domain.Abstractions.Durational;
 
 public static class DurationalExtensions
 {
@@ -6,7 +6,7 @@ public static class DurationalExtensions
     {
         if (!durational.EndedAt.HasValue)
             return null;
-        
+
         return durational.EndedAt.Value - durational.StartedAt;
     }
 
@@ -36,7 +36,7 @@ public static class DurationalExtensions
         {
             if (previous != null && !current.StartedAfter(previous))
                 return false;
-            
+
             previous = current;
         }
 
@@ -62,7 +62,7 @@ public static class DurationalExtensions
             item.EndedAt.HasValue &&
             item.EndedAt.Value <= end);
     }
-    
+
     public static IEnumerable<TDurational> WhereBetween<TDurational>(this IEnumerable<TDurational> source, DateTime start, DateTime end, Func<TDurational, bool> predicate)
         where TDurational : IDurational
     {

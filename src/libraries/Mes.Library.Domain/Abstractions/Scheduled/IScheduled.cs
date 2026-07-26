@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Scheduled;
+﻿namespace Mes.Library.Domain.Abstractions.Scheduled;
 
 public interface IScheduled
 {

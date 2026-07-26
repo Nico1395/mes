@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Api.SharedKernel.Domain.Exceptions;
+﻿namespace Mes.Library.Domain.Exceptions;
 
 public sealed class DomainRuleViolationException(string message) : Exception(message)
 {
@@ -11,7 +11,7 @@ public sealed class DomainRuleViolationException(string message) : Exception(mes
     {
         return new DomainRuleViolationException($"Domain rule violated: {explanation}");
     }
-    
+
     public static void Throw<T>(string explanation)
     {
         throw Create<T>(explanation);
@@ -21,7 +21,7 @@ public sealed class DomainRuleViolationException(string message) : Exception(mes
     {
         throw Create(explanation);
     }
-    
+
     public static void ThrowIf<T>(bool condition, string explanation)
     {
         throw Create<T>(explanation);

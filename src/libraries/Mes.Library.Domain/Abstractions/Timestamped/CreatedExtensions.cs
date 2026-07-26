@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Timestamped;
+﻿namespace Mes.Library.Domain.Abstractions.Timestamped;
 
 public static class CreatedExtensions
 {

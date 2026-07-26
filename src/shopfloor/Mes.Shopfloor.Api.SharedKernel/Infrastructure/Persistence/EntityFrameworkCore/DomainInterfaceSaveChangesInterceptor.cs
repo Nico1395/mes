@@ -1,4 +1,4 @@
-﻿using Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Timestamped;
+﻿using Mes.Library.Domain.Abstractions.Timestamped;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -39,7 +39,7 @@ internal sealed class DomainInterfaceSaveChangesInterceptor : SaveChangesInterce
         if (entry is { Entity: ICreated created, State: EntityState.Added })
             created.TouchCreatedAt(now);
     }
-    
+
     private static void TouchIfUpdateable(EntityEntry entry, DateTime now)
     {
         if (entry is { Entity: IUpdated updated, State: EntityState.Added or EntityState.Modified })

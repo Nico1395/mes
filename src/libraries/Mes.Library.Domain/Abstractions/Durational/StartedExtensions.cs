@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Durational;
+﻿namespace Mes.Library.Domain.Abstractions.Durational;
 
 public static class StartedExtensions
 {

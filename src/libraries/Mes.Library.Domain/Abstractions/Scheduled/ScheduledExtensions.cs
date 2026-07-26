@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Scheduled;
+namespace Mes.Library.Domain.Abstractions.Scheduled;
 
 public static class ScheduledExtensions
 {
@@ -19,7 +19,7 @@ public static class ScheduledExtensions
     {
         return scheduled.Where(predicate).FirstOrDefault();
     }
-    
+
     public static TScheduled First<TScheduled>(this TScheduled scheduled, Func<TScheduled, bool> predicate)
         where TScheduled : class, IScheduled<TScheduled>
     {
@@ -31,7 +31,7 @@ public static class ScheduledExtensions
     {
         return scheduled.Where(predicate).LastOrDefault();
     }
-    
+
     public static TScheduled Last<TScheduled>(this TScheduled scheduled, Func<TScheduled, bool> predicate)
         where TScheduled : class, IScheduled<TScheduled>
     {
@@ -43,7 +43,7 @@ public static class ScheduledExtensions
     {
         return scheduled.Where(predicate).SingleOrDefault();
     }
-    
+
     public static TScheduled Single<TScheduled>(this TScheduled scheduled, Func<TScheduled, bool> predicate)
         where TScheduled : class, IScheduled<TScheduled>
     {

@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Api.SharedKernel.Domain.Abstractions.Graphs;
+﻿namespace Mes.Library.Domain.Abstractions.Graphs;
 
 public static class DagExtensions
 {
@@ -101,7 +101,7 @@ public static class DagExtensions
         {
             prevNode.Next.Remove(toNode);
             toNode.Previous.Remove(prevNode);
-            
+
             if (!prevNode.RemoveEdge(toNode.Id) || !toNode.RemoveEdge(prevNode.Id))
                 return false;
         }
@@ -109,7 +109,7 @@ public static class DagExtensions
         // Add new node before toNode
         toNode.Previous.Add(node);
         node.Next.Add(toNode);
-        
+
         if (!toNode.InsertEdge(node.Id) || !node.InsertEdge(toNode.Id))
             return false;
 
@@ -118,7 +118,7 @@ public static class DagExtensions
         {
             prevNode.Next.Add(node);
             node.Previous.Add(prevNode);
-            
+
             if (!prevNode.InsertEdge(node.Id) || !node.InsertEdge(prevNode.Id))
                 return false;
         }
@@ -143,10 +143,10 @@ public static class DagExtensions
             prevNode.Next.Remove(targetNode);
             prevNode.Next.Add(node);
             node.Previous.Add(prevNode);
-            
+
             if (!prevNode.RemoveEdge(targetNode.Id) || !targetNode.RemoveEdge(prevNode.Id))
                 return false;
-            
+
             if (!prevNode.InsertEdge(node.Id) || !node.InsertEdge(prevNode.Id))
                 return false;
         }
@@ -157,10 +157,10 @@ public static class DagExtensions
             nextNode.Previous.Remove(targetNode);
             nextNode.Previous.Add(node);
             node.Next.Add(nextNode);
-            
+
             if (!nextNode.RemoveEdge(targetNode.Id) || !targetNode.RemoveEdge(nextNode.Id))
                 return false;
-            
+
             if (!nextNode.InsertEdge(node.Id) || !node.InsertEdge(nextNode.Id))
                 return false;
         }
@@ -199,14 +199,14 @@ public static class DagExtensions
                 {
                     prevNode.Next.Add(nextNode);
                     nextNode.Previous.Add(prevNode);
-                    
+
                     if (!prevNode.InsertEdge(nextNode.Id) || !nextNode.InsertEdge(prevNode.Id))
                         return false;
                 }
             }
 
             prevNode.Next.Remove(node);
-            
+
             if (!prevNode.RemoveEdge(node.Id) || !node.RemoveEdge(prevNode.Id))
                 return false;
         }
@@ -215,7 +215,7 @@ public static class DagExtensions
         foreach (var nextNode in nextNodes)
         {
             nextNode.Previous.Remove(node);
-            
+
             if (!nextNode.RemoveEdge(node.Id) || !node.RemoveEdge(nextNode.Id))
                 return false;
         }
