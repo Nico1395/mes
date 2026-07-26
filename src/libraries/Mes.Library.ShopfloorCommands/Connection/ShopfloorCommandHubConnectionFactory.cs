@@ -59,7 +59,7 @@ internal sealed class ShopfloorCommandHubConnectionFactory(ShopfloorCommandHubCo
         var connection = new HubConnectionBuilder()
             .AddJsonProtocol()
             .WithAutomaticReconnect()
-            .WithUrl($"{configuration.HubBaseUrl}/cmd/v1/")
+            .WithUrl($"{configuration.HubBaseUrl}/api/v1/shopfloor-commands/")
             .Build();
 
         await connection.StartAsync(cancellationToken);

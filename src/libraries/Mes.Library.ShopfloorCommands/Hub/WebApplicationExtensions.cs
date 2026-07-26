@@ -41,6 +41,6 @@ public static class WebApplicationExtensions
     /// <exception cref="ArgumentNullException">Thrown if the app parameter is null.</exception>
     public static void MapShopfloorCommandHub(this WebApplication app)
     {
-        app.MapHub<ShopfloorCommandHub>("/cmd/");
+        app.MapHub<ShopfloorCommandHub>("/api/v1/shopfloor-commands/");
     }
 }
