@@ -11,6 +11,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj"/>
+        <ProjectReference Include="..\Mes.Library.SignalR\Mes.Library.SignalR.csproj" />
     </ItemGroup>
 
 </Project>

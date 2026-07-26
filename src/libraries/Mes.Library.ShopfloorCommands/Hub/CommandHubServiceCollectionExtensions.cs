@@ -57,11 +57,6 @@ public static class CommandHubServiceCollectionExtensions
         var cfg = builder.Build();
 
         services.AddSingleton(cfg);
-        services.AddSignalR().AddStackExchangeRedis(options =>
-        {
-            options.Configuration.AbortOnConnectFail = false;
-            options.Configuration.EndPoints.Add(cfg.RedisUrl ?? throw new InvalidAsynchronousStateException("Redis URL is not configured."));
-        });
         services.AddTransient<IShopfloorCommandHubController, ShopfloorCommandHubController>();
 
         return services;

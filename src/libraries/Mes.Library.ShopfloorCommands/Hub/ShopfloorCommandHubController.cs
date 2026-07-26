@@ -1,3 +1,4 @@
+using Mes.Library.SignalR.Connections;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
@@ -25,6 +26,7 @@ namespace Mes.Library.ShopfloorCommands.Hub;
 /// <seealso cref="ShopfloorCommandHub"/>
 internal sealed class ShopfloorCommandHubController(
     ILogger<ShopfloorCommandHubController> logger,
+    ISignalRConnectionManager connectionManager,
     IHubContext<ShopfloorCommandHub> hubContext) : IShopfloorCommandHubController
 {
     /// <summary>
@@ -46,10 +48,15 @@ internal sealed class ShopfloorCommandHubController(
     {
         try
         {
-            if (!ShopfloorCommandHub.TryGetConnectionId(command.ReceiverShopfloorKey, out var connectionId))
+            var connectionIds = await connectionManager.GetConnectionIdsAsync(
+                ShopfloorCommandHub.Key2ConnectionPrefix,
+                command.ReceiverShopfloorKey,
+                cancellationToken);
+
+            if (connectionIds.Length == 0)
                 return ShopfloorCommandResponse.Failure;
 
-            await hubContext.Clients.Client(connectionId).SendAsync(ShopfloorCommandConstants.V1.Receiver.ReceiveCommand, command, cancellationToken);
+            await hubContext.Clients.Client(connectionIds[0]).SendAsync(ShopfloorCommandConstants.V1.Receiver.ReceiveCommand, command, cancellationToken);
             return ShopfloorCommandResponse.Success;
         }
         catch (Exception ex)

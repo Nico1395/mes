@@ -1,6 +1,5 @@
-using System.Collections.Concurrent;
-using System.Diagnostics.CodeAnalysis;
 using Mes.Library.RabbitMQ.Producer;
+using Mes.Library.SignalR.Connections;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Mes.Library.ShopfloorCommands.Hub;
@@ -27,16 +26,11 @@ namespace Mes.Library.ShopfloorCommands.Hub;
 /// </remarks>
 /// <seealso cref="WebApplicationExtensions.MapShopfloorCommandHub"/>
 /// <seealso cref="IShopfloorCommandHubController"/>
-internal sealed class ShopfloorCommandHub(IMessagePublisher messagePublisher) : Microsoft.AspNetCore.SignalR.Hub
+internal sealed class ShopfloorCommandHub(
+    ISignalRConnectionManager connectionManager,
+    IMessagePublisher messagePublisher) : Microsoft.AspNetCore.SignalR.Hub
 {
-    /// <summary>
-    /// Thread-safe dictionary that maps shopfloor keys to SignalR connection IDs.
-    /// <para>
-    /// This dictionary maintains the current connections for all registered shopfloors,
-    /// enabling the hub to route commands to specific shopfloors by their key.
-    /// </para>
-    /// </summary>
-    private static ConcurrentDictionary<string, string> ShopfloorConnections { get; } = [];
+    public const string Key2ConnectionPrefix = "edge:signalr:shopfloor-commands";
 
     /// <summary>
     /// Registers a shopfloor with its SignalR connection ID.
@@ -50,8 +44,11 @@ internal sealed class ShopfloorCommandHub(IMessagePublisher messagePublisher) : 
     [HubMethodName(ShopfloorCommandConstants.V1.Hub.RegisterShopfloor)]
     public Task RegisterShopfloorV1(string shopfloorKey)
     {
-        ShopfloorConnections[shopfloorKey] = Context.ConnectionId;
-        return Task.CompletedTask;
+        return connectionManager.AddConnectionIdAsync(
+            Key2ConnectionPrefix,
+            shopfloorKey,
+            Context.ConnectionId,
+            Context.ConnectionAborted);
     }
 
     /// <summary>
@@ -74,14 +71,12 @@ internal sealed class ShopfloorCommandHub(IMessagePublisher messagePublisher) : 
         return messagePublisher.PublishAsync(command, Context.ConnectionAborted);
     }
 
-    /// <summary>
-    /// Attempts to retrieve the SignalR connection ID for a shopfloor key.
-    /// </summary>
-    /// <param name="shopfloorKey">The shopfloor key to look up.</param>
-    /// <param name="connectionId">When this method returns, contains the connection ID if found; otherwise, null.</param>
-    /// <returns>True if the shopfloor key was found and has an active connection; otherwise, false.</returns>
-    public static bool TryGetConnectionId(string shopfloorKey, [NotNullWhen(true)] out string? connectionId)
+    /// <inheritdoc/>
+    public override Task OnDisconnectedAsync(Exception? exception)
     {
-        return ShopfloorConnections.TryGetValue(shopfloorKey, out connectionId);
+        return connectionManager.DeleteConnectionIdAsync(
+            Key2ConnectionPrefix,
+            Context.ConnectionId,
+            Context.ConnectionAborted);
     }
 }
