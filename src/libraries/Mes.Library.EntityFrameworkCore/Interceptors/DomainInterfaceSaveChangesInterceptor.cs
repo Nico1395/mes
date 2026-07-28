@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Mes.Library.EntityFrameworkCore.Interceptors;
 
-internal sealed class DomainInterfaceSaveChangesInterceptor : SaveChangesInterceptor
+public sealed class DomainInterfaceSaveChangesInterceptor : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
