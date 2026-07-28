@@ -17,13 +17,8 @@ public static class SignalRServiceCollectionExtensions
             options.Configuration.EndPoints.Add(redisUrl);
             options.Configuration.ChannelPrefix = RedisChannel.Literal(channelPrefix);
         });
-        services.AddSignalRConnectionManager();
+        services.AddSingleton<ISignalRConnectionManager, SignalRConnectionManager>();
 
         return services;
-    }
-
-    public static IServiceCollection AddSignalRConnectionManager(this IServiceCollection services)
-    {
-        return services.AddSingleton<ISignalRConnectionManager, SignalRConnectionManager>();
     }
 }
