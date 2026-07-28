@@ -6,13 +6,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\libraries\Mes.Library.Domain\Mes.Library.Domain.csproj"/>
         <ProjectReference Include="..\..\libraries\Mes.Library.Marten\Mes.Library.Marten.csproj"/>
         <ProjectReference Include="..\..\libraries\Mes.Library.ObjectMapping\Mes.Library.ObjectMapping.csproj"/>
         <ProjectReference Include="..\..\libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj"/>
         <ProjectReference Include="..\..\libraries\Mes.Library.ShopfloorCommands\Mes.Library.ShopfloorCommands.csproj"/>
         <ProjectReference Include="..\..\libraries\Mes.Library.SignalR\Mes.Library.SignalR.csproj"/>
-        <ProjectReference Include="..\..\shared\Mes.Shared.Contracts\Mes.Shared.Contracts.csproj"/>
+        <ProjectReference Include="..\..\shared\Mes.Shared.Contracts.SharedKernel\Mes.Shared.Contracts.SharedKernel.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,11 @@
+﻿using Microsoft.AspNetCore.Builder;
+
+namespace Mes.Hub.Edge.SharedKernel.Synchronization.MasterData.Infrastructure;
+
+public static class WebApplicationExtensions
+{
+    public static void AddMasterDataHub(this WebApplication app)
+    {
+        app.MapHub<MasterDataHub>("/api/v1/synchronization/master-data/push");
+    }
+}

@@ -1,20 +1,25 @@
 <Solution>
-  <Folder Name="/Hub/" />
+    <Folder Name="/Hub/">
+        <Project Path="hub/Mes.Hub.Api.ProductionManagement/Mes.Hub.Api.ProductionManagement.csproj"/>
+        <Project Path="hub/Mes.Hub.Api.SharedKernel/Mes.Hub.Api.SharedKernel.csproj"/>
+        <Project Path="hub/Mes.Hub.Api.SystemManagement/Mes.Hub.Api.SystemManagement.csproj"/>
+        <Project Path="hub/Mes.Hub.Api/Mes.Hub.Api.csproj"/>
+        <Project Path="hub/Mes.Hub.Edge.SharedKernel/Mes.Hub.Edge.SharedKernel.csproj"/>
+        <Project Path="hub/Mes.Hub.Edge.Synchronization/Mes.Hub.Edge.Synchronization.csproj"/>
+        <Project Path="hub/Mes.Hub.Edge/Mes.Hub.Edge.csproj"/>
+    </Folder>
   <Folder Name="/Libraries/">
-    <Project Path="libraries/Mes.Library.Domain/Mes.Library.Domain.csproj"/>
     <Project Path="libraries/Mes.Library.ShopfloorCommands/Mes.Library.ShopfloorCommands.csproj" />
-    <Project Path="libraries/Mes.Library.Synchronization.MasterData/Mes.Library.Synchronization.MasterData.csproj"/>
-    <Project
-            Path="libraries/Mes.Library.Synchronization.ProductionData/Mes.Library.Synchronization.ProductionData.csproj"/>
     <Project Path="libraries\Mes.Library.Marten\Mes.Library.Marten.csproj" />
     <Project Path="libraries\Mes.Library.ObjectMapping\Mes.Library.ObjectMapping.csproj" />
     <Project Path="libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj" />
     <Project Path="libraries\Mes.Library.SignalR\Mes.Library.SignalR.csproj" />
   </Folder>
   <Folder Name="/Shared/">
-    <Project Path="shared/Mes.Shared.Contracts.ProductionManagement/Mes.Shared.Contracts.ProductionManagement.csproj"/>
-    <Project Path="shared/Mes.Shared.Contracts.SystemManagement/Mes.Shared.Contracts.SystemManagement.csproj"/>
-    <Project Path="shared\Mes.Shared.Contracts\Mes.Shared.Contracts.csproj" />
+      <Project
+              Path="shared/Mes.Shared.Contracts.ProductionManagement/Mes.Shared.Contracts.ProductionManagement.csproj"/>
+      <Project Path="shared/Mes.Shared.Contracts.SharedKernel/Mes.Shared.Contracts.SharedKernel.csproj"/>
+      <Project Path="shared/Mes.Shared.Contracts.SystemManagement/Mes.Shared.Contracts.SystemManagement.csproj"/>
   </Folder>
   <Folder Name="/Shopfloor/">
     <Project Path="shopfloor/Mes.Shopfloor.Shared.SharedKernel/Mes.Shopfloor.Shared.SharedKernel.csproj" />

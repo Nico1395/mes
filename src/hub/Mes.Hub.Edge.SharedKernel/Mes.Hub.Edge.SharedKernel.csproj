@@ -4,8 +4,7 @@
         <ProjectReference Include="..\..\libraries\Mes.Library.Marten\Mes.Library.Marten.csproj"/>
         <ProjectReference Include="..\..\libraries\Mes.Library.ObjectMapping\Mes.Library.ObjectMapping.csproj"/>
         <ProjectReference Include="..\..\libraries\Mes.Library.ShopfloorCommands\Mes.Library.ShopfloorCommands.csproj"/>
-        <ProjectReference Include="..\..\libraries\Mes.Library.Synchronization.MasterData\Mes.Library.Synchronization.MasterData.csproj"/>
-        <ProjectReference Include="..\..\libraries\Mes.Library.Synchronization.ProductionData\Mes.Library.Synchronization.ProductionData.csproj"/>
+        <ProjectReference Include="..\..\shared\Mes.Shared.Contracts.SharedKernel\Mes.Shared.Contracts.SharedKernel.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
