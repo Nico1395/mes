@@ -4,6 +4,7 @@ using DandyMediator;
 using DandyMediator.Validation;
 using DandyStrategies;
 using Marten;
+using Mes.Library.EntityFrameworkCore.Interceptors;
 using Mes.Library.Marten;
 using Mes.Library.ObjectMapping;
 using Mes.Library.RabbitMQ.Connections;

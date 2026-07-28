@@ -9,6 +9,7 @@
         <Project Path="hub/Mes.Hub.Edge/Mes.Hub.Edge.csproj"/>
     </Folder>
   <Folder Name="/Libraries/">
+      <Project Path="libraries/Mes.Library.EntityFrameworkCore/Mes.Library.EntityFrameworkCore.csproj"/>
       <Project Path="libraries/Mes.Library.Serialization/Mes.Library.Serialization.csproj"/>
     <Project Path="libraries/Mes.Library.ShopfloorCommands/Mes.Library.ShopfloorCommands.csproj" />
     <Project Path="libraries\Mes.Library.Marten\Mes.Library.Marten.csproj" />
