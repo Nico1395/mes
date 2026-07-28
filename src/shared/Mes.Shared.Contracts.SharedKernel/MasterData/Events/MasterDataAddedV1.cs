@@ -1,10 +1,5 @@
-﻿using Mes.Library.RabbitMQ;
-using Mes.Shared.Contracts.SharedKernel.Abstractions;
+﻿namespace Mes.Shared.Contracts.SharedKernel.MasterData.Events;
 
-namespace Mes.Shared.Contracts.SharedKernel.MasterData.Events;
-
-public sealed class MasterDataAddedV1 : Message
+public sealed class MasterDataAddedV1 : MasterDataMessage
 {
-    public required List<IMasterDataEntity> Data { get; init; }
-    public string[]? ShopfloorKeys { get; init; }
 }

@@ -2,6 +2,6 @@
 
 namespace Mes.Shared.Contracts.SharedKernel.Abstractions;
 
-public interface IMasterDataEntity : ITimestamped
+public interface IMasterData : ITimestamped
 {
 }
