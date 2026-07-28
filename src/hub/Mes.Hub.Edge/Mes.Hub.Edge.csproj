@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <ItemGroup>
+        <ProjectReference Include="..\Mes.Hub.Edge.Synchronization\Mes.Hub.Edge.Synchronization.csproj"/>
+    </ItemGroup>
+
+</Project>

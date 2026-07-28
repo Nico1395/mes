@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\Mes.Hub.Api.SharedKernel\Mes.Hub.Api.SharedKernel.csproj"/>
+    </ItemGroup>
+
+</Project>
