@@ -3,7 +3,7 @@ using DandyMediator.Commands;
 using DandyMediator.Responses;
 using Marten;
 using Mes.Library.RabbitMQ.Consumer;
-using Mes.Shared.Contracts.ProductionData.Orders;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.Orders;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Application;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,7 +42,7 @@ internal static class HandleOrderScheduledV1
                 request.OrderScheduled,
                 productionOrder,
                 scheduledProductionOrder);
-            
+
             session.Events.StartStream(productionOrder.Id, request.OrderScheduled);
             await session.SaveChangesAsync(cancellationToken);
 

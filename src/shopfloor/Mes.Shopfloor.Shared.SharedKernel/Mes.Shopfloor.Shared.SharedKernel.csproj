@@ -3,7 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\libraries\Mes.Library.ObjectMapping\Mes.Library.ObjectMapping.csproj" />
     <ProjectReference Include="..\..\libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj" />
-    <ProjectReference Include="..\..\shared\Mes.Shared.Contracts\Mes.Shared.Contracts.csproj" />
+      <ProjectReference Include="..\..\shared\Mes.Shared.Contracts.SharedKernel\Mes.Shared.Contracts.SharedKernel.csproj"/>
   </ItemGroup>
 
 </Project>

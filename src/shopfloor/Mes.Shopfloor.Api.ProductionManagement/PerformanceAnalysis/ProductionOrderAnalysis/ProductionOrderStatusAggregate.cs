@@ -1,7 +1,7 @@
 ﻿using Mes.Library.RabbitMQ.Exceptions;
-using Mes.Shared.Contracts.ProductionData.MaterialsAndParts;
-using Mes.Shared.Contracts.ProductionData.Orders;
-using Mes.Shared.Contracts.ProductionData.Quantities;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.MaterialsAndParts;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.Orders;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.Quantities;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis;

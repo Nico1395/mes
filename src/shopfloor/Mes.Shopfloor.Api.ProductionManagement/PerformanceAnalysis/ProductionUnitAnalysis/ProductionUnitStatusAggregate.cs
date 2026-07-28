@@ -1,7 +1,7 @@
-﻿using Mes.Shared.Contracts.ProductionData.MaterialsAndParts;
-using Mes.Shared.Contracts.ProductionData.Orders;
-using Mes.Shared.Contracts.ProductionData.ProductionUnits;
-using Mes.Shared.Contracts.ProductionData.Quantities;
+﻿using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.MaterialsAndParts;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.Orders;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.ProductionUnits;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.Quantities;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionUnitAnalysis;
 
@@ -23,7 +23,7 @@ internal sealed class ProductionUnitStatusAggregate : ProductionUnitStatus
         status.BookOrder(
             orderBooked.ProductionOrderId,
             orderBooked.ScheduledTaskId);
-        
+
         // Should the state be set? No because the production unit's state being set is dealt with using another event.
     }
 

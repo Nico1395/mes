@@ -1,4 +1,4 @@
-﻿using Mes.Library.Domain.Abstractions.Timestamped;
+﻿using Mes.Shared.Contracts.SharedKernel.Abstractions.Timestamped;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.DataCollection;
 

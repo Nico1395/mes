@@ -1,7 +1,7 @@
 ﻿using DandyMediator.Commands;
 using Marten;
 using Mes.Library.RabbitMQ.Producer;
-using Mes.Shared.Contracts.ProductionData.Orders;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.Orders;
 using Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Application;
 using Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling.Application;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ namespace Mes.Shopfloor.Api.ProductionManagement.ExecutionManagement.Requests;
 internal static class EvaluateProductionOrderPerformanceV1
 {
     internal sealed record Command(Guid ProductionOrderId) : ICommand;
- 
+
     private sealed class CommandHandler(
         DbContext context,
         IMessagePublisher messagePublisher,

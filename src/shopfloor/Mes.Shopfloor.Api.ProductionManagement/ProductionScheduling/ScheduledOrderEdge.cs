@@ -1,4 +1,4 @@
-﻿using Mes.Library.Domain.Abstractions.Graphs;
+﻿using Mes.Shared.Contracts.SharedKernel.Abstractions.Graphs;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
 

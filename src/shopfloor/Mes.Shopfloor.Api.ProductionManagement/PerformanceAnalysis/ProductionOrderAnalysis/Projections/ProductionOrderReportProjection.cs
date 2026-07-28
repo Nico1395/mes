@@ -1,6 +1,6 @@
 ﻿using Marten;
 using Marten.Events.Aggregation;
-using Mes.Shared.Contracts.ProductionData.Orders;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.Orders;
 using Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Application;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Projections;
@@ -17,8 +17,8 @@ public partial class ProductionOrderReportProjection : SingleStreamProjection<Pr
         {
             ProductionOrderId = orderCompleted.ProductionOrderId,
             ScheduledProductionOrderId = status.ScheduledProductionOrderId,
-            ProductId =  status.ProductId,
-            TargetQuantity =  status.TargetQuantity,
+            ProductId = status.ProductId,
+            TargetQuantity = status.TargetQuantity,
             ProducedQuantity = status.ProducedQuantity,
             CompletionPercent = status.ProgressPercent,
             ProducedRejectQuantity = status.ProducedRejectQuantity,

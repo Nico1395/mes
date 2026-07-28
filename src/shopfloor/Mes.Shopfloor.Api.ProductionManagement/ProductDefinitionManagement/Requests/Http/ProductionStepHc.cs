@@ -1,4 +1,4 @@
-﻿using Mes.Shared.Contracts.ValueObjects;
+﻿using Mes.Shared.Contracts.SharedKernel.ValueObjects;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ProductDefinitionManagement.Requests.Http;
 

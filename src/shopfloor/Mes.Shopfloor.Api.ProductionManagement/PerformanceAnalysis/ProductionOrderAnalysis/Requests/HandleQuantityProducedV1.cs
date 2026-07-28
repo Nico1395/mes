@@ -4,8 +4,8 @@ using DandyMediator.Responses;
 using Marten;
 using Mes.Library.RabbitMQ.Consumer;
 using Mes.Library.RabbitMQ.Producer;
-using Mes.Shared.Contracts.ProductionData.Orders;
-using Mes.Shared.Contracts.ProductionData.Quantities;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.Orders;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.Quantities;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Requests;
 

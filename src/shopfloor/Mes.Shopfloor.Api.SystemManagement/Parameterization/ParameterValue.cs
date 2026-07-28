@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
-using Mes.Library.Domain.Abstractions.Timestamped;
+using Mes.Shared.Contracts.SharedKernel.Abstractions.Timestamped;
 
 namespace Mes.Shopfloor.Api.SystemManagement.Parameterization;
 

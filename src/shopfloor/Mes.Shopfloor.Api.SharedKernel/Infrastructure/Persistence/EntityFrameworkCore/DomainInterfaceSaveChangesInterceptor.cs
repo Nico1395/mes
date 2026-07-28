@@ -1,4 +1,4 @@
-﻿using Mes.Library.Domain.Abstractions.Timestamped;
+﻿using Mes.Shared.Contracts.SharedKernel.Abstractions.Timestamped;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;

@@ -2,10 +2,10 @@
 using DandyMediator.Commands;
 using DandyMediator.Responses;
 using Marten;
-using Mes.Library.Domain.Exceptions;
 using Mes.Library.RabbitMQ.Consumer;
 using Mes.Library.RabbitMQ.Producer;
-using Mes.Shared.Contracts.ProductionData.Orders;
+using Mes.Shared.Contracts.SharedKernel.Exceptions;
+using Mes.Shared.Contracts.SharedKernel.ProductionData.Events.Orders;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.PerformanceAnalysis.ProductionOrderAnalysis.Requests;
 
