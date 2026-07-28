@@ -9,6 +9,7 @@ using Mes.Library.ObjectMapping;
 using Mes.Library.RabbitMQ.Connections;
 using Mes.Library.RabbitMQ.Consumer.Configuration;
 using Mes.Library.RabbitMQ.Producer;
+using Mes.Library.Serialization.Json;
 using Mes.Shopfloor.Api.SharedKernel.Configurations;
 using Mes.Shopfloor.Api.SharedKernel.Infrastructure.Persistence.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -63,10 +64,7 @@ public static class DependencyInjection
         });
 
         // DandyEndpoints
-        services.AddDandyEndpoints(cfg =>
-        {
-            cfg.ScanInAssemblies(assemblies);
-        });
+        services.AddDandyEndpoints(cfg => { cfg.ScanInAssemblies(assemblies); });
 
         // DandyStrategies
         services.AddDandyStrategies(cfg => cfg.ScanInAssemblies(assemblies));
@@ -76,8 +74,11 @@ public static class DependencyInjection
         services.AddTransient<IInterceptor, DomainInterfaceSaveChangesInterceptor>();
 
         // Options
-        services.AddOptions<AppOptions>().Bind(configuration.GetSection("App"));            // TODO -> Make sure this is containerizable
-        
+        services.AddOptions<AppOptions>().Bind(configuration.GetSection("App"));
+
+        // Serialization
+        services.AddMinimalApiJsonOptions();
+
         return services;
     }
 }

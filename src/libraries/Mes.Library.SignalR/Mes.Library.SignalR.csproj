@@ -5,4 +5,8 @@
         <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" />
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Mes.Library.Serialization\Mes.Library.Serialization.csproj"/>
+    </ItemGroup>
+
 </Project>

@@ -1,3 +1,4 @@
+using Mes.Library.Serialization.Json;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -57,7 +58,7 @@ internal sealed class ShopfloorCommandHubConnectionFactory(ShopfloorCommandHubCo
             throw new InvalidOperationException("The shopfloor key was not configured.");
 
         var connection = new HubConnectionBuilder()
-            .AddJsonProtocol()
+            .AddJsonProtocol(options => options.PayloadSerializerOptions.TypeInfoResolver = MesJsonSerializer.CreateTypeInfoResolver())
             .WithAutomaticReconnect()
             .WithUrl($"{configuration.HubBaseUrl}/api/v1/shopfloor-commands/")
             .Build();

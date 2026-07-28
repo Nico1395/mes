@@ -1,17 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="DandyEndpoints"/>
-        <PackageReference Include="DandyMediator.Validation"/>
+        <ProjectReference Include="..\..\libraries\Mes.Library.Marten\Mes.Library.Marten.csproj"/>
+        <ProjectReference Include="..\..\libraries\Mes.Library.ObjectMapping\Mes.Library.ObjectMapping.csproj"/>
+        <ProjectReference Include="..\..\shared\Mes.Shared.Contracts.SharedKernel\Mes.Shared.Contracts.SharedKernel.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\libraries\Mes.Library.Marten\Mes.Library.Marten.csproj"/>
-        <ProjectReference Include="..\..\libraries\Mes.Library.ObjectMapping\Mes.Library.ObjectMapping.csproj"/>
-        <ProjectReference Include="..\..\libraries\Mes.Library.RabbitMQ\Mes.Library.RabbitMQ.csproj"/>
-        <ProjectReference Include="..\..\libraries\Mes.Library.ShopfloorCommands\Mes.Library.ShopfloorCommands.csproj"/>
-        <ProjectReference Include="..\..\libraries\Mes.Library.SignalR\Mes.Library.SignalR.csproj"/>
-        <ProjectReference Include="..\..\shared\Mes.Shared.Contracts.SharedKernel\Mes.Shared.Contracts.SharedKernel.csproj"/>
+        <PackageReference Include="DandyEndpoints"/>
+        <PackageReference Include="DandyMediator.Validation"/>
+        <PackageReference Include="DandyStrategies"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
+        <PackageReference Include="NLog.Web.AspNetCore"/>
+        <PackageReference Include="Scalar.AspNetCore"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
     </ItemGroup>
 
 </Project>

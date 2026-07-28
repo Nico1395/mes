@@ -4,7 +4,6 @@ using DandyMediator;
 using DandyMediator.Validation;
 using DandyStrategies;
 using Marten;
-using Mes.Hub.Edge.SharedKernel.Infrastructure.Persistence.EntityFrameworkCore;
 using Mes.Library.Marten;
 using Mes.Library.ObjectMapping;
 using Mes.Library.RabbitMQ.Connections;
@@ -13,13 +12,12 @@ using Mes.Library.RabbitMQ.Producer;
 using Mes.Library.Serialization.Json;
 using Mes.Library.ShopfloorCommands.Hub;
 using Mes.Library.SignalR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 
-namespace Mes.Hub.Edge.SharedKernel;
+namespace Mes.Hub.Api.SharedKernel;
 
 public static class DependencyInjection
 {
@@ -70,7 +68,7 @@ public static class DependencyInjection
         services.AddDandyStrategies(cfg => cfg.ScanInAssemblies(assemblies));
 
         // Core persistence - Note: No interceptor, since we will only ever read master data and don't want to temper with timestamps
-        services.AddDbContext<DbContext, HubEdgeDbContext>();
+        // services.AddDbContext<DbContext, HubEdgeDbContext>();
 
         // SignalR
         services.AddSignalRWithBackplane(configuration["Redis:Url"], "mes:hub:edge");

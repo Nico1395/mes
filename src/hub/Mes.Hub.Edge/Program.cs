@@ -1,4 +1,5 @@
 using DandyEndpoints;
+using Mes.Hub.Edge.Synchronization.MasterData.Infrastructure;
 using Mes.Library.ShopfloorCommands.Hub;
 using Scalar.AspNetCore;
 
@@ -28,6 +29,7 @@ internal sealed class Program
 
         app.MapDandyEndpoints();
         app.MapShopfloorCommandHub();
+        app.MapMasterDataHub();
         app.MapGet("/", () => Results.Redirect("/api/reference"));
 
         app.Run();

@@ -5,6 +5,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="MasterData\Application\"/>
         <Folder Include="ProductionData\"/>
     </ItemGroup>
 
