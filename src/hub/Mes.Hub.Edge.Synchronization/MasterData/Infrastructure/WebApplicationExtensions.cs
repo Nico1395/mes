@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace Mes.Hub.Edge.SharedKernel.Synchronization.MasterData.Infrastructure;
+namespace Mes.Hub.Edge.Synchronization.MasterData.Infrastructure;
 
 public static class WebApplicationExtensions
 {

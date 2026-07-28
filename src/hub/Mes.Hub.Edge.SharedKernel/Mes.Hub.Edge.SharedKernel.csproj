@@ -8,10 +8,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Synchronization\ProductionData\"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="DandyEndpoints"/>
         <PackageReference Include="DandyMediator.Validation"/>
         <PackageReference Include="DandyStrategies"/>

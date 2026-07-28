@@ -4,4 +4,8 @@
         <ProjectReference Include="..\Mes.Hub.Edge.SharedKernel\Mes.Hub.Edge.SharedKernel.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="ProductionData\"/>
+    </ItemGroup>
+
 </Project>

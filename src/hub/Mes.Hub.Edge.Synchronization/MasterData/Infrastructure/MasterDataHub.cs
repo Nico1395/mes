@@ -1,4 +1,4 @@
-﻿namespace Mes.Hub.Edge.SharedKernel.Synchronization.MasterData.Infrastructure;
+﻿namespace Mes.Hub.Edge.Synchronization.MasterData.Infrastructure;
 
 internal sealed class MasterDataHub : Microsoft.AspNetCore.SignalR.Hub
 {

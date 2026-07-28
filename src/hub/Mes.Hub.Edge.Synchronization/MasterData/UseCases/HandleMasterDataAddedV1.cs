@@ -1,14 +1,14 @@
 ﻿using DandyMediator;
 using DandyMediator.Commands;
 using DandyMediator.Responses;
-using Mes.Hub.Edge.SharedKernel.Synchronization.MasterData.Infrastructure;
+using Mes.Hub.Edge.Synchronization.MasterData.Infrastructure;
 using Mes.Library.RabbitMQ.Consumer;
 using Mes.Library.SignalR;
 using Mes.Library.SignalR.Connections;
 using Mes.Shared.Contracts.SharedKernel.MasterData.Events;
 using Microsoft.AspNetCore.SignalR;
 
-namespace Mes.Hub.Edge.SharedKernel.Synchronization.MasterData.UseCases;
+namespace Mes.Hub.Edge.Synchronization.MasterData.UseCases;
 
 internal static class HandleMasterDataAddedV1
 {
