@@ -1,4 +1,4 @@
-﻿namespace Mes.Shopfloor.Api.SharedKernel.Extensions;
+﻿namespace Mes.Shared.Contracts.SharedKernel.Extensions;
 
 public static class EnumerableExtensions
 {

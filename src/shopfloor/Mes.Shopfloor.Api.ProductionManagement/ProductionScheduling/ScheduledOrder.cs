@@ -1,5 +1,5 @@
 ﻿using Mes.Shared.Contracts.SharedKernel.Abstractions.Graphs;
-using Mes.Shopfloor.Api.SharedKernel.Extensions;
+using Mes.Shared.Contracts.SharedKernel.Extensions;
 
 namespace Mes.Shopfloor.Api.ProductionManagement.ProductionScheduling;
 
