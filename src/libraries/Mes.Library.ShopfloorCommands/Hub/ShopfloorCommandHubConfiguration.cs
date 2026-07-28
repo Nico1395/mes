@@ -21,17 +21,4 @@ namespace Mes.Library.ShopfloorCommands.Hub;
 /// <seealso cref="CommandHubServiceCollectionExtensions.AddShopfloorCommandHub"/>
 public sealed class ShopfloorCommandHubConfiguration
 {
-    /// <summary>
-    /// Gets or sets the Redis connection URL for the SignalR backplane.
-    /// <para>
-    /// This URL is used to configure the Redis backplane for SignalR, enabling
-    /// real-time communication across multiple servers in a scaled-out environment.
-    /// The format is typically "&lt;host&gt;:&lt;port&gt;,password=&lt;password&gt;,ssl=False,abortConnect=False".
-    /// </para>
-    /// </summary>
-    /// <value>The Redis connection URL.</value>
-    /// <exception cref="InvalidAsynchronousStateException">
-    /// Thrown if this property is null when attempting to configure SignalR.
-    /// </exception>
-    public string? RedisUrl { get; set; }
 }

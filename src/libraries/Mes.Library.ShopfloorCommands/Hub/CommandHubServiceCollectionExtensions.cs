@@ -50,10 +50,10 @@ public static class CommandHubServiceCollectionExtensions
     /// </remarks>
     /// <exception cref="ArgumentNullException">Thrown if the services parameter is null.</exception>
     /// <exception cref="InvalidAsynchronousStateException">Thrown if the Redis URL is not configured.</exception>
-    public static IServiceCollection AddShopfloorCommandHub(this IServiceCollection services, Action<ShopfloorCommandHubConfigurationBuilder> configuration)
+    public static IServiceCollection AddShopfloorCommandHub(this IServiceCollection services, Action<ShopfloorCommandHubConfigurationBuilder>? configuration = null)
     {
         var builder = new ShopfloorCommandHubConfigurationBuilder();
-        configuration(builder);
+        configuration?.Invoke(builder);
         var cfg = builder.Build();
 
         services.AddSingleton(cfg);
