@@ -23,9 +23,7 @@
       <Project Path="shared/Mes.Shared.Contracts.SharedKernel/Mes.Shared.Contracts.SharedKernel.csproj"/>
       <Project Path="shared/Mes.Shared.Contracts.SystemManagement/Mes.Shared.Contracts.SystemManagement.csproj"/>
   </Folder>
-  <Folder Name="/Shopfloor/">
-    <Project Path="shopfloor/Mes.Shopfloor.Shared.SharedKernel/Mes.Shopfloor.Shared.SharedKernel.csproj" />
-  </Folder>
+    <Folder Name="/Shopfloor/"/>
   <Folder Name="/Shopfloor/Apis/">
     <Project Path="shopfloor/Mes.Shopfloor.Api.ProductionManagement/Mes.Shopfloor.Api.ProductionManagement.csproj" />
     <Project Path="shopfloor/Mes.Shopfloor.Api.SharedKernel/Mes.Shopfloor.Api.SharedKernel.csproj" />

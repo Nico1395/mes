@@ -13,7 +13,6 @@
   <ItemGroup>
       <ProjectReference Include="..\..\libraries\Mes.Library.EntityFrameworkCore\Mes.Library.EntityFrameworkCore.csproj"/>
     <ProjectReference Include="..\..\libraries\Mes.Library.Marten\Mes.Library.Marten.csproj" />
-    <ProjectReference Include="..\Mes.Shopfloor.Shared.SharedKernel\Mes.Shopfloor.Shared.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>
