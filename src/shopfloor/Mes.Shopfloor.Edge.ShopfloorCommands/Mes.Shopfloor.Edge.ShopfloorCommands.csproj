@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\Mes.Shopfloor.Edge.SharedKernel\Mes.Shopfloor.Edge.SharedKernel.csproj"/>
+    </ItemGroup>
+</Project>

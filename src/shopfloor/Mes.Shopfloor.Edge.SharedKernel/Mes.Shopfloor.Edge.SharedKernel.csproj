@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\libraries\Mes.Library.EntityFrameworkCore\Mes.Library.EntityFrameworkCore.csproj"/>
+        <ProjectReference Include="..\..\libraries\Mes.Library.Marten\Mes.Library.Marten.csproj"/>
+        <ProjectReference Include="..\..\libraries\Mes.Library.ObjectMapping\Mes.Library.ObjectMapping.csproj"/>
+        <ProjectReference Include="..\..\libraries\Mes.Library.ShopfloorCommands\Mes.Library.ShopfloorCommands.csproj"/>
+        <ProjectReference Include="..\..\shared\Mes.Shared.Contracts.SharedKernel\Mes.Shared.Contracts.SharedKernel.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="DandyEndpoints"/>
+        <PackageReference Include="DandyMediator.Validation"/>
+        <PackageReference Include="DandyStrategies"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
+        <PackageReference Include="NLog.Web.AspNetCore"/>
+        <PackageReference Include="Scalar.AspNetCore"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
+    </ItemGroup>
+
+</Project>

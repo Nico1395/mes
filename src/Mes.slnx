@@ -37,6 +37,12 @@
     <Project Path="shopfloor/Mes.Shopfloor.Client.ProductionManagement/Mes.Shopfloor.Client.ProductionManagement.csproj" />
     <Project Path="shopfloor/Mes.Shopfloor.Client.SharedKernel/Mes.Shopfloor.Client.SharedKernel.csproj" />
   </Folder>
+    <Folder Name="/Shopfloor/Edge/">
+        <Project Path="shopfloor/Mes.Shopfloor.Edge.SharedKernel/Mes.Shopfloor.Edge.SharedKernel.csproj"/>
+        <Project Path="shopfloor/Mes.Shopfloor.Edge.ShopfloorCommands/Mes.Shopfloor.Edge.ShopfloorCommands.csproj"/>
+        <Project Path="shopfloor/Mes.Shopfloor.Edge.Synchronization/Mes.Shopfloor.Edge.Synchronization.csproj"/>
+        <Project Path="shopfloor/Mes.Shopfloor.Edge/Mes.Shopfloor.Edge.csproj"/>
+    </Folder>
   <Folder Name="/_/">
     <File Path="Directory.Packages.props" />
   </Folder>

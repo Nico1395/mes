@@ -20,7 +20,7 @@ internal sealed class MasterDataProvider(
         foreach (var entityType in masterDataTypes.Select(typeResolver.ResolveType).WhereNotNull())
         {
             var getEntities = getEntitiesMethodInfo.MakeGenericMethod(entityType);
-            var entities = await InvokeGetEntities(getEntities, page, pageSize, requestLastUpdatedAt);
+            var entities = await InvokeGetEntities(getEntities, page, pageSize, requestLastUpdatedAt, cancellationToken);
 
             masterData[getEntities.Name] = entities;
         }
@@ -36,15 +36,15 @@ internal sealed class MasterDataProvider(
         return _getEntities = GetType().GetMethod(nameof(GetEntites)) ?? throw new InvalidOperationException($"Could not find method '{nameof(GetEntites)}'.");
     }
 
-    private async Task<IMasterData[]> InvokeGetEntities(MethodInfo getEntities, int? page, int? pageSize, DateTime? lastUpdatedAt)
+    private async Task<IMasterData[]> InvokeGetEntities(MethodInfo getEntities, int? page, int? pageSize, DateTime? lastUpdatedAt, CancellationToken cancellationToken)
     {
-        if (getEntities.Invoke(this, [page, pageSize, lastUpdatedAt]) is not Task<IMasterData[]> task)
+        if (getEntities.Invoke(this, [page, pageSize, lastUpdatedAt, cancellationToken]) is not Task<IMasterData[]> task)
             return [];
 
         return await task;
     }
 
-    private Task<TEntity[]> GetEntites<TEntity>(int? page, int? pageSize, DateTime? lastUpdatedAt)
+    private Task<TEntity[]> GetEntites<TEntity>(int? page, int? pageSize, DateTime? lastUpdatedAt, CancellationToken cancellationToken)
         where TEntity : class, IMasterData
     {
         var query = context
@@ -58,6 +58,6 @@ internal sealed class MasterDataProvider(
         if (page.HasValue && pageSize.HasValue)
             query = query.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
 
-        return query.ToArrayAsync();
+        return query.ToArrayAsync(cancellationToken);
     }
 }
